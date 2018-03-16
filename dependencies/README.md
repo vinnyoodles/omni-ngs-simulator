@@ -5,5 +5,5 @@
         - bioperl 
     - python 2.7.3
         - numpy, biopython
-    - DRISEE
+    - [DRISEE](https://github.com/MG-RAST/DRISEE)
         - qiime, cdbfasta, cdbyank

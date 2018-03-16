@@ -1,0 +1,3 @@
+[submodule "simulators/bear"]
+	path = simulators/bear
+	url = git@github.com:sej917/BEAR.git

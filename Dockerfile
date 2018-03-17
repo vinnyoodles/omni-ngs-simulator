@@ -34,10 +34,9 @@ RUN tar -xvf /home/cdbfasta.tar.gz && \
     ln -s /cdbfasta/cdbyank /usr/bin/cdbyank
 
 ENV PATH="${PATH}:/DRISEE"
-ENV FLASK_APP="server.py"
+ENV FLASK_APP="/app/server.py"
 
-COPY app /app
-COPY server.py server.py
+COPY . /app
 
 EXPOSE 5000
 CMD ["flask", "run", "--host=0.0.0.0"]

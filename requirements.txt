@@ -2,3 +2,4 @@ numpy
 biopython
 qiime
 flask
+flask-wtf

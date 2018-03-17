@@ -1,0 +1,36 @@
+version: "2"
+
+services:
+  # The main server (node.js) instance
+  simulator:
+    container_name: simulator
+
+    # Use Dockerfile for build commands
+    build: .
+
+    # Expose ports
+    ports:
+      - "5000:5000"
+
+    # Link with mongo service
+    links:
+      - sim_mongo
+
+    environment:
+     - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
+
+    # Mount the project directory to the container's directory for hot reloading.
+    volumes:
+      - .:/app
+
+
+  # The mongodb instance
+  sim_mongo:
+    container_name: sim_mongo
+
+    # Use the official mongo image
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"

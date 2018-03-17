@@ -1,5 +1,6 @@
-numpy
 biopython
-qiime
 flask
 flask-wtf
+mongoengine
+numpy
+qiime

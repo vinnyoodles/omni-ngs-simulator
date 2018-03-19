@@ -35,6 +35,7 @@ RUN tar -xvf /home/cdbfasta.tar.gz && \
 
 ENV PATH="${PATH}:/DRISEE"
 ENV FLASK_APP="/app/server.py"
+ENV FLASK_DEBUG="1"
 
 COPY . /app
 

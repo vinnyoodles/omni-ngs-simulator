@@ -1,5 +1,6 @@
 biopython
 flask
+flask-login
 flask-wtf
 mongoengine
 numpy

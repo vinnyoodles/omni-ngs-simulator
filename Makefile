@@ -9,10 +9,10 @@ run:
 
 up: build run
 
-compose-build:
+cb:
 	docker-compose build
 
-compose-up:
+cu:
 	docker-compose up
 
-compose: compose-build compose-up
+compose: cb cu

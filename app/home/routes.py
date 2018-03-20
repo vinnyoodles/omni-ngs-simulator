@@ -5,7 +5,7 @@ from app.models import User
 @bp.route('/')
 @bp.route('/index')
 def index():
-    return render_template('index.html', title='Home')
+    return render_template('index.html', title='Home', transparent_nav=True)
 
 @bp.route('/api/users', methods=['GET'])
 def get_users():

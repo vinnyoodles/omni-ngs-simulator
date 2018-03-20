@@ -1,34 +1,36 @@
-{% extends "base.html" %}
+{% extends "container.html" %}
 
 {% block content %}
-    <h1>Register</h1>
-    <div class="row">
-        <div class="col-md-4">
-            <form action="" method="post" class="form" role="form">
-                {{ form.hidden_tag() }}
-                <div class="form-group  required">
-                    <input class="form-control {{ 'is-invalid' if form.email.errors }}" id="email" name="email" required="" type="email" placeholder="Email">
-                    {% for error in form.email.errors %}
-                        <div class="invalid-feedback">{{ error }}</div>
-                    {% endfor %}
-                </div>
-                <div class="form-group  required">
-                    <input class="form-control" id="institution" name="institution" required="" type="text" placeholder="Institution">
-                </div>
-                <div class="form-group  required">
-                    <input class="form-control {{ 'is-invalid' if form.password.errors }}" id="password" name="password" required="" type="password" placeholder="Password">
-                    {% for error in form.password.errors %}
-                        <div class="invalid-feedback">{{ error }}</div>
-                    {% endfor %}
-                </div>
-                <div class="form-group  required">
-                    <input class="form-control {{ 'is-invalid' if form.confirm_password.errors }}" id="confirm_password" name="confirm_password" required="" type="password" placeholder="Confirm Password">
-                    {% for error in form.confirm_password.errors %}
-                        <div class="invalid-feedback">{{ error }}</div>
-                    {% endfor %}
-                </div>
-                <input type="submit" class="btn btn-outline-primary" id="submit" name="submit" value="Submit"/>
-            </form>
+    <div class="text-center" style="padding-top:60px">
+        <h1>Register</h1>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 text-center">
+                <form action="" method="post" class="form" role="form">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group  required">
+                        <input class="form-control {{ 'is-invalid' if form.email.errors }}" id="email" name="email" required="" type="email" placeholder="Email">
+                        {% for error in form.email.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group  required">
+                        <input class="form-control" id="institution" name="institution" required="" type="text" placeholder="Institution">
+                    </div>
+                    <div class="form-group  required">
+                        <input class="form-control {{ 'is-invalid' if form.password.errors }}" id="password" name="password" required="" type="password" placeholder="Password">
+                        {% for error in form.password.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group  required">
+                        <input class="form-control {{ 'is-invalid' if form.confirm_password.errors }}" id="confirm_password" name="confirm_password" required="" type="password" placeholder="Confirm Password">
+                        {% for error in form.confirm_password.errors %}
+                            <div class="invalid-feedback">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+                    <input type="submit" class="btn btn-outline-primary" id="submit" name="submit" value="Submit"/>
+                </form>
+            </div>
         </div>
     </div>
 {% endblock %}

@@ -2,36 +2,33 @@
 
 {% block content %}
     <h1>Register</h1>
-    <form action="" method="post">
-        {{ form.hidden_tag() }}
-        <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=64) }}<br>
-            {% for error in form.email.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.institution.label }}<br>
-            {{ form.institution(size=64) }}<br>
-            {% for error in form.institution.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>
-            {{ form.confirm_password.label }}<br>
-            {{ form.confirm_password(size=32) }}<br>
-            {% for error in form.confirm_password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-        <p>{{ form.submit() }}</p>
-    </form>
+    <div class="row">
+        <div class="col-md-4">
+            <form action="" method="post" class="form" role="form">
+                {{ form.hidden_tag() }}
+                <div class="form-group  required">
+                    <input class="form-control {{ 'is-invalid' if form.email.errors }}" id="email" name="email" required="" type="email" placeholder="Email">
+                    {% for error in form.email.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="form-group  required">
+                    <input class="form-control" id="institution" name="institution" required="" type="text" placeholder="Institution">
+                </div>
+                <div class="form-group  required">
+                    <input class="form-control {{ 'is-invalid' if form.password.errors }}" id="password" name="password" required="" type="password" placeholder="Password">
+                    {% for error in form.password.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <div class="form-group  required">
+                    <input class="form-control {{ 'is-invalid' if form.confirm_password.errors }}" id="confirm_password" name="confirm_password" required="" type="password" placeholder="Confirm Password">
+                    {% for error in form.confirm_password.errors %}
+                        <div class="invalid-feedback">{{ error }}</div>
+                    {% endfor %}
+                </div>
+                <input type="submit" class="btn btn-outline-primary" id="submit" name="submit" value="Submit"/>
+            </form>
+        </div>
+    </div>
 {% endblock %}

@@ -13,7 +13,7 @@ login.login_message = 'Please log in to access this page.'
 connect(host=instance.config['MONGO_URL'])
 
 def create_app(config_class=Config):
-    instance = Flask(__name__)
+    instance = Flask(__name__, static_url_path='/static')
     instance.config.from_object(config_class)
 
     login.init_app(instance)

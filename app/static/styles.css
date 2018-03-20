@@ -14,50 +14,6 @@ hr.light {
     border-color: #fff;
 }
 
-a {
-    -webkit-transition: all 0.2s;
-    -moz-transition: all 0.2s;
-    transition: all 0.2s;
-}
-
-.bg-primary {
-    background-color: #F05F40 !important;
-}
-
-.bg-dark {
-    background-color: #212529 !important;
-}
-
-.text-faded {
-    color: rgba(255, 255, 255, 0.7);
-}
-
-.section-heading {
-    margin-top: 0;
-}
-
-::-moz-selection {
-    color: #fff;
-    background: #212529;
-    text-shadow: none;
-}
-
-::selection {
-    color: #fff;
-    background: #212529;
-    text-shadow: none;
-}
-
-img::selection {
-    color: #fff;
-    background: transparent;
-}
-
-img::-moz-selection {
-    color: #fff;
-    background: transparent;
-}
-
 #mainNav {
     border-bottom: 1px solid rgba(33, 37, 41, 0.1);
     background-color: #fff;

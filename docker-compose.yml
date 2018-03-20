@@ -18,6 +18,9 @@ services:
 
     environment:
      - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
+     - PATH=$PATH:/DRISEE
+     - FLASK_APP=/app/server.py
+     - FLASK_DEBUG=1
 
     # Mount the project directory to the container's directory for hot reloading.
     volumes:

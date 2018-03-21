@@ -16,4 +16,8 @@ class User(UserMixin, Document):
 
 @login.user_loader
 def load_user(user_id):
+    """
+        Helper function for the flask login module.
+        This is the authentication logic to verify if a user exists in the database or not.
+    """
     return User.objects(id=user_id).first()

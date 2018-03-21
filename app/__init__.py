@@ -21,8 +21,10 @@ def create_app(config_class=Config):
 
     from app.home import bp as home_bp
     from app.auth import bp as auth_bp
+    from app.api import bp as api_bp
     instance.register_blueprint(home_bp)
     instance.register_blueprint(auth_bp, url_prefix='/auth')
+    instance.register_blueprint(api_bp, url_prefix='/api/v1.0')
 
     return instance
 

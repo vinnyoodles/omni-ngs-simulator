@@ -2,9 +2,12 @@ from flask import Flask
 from flask_login import LoginManager
 from config import Config
 from mongoengine import connect
+from celery import Celery
 
 login = LoginManager()
 login.login_view = 'auth.login'
+
+celery = Celery(__name__, broker=Config.CELERY_BROKER_URL)
 
 def create_app(config_class=Config):
     """
@@ -18,6 +21,8 @@ def create_app(config_class=Config):
     login.init_app(instance)
 
     connect(host=instance.config['MONGO_URL'])
+
+    celery.conf.update(instance.config)
 
     from app.home import bp as home_bp
     from app.auth import bp as auth_bp

@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y \
     python-pip \
     python-tk
 
+WORKDIR /app
+
 # Install python dependencies for python 2.7
 # NOTE: Running two commands of pip install because of an issue with "cogent" module
 COPY . /app

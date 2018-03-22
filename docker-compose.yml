@@ -15,12 +15,14 @@ services:
     # Link with mongo service
     links:
       - sim_mongo
+      - sim_redis
 
     environment:
-     - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
-     - PATH=$PATH:/DRISEE
-     - FLASK_APP=/app/server.py
-     - FLASK_DEBUG=1
+      - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
+      - PATH=$PATH:/DRISEE
+      - FLASK_APP=/app/server.py
+      - FLASK_DEBUG=1
+      - REDIS_URL=redis://sim_redis:6379/0
 
     # Mount the project directory to the container's directory for hot reloading.
     volumes:
@@ -37,3 +39,19 @@ services:
       - ./data:/data/db
     ports:
       - "27017:27017"
+
+  sim_redis:
+    container_name: sim_redis
+    image: redis:4.0
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    command: celery worker -A app.tasks --loglevel=DEBUG
+    volumes:
+      - .:/app
+    environment:
+      - REDIS_URL=redis://sim_redis:6379/0
+    depends_on:
+      - sim_redis

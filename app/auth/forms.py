@@ -25,6 +25,7 @@ class RegistrationForm(FlaskForm):
 class BaseSimulatorForm(FlaskForm):
     name = StringField('Name')
     file = FileField('File', validators=[FileRequired()])
+    submit = SubmitField('Submit')
 
 class BearParametricAbundanceForm(BaseSimulatorForm):
     complexity = SelectField('Complexity', choices=[('low', 'Low'), ('medium', 'Medium'), ('high', 'High')], validators=[DataRequired()])

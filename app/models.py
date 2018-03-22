@@ -17,16 +17,9 @@ class User(UserMixin, Document):
 class Job(Document):
     user_id            = ObjectIdField(required=True)
     name               = StringField(required=True)
-    command            = StringField(required=True)
-    status             = IntField(required=True)
-    simulator          = IntField(required=True)
-
-    STATUS = {
-        1 : 'Pending',
-        2 : 'Submitted',
-        3 : 'Running',
-        4 : 'Completed'
-    }
+    simulator          = StringField(required=True)
+    status             = StringField(required=True)
+    command            = StringField()
 
 @login.user_loader
 def load_user(user_id):

@@ -19,7 +19,6 @@ services:
 
     environment:
       - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
-      - PATH=$PATH:/DRISEE
       - FLASK_APP=/app/server.py
       - FLASK_DEBUG=1
       - REDIS_URL=redis://sim_redis:6379/0
@@ -53,5 +52,6 @@ services:
       - .:/app
     environment:
       - REDIS_URL=redis://sim_redis:6379/0
+      - PATH=$PATH:/app/simulators/bear/scripts
     depends_on:
       - sim_redis

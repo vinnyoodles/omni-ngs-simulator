@@ -6,3 +6,8 @@ from app.models import User
 @bp.route('/')
 def index():
     return render_template('index.html', title='Home', transparent_nav=True)
+
+@bp.route('/dashboard')
+@login_required
+def dashboard():
+    return render_template('dashboard.html', title='Dashboard')

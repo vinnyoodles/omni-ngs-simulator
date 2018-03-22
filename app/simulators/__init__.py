@@ -36,9 +36,7 @@ def parse_commandline(sim, params):
         = Return =
         array                 = arguments for subprocess.Popen
     """
-    arguments sim['format'].format(**params).split()
+    arguments = sim['format'].format(**params).split()
     return [sim['command']] + arguments
-
-
 
 from app.simulators import routes

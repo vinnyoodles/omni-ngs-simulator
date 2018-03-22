@@ -2,10 +2,6 @@ import subprocess, os
 from app import celery
 from simulators import SIMULATORS, parse_commandline
 
-# The path where all output files are written to.
-# TODO: for dev purposes, it is the current directory (update for production)
-OUTPUT_DIR = '/app'
-
 @celery.task
 def start_job(job_name, params, output_file):
     """
@@ -63,7 +59,7 @@ def start_job(job_name, params, output_file):
 
     try:
         if job['stdout']:
-            output_file = open(os.path.join(OUTPUT_DIR, output_file), 'w+')
+            output_file = open(output_file, 'w+')
             process = subprocess.Popen(commandline, stdout=output_file)
         else:
             process = subprocess.Popen(commandline)

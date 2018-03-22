@@ -1,5 +1,39 @@
 {% extends "container.html" %}
 
 {% block content %}
-    <h3>Bear - Parametric Abundance</h3>
+    <div class="text-center" style="padding-top:20px">
+        <h3 style="padding-bottom:10px">Bear - Parametric Abundance</h3>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 text-center">
+                <form class="form job-form" method="POST" enctype="multipart/form-data" role="form">
+                    {{ form.hidden_tag() }}
+                    <div class="form-group row">
+                        <label for="name" class="col-4 col-form-label">Name</label> 
+                        <div class="col-8">
+                            <input id="name" name="name" placeholder="Default - Job ID" type="text" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="file">
+                            <label class="custom-file-label" for="file">Choose a multi-fasta file</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-4 col-form-label" for="complexity">Complexity</label> 
+                        <div class="col-8">
+                            <select id="complexity" name="complexity" required="required" style="width:100%">
+                                <option value="low">Low</option>
+                                <option value="medium">Medium</option>
+                                <option value="high">High</option>
+                            </select> 
+                        </div>
+                    </div> 
+                    <input class="btn btn-outline-primary btn-block" id="submit" name="submit" type="submit" value="Submit"/>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

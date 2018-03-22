@@ -145,3 +145,16 @@ header.masthead p {
         font-size: 4rem;
     }
 }
+
+div.hover-highlight {
+    transition: box-shadow .3s;
+}
+
+div.hover-highlight:hover {
+    box-shadow: 0 0 11px rgba(33,33,33,.2);
+    cursor: pointer;
+}
+
+.job-form {
+    max-width: 600px
+}

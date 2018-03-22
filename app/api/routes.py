@@ -3,6 +3,8 @@ from flask_login import current_user
 from app.api import bp
 from app.models import User, Job
 from app.tasks import start_job
+import app.simulators as simulators
+
 
 @bp.route('/users', methods=['GET'])
 def get_users():
@@ -43,3 +45,7 @@ def create_job():
 @bp.route('/jobs', methods=['GET'])
 def get_jobs():
     return Job.objects.all().to_json()
+
+@bp.route('/simulators', methods=['GET'])
+def get_simulators():
+    return jsonify(simulators.to_json())

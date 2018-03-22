@@ -6,7 +6,7 @@ services:
     container_name: simulator
 
     # Use Dockerfile for build commands
-    build: .
+    build: ./docker/server
 
     # Expose ports
     ports:
@@ -47,7 +47,7 @@ services:
       - "6379:6379"
 
   celery:
-    build: .
+    build: ./docker/celery
     command: celery worker -A app.tasks --loglevel=DEBUG
     volumes:
       - .:/app

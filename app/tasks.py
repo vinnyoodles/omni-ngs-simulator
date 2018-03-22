@@ -1,6 +1,6 @@
 import subprocess, os
 from app import celery
-from simulators import SIMULATORS
+from simulators import SIMULATORS, parse_commandline
 
 # The path where all output files are written to.
 # TODO: for dev purposes, it is the current directory (update for production)
@@ -33,7 +33,7 @@ def start_job(job_name, params, output_file):
 
         = Parameters =
         job_name     : string   = valid string that denotes the job (job is valid if found in SIMULATORS dict)
-        params       : object   = dictionary of arguments to pass to the job when run
+        params       : dict     = dictionary of arguments to pass to the job when run
 
         = Return =
         boolean = the status of the job (true=success, false=failed)
@@ -59,9 +59,7 @@ def start_job(job_name, params, output_file):
             # TODO: update database failure (invalid job arguments)
             return arg
 
-    # subprocess.Popen requires an array of arguments.
-    arguments = job['format'].format(**params).split()
-    commandline = [job['command']] + arguments
+    commandline = parse_commandline(job, params)
 
     try:
         if job['stdout']:

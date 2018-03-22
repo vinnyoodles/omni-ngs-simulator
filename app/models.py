@@ -4,15 +4,29 @@ from flask_login import UserMixin
 from app import login
 
 class User(UserMixin, Document):
-    email = StringField(required=True)
-    password_hash = StringField(required=True)
-    institution = StringField(required=True)
+    email              = StringField(required=True, unique=True)
+    password_hash      = StringField(required=True)
+    institution        = StringField(required=True)
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+class Job(Document):
+    user_id            = ObjectIdField(required=True)
+    name               = StringField(required=True)
+    command            = StringField(required=True)
+    status             = IntField(required=True)
+    simulator          = IntField(required=True)
+
+    STATUS = {
+        1 : 'Pending',
+        2 : 'Submitted',
+        3 : 'Running',
+        4 : 'Completed'
+    }
 
 @login.user_loader
 def load_user(user_id):

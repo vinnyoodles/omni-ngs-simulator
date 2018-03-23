@@ -1,13 +1,10 @@
-from flask import Blueprint
 from bear import PARAMETRIC_ABUNDANCE
-
-bp = Blueprint('simulators', __name__)
 
 SIMULATORS = {
     'bear.parametric_abundance': PARAMETRIC_ABUNDANCE
 }
 
-def to_json():
+def sim_json():
     """
         Converts the SIMULATORS dictionary into a nested dictionary where
         the '.' denotes a nested level. This is due to multiple simulators
@@ -38,5 +35,3 @@ def parse_commandline(sim, params):
     """
     arguments = sim['format'].format(**params).split()
     return [sim['command']] + arguments
-
-from app.simulators import routes

@@ -109,8 +109,11 @@ def create_and_start_job(sim_id, name, command_args, file):
 
     command_args['input'] = input_filename
     command_args['output'] = output_filename
-    command_arr = parse_commandline(SIMULATORS[sim_id], command_args)
-    job.command = ' '.join(command_arr)
+
+    # Omit the input filename for db storage
+    arg_clone = command_args.copy()
+    arg_clone['input'] = '<input>'
+
+    job.command = ' '.join(parse_commandline(SIMULATORS[sim_id], arg_clone))
     job.save()
     start_job.apply_async(args=[str(job.id), sim_id, command_args, output_filename])
-    return (job, command_arr)

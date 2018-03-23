@@ -7,7 +7,7 @@
             <thead>
                 <tr>
                     <th class="column1">Job name</th>
-                    <th class="column2">Simulator</th>
+                    <th class="column2">Command</th>
                     <th class="column3">Status</th>
                 </tr>
             </thead>
@@ -20,7 +20,7 @@
                 {% for job in jobs %}
                 <tr class="row100 body">
                     <td class="column1">{{ job.name }}</td>
-                    <td class="column2 data-column">{{ job.simulator }}</td>
+                    <td class="column2 data-column">{{ job.command }}</td>
                     <td class="column3 data-column">{{ job.status }}</td>
                 </tr>
                 {% endfor %}

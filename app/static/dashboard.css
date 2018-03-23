@@ -8,16 +8,16 @@ th, td {
 }
 
 .column1 {
-    width: 50%;
+    width: 20%;
     padding-left: 40px;
 }
 
 .column2 {
-    width: 30%;
+    width: 60%;
 }
 
 .column3 {
-    width: 20%;
+    width: 10%;
 }
 
 .data-column {

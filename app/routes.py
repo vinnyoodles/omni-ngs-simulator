@@ -59,7 +59,7 @@ Authenticated Routes
 @instance.route('/dashboard', methods=['GET'], strict_slashes=False)
 @login_required
 def dashboard():
-    jobs = Job.objects(user_id=current_user.id).all()
+    jobs = Job.objects(user_id=current_user.id).order_by('-$natural').all()
     return render_template('dashboard.html', title='Dashboard', jobs=jobs)
 
 @instance.route('/simulators', methods=['GET'], strict_slashes=False)

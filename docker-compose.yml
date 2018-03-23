@@ -47,7 +47,7 @@ services:
 
   celery:
     build: ./docker/celery
-    command: celery worker -A app.tasks --loglevel=DEBUG
+    command: celery worker -A app --loglevel=DEBUG
     volumes:
       - .:/app
     environment:

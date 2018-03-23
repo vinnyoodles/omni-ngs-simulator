@@ -1,12 +1,11 @@
-import os
 from flask import render_template, flash, redirect, jsonify, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
-from app.simulators import SIMULATORS, parse_commandline, sim_json
+from app.simulators import SIMULATORS, sim_json
 from app.forms import LoginForm, RegistrationForm, BearParametricAbundanceForm
-from app.tasks import start_job
-from app.models import User, Job
+from app.tasks import create_and_start_job
+from app.models import User
 from app import instance
 
 """
@@ -93,33 +92,3 @@ def get_jobs():
 @instance.route('/api/simulators', methods=['GET'], strict_slashes=False)
 def get_simulators():
     return jsonify(sim_json())
-
-
-def create_and_start_job(sim_id, name, command_args, file):
-    data = {
-        'status'    : 'pending',
-        'simulator' : sim_id,
-        'user_id'   : current_user.id,
-        'name'      : name
-    }
-    job = Job(**data)
-
-    if name is None:
-        job.name = name = str(job.id)
-
-    job.save()
-
-    # The path where all output files are written to is the project's directory.
-    # TODO: for dev purposes, this is okay (change for production)
-    input_filename = os.path.join('/app', '{}_{}.in'.format(sim_id, job.id))
-    output_filename = os.path.join('/app', '{}_{}.out'.format(sim_id, job.id))
-    file.save(input_filename)
-
-    command_args['input'] = input_filename
-    command_args['output'] = output_filename
-    command_arr = parse_commandline(SIMULATORS[sim_id], command_args)
-    job.command = ' '.join(command_arr)
-    job.save()
-    start_job.apply_async(args=[sim_id, command_args, output_filename])
-    return (job, command_arr)
-

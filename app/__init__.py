@@ -16,4 +16,4 @@ celery.conf.update(instance.config)
 
 connect(host=instance.config['MONGO_URL'])
 
-from app import models, routes
+from app import models, routes, tasks

@@ -1,6 +1,8 @@
 import subprocess, os
-from app import celery
+from . import celery
 from simulators import SIMULATORS, parse_commandline
+from flask_login import current_user
+from app.models import Job
 
 @celery.task
 def start_job(job_name, params, output_file):
@@ -71,3 +73,32 @@ def start_job(job_name, params, output_file):
 
     # TODO: update database success
     return True
+
+def create_and_start_job(sim_id, name, command_args, file):
+    data = {
+        'status'    : 'pending',
+        'simulator' : sim_id,
+        'user_id'   : current_user.id,
+        'name'      : name
+    }
+    job = Job(**data)
+
+    if name is None:
+        job.name = name = str(job.id)
+
+    job.save()
+
+    # The path where all output files are written to is the project's directory.
+    # TODO: for dev purposes, this is okay (change for production)
+    prefix = '{}_{}'.format(sim_id, job.id).replace('.', '_')
+    input_filename = os.path.join('/app', '{}.in'.format(prefix))
+    output_filename = os.path.join('/app', '{}.out'.format(prefix))
+    file.save(input_filename)
+
+    command_args['input'] = input_filename
+    command_args['output'] = output_filename
+    command_arr = parse_commandline(SIMULATORS[sim_id], command_args)
+    job.command = ' '.join(command_arr)
+    job.save()
+    start_job.apply_async(args=[sim_id, command_args, output_filename])
+    return (job, command_arr)

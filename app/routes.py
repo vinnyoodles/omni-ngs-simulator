@@ -5,7 +5,7 @@ from werkzeug.urls import url_parse
 from app.simulators import SIMULATORS, sim_json
 from app.forms import LoginForm, RegistrationForm, BearParametricAbundanceForm
 from app.tasks import create_and_start_job
-from app.models import User
+from app.models import User, Job
 from app import instance
 
 """

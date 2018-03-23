@@ -20,6 +20,7 @@ class Job(Document):
     simulator          = StringField(required=True)
     status             = StringField(required=True)
     command            = StringField()
+    err                = StringField()
 
 @login.user_loader
 def load_user(user_id):

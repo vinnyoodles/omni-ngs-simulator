@@ -27,7 +27,6 @@ services:
     volumes:
       - .:/app
 
-
   # The mongodb instance
   sim_mongo:
     container_name: sim_mongo
@@ -51,7 +50,9 @@ services:
     volumes:
       - .:/app
     environment:
+      - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
       - REDIS_URL=redis://sim_redis:6379/0
       - PATH=$PATH:/app/simulators/bear/scripts
-    depends_on:
+    links:
       - sim_redis
+      - sim_mongo

@@ -65,7 +65,8 @@ def dashboard():
 @instance.route('/simulators/help', methods=['GET'], strict_slashes=False)
 @login_required
 def help():
-    return render_template('help.html', title='Help')
+    methods = [ 'IonTorrent', 'SOLiD', 'PacBio', '454', 'Illumina', 'Sanger', 'Nanopere' ]
+    return render_template('help.html', title='Help', methods=methods)
 
 @instance.route('/simulators', methods=['GET'], strict_slashes=False)
 @login_required

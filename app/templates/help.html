@@ -5,32 +5,47 @@
         <h2>Help finding your simulator</h2>
 
         <div>Do you have reference sequences?</div>
-        <ul class="nav nav-pills nav-justified">
-            <a class="nav-link" data-toggle="tab" href="#yes-ref-seq" role="tab">Yes</a>
-            <a class="nav-link" data-toggle="tab" href="#no-ref-seq" role="tab">No</a>
-        </ul>
+        <div class="form-check form-check-inline">
+            <input class="help-tree form-check-input" type="radio" name="ref-seq" id="refSeqYes" value="yes">
+            <label class="form-check-label" for="refSeqYes">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="help-tree form-check-input" type="radio" name="ref-seq" id="refSeqNo" value="no">
+            <label class="form-check-label" for="refSeqNo">No</label>
+        </div>
+
+        <br>
 
         <div>Do you have one organism or several organisms?</div>
-        <ul class="nav nav-pills nav-justified">
-            <a class="nav-link" data-toggle="tab" href="#single-organism" role="tab">One</a>
-            <a class="nav-link" data-toggle="tab" href="#several-organisms" role="tab">Several</a>
-        </ul>
+        <div class="form-check form-check-inline">
+            <input class="help-tree organism-input form-check-input" type="radio" name="organisms" id="singleOrgansim" value="one">
+            <label class="form-check-label" for="singleOrgansim">One</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="help-tree organism-input form-check-input" type="radio" name="organisms" id="severalOrganisms" value="several">
+            <label class="form-check-label" for="severalOrganisms">Several</label>
+        </div>
+
+        <br>
 
         <div>Do you have variants in the genome?</div>
-        <ul class="nav nav-pills nav-justified">
-            <a class="nav-link" data-toggle="tab" href="#yes-variants" role="tab">Yes</a>
-            <a class="nav-link" data-toggle="tab" href="#no-variants" role="tab">No</a>
-        </ul>
+        <div class="form-check form-check-inline">
+            <input class="help-tree genome-input form-check-input" type="radio" name="variants" id="variants" value="yes">
+            <label class="form-check-label" for="variants">Yes</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="help-tree genome-input form-check-input" type="radio" name="variants" id="noVariants" value="no">
+            <label class="form-check-label" for="noVariants">No</label>
+        </div>
 
-        <div>What method or technology of genome sequencing?</div>
-        <ul class="nav nav-pills nav-justified">
-            <a class="nav-link" data-toggle="tab" href="#" role="tab">IonTorrent</a>
-            <a class="nav-link" data-toggle="tab" href="#" role="tab">SOLiD</a>
-            <a class="nav-link" data-toggle="tab" href="#" role="tab">PacBio</a>
-            <a class="nav-link" data-toggle="tab" href="#" role="tab">454</a>
-            <a class="nav-link" data-toggle="tab" href="#" role="tab">Illumina</a>
-            <a class="nav-link" data-toggle="tab" href="#" role="tab">Sanger</a>
-            <a class="nav-link" data-toggle="tab" href="#" role="tab">Nanopere</a>
-        </ul>
+        <br>
+
+        <div>What is the method or technology for genome sequencing?</div>
+        {% for method in methods %}
+            <div class="form-check form-check-inline">
+                <input class="help-tree method-input form-check-input {{ method.lower() }}-input" type="radio" name="method" id="{{ method }}" value="{{ method }}">
+                <label class="form-check-label" for="{{ method }}">{{ method }}</label>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}

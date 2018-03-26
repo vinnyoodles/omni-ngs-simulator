@@ -62,11 +62,15 @@ def dashboard():
     jobs = Job.objects(user_id=current_user.id).order_by('-$natural').all()
     return render_template('dashboard.html', title='Dashboard', jobs=jobs)
 
+@instance.route('/simulators/help', methods=['GET'], strict_slashes=False)
+@login_required
+def help():
+    return render_template('help.html', title='Help')
+
 @instance.route('/simulators', methods=['GET'], strict_slashes=False)
 @login_required
 def simulators():
     return render_template('cards.html', title='Cards', simulators=SIMULATORS)
-
 
 @instance.route('/simulators/bear/parametric_abundance', methods=['GET', 'POST'], strict_slashes=False)
 @login_required

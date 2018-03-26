@@ -3,10 +3,20 @@
 {% block content %}
     <div class="container" style="padding-top:50px; padding-bottom:50px">
         <div class="row">
+            <div class="col-sm-6" style="height:160px;padding-bottom: 10px;">
+                <a style="text-decoration:none; color:inherit;" href="/simulators/help">
+                    <div class="card hover-highlight" style="height:100%">
+                        <div class="card-body">
+                            <h5 class="card-title">Find your simulator</h5>
+                            <p class="card-text">Click here if you need helping finding a simulator for your needs.</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
             {% for sim in simulators %}
-            <div class="col-sm-6" style="padding-bottom: 10px;">
+            <div class="col-sm-6" style="height:160px;padding-bottom: 10px;">
                 <a style="text-decoration:none; color:inherit;" href="{{ url_for(simulators[sim]['route']) }}">
-                    <div class="card hover-highlight">
+                    <div class="card hover-highlight" style="height:100%">
                         <div class="card-body">
                             <h5 class="card-title">{{ simulators[sim]['title'] }}</h5>
                             <p class="card-text">{{ simulators[sim]['caption'] }}</p>

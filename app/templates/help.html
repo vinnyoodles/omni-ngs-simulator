@@ -1,0 +1,36 @@
+{% extends "container.html" %}
+
+{% block content %}
+    <div class="container">
+        <h2>Help finding your simulator</h2>
+
+        <div>Do you have reference sequences?</div>
+        <ul class="nav nav-pills nav-justified">
+            <a class="nav-link" data-toggle="tab" href="#yes-ref-seq" role="tab">Yes</a>
+            <a class="nav-link" data-toggle="tab" href="#no-ref-seq" role="tab">No</a>
+        </ul>
+
+        <div>Do you have one organism or several organisms?</div>
+        <ul class="nav nav-pills nav-justified">
+            <a class="nav-link" data-toggle="tab" href="#single-organism" role="tab">One</a>
+            <a class="nav-link" data-toggle="tab" href="#several-organisms" role="tab">Several</a>
+        </ul>
+
+        <div>Do you have variants in the genome?</div>
+        <ul class="nav nav-pills nav-justified">
+            <a class="nav-link" data-toggle="tab" href="#yes-variants" role="tab">Yes</a>
+            <a class="nav-link" data-toggle="tab" href="#no-variants" role="tab">No</a>
+        </ul>
+
+        <div>What method or technology of genome sequencing?</div>
+        <ul class="nav nav-pills nav-justified">
+            <a class="nav-link" data-toggle="tab" href="#" role="tab">IonTorrent</a>
+            <a class="nav-link" data-toggle="tab" href="#" role="tab">SOLiD</a>
+            <a class="nav-link" data-toggle="tab" href="#" role="tab">PacBio</a>
+            <a class="nav-link" data-toggle="tab" href="#" role="tab">454</a>
+            <a class="nav-link" data-toggle="tab" href="#" role="tab">Illumina</a>
+            <a class="nav-link" data-toggle="tab" href="#" role="tab">Sanger</a>
+            <a class="nav-link" data-toggle="tab" href="#" role="tab">Nanopere</a>
+        </ul>
+    </div>
+{% endblock %}

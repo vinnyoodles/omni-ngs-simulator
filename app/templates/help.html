@@ -2,50 +2,81 @@
 
 {% block content %}
     <div class="container">
-        <h2>Help finding your simulator</h2>
+        <h2>Need help finding the best simulator?</h2>
 
-        <div>Do you have reference sequences?</div>
-        <div class="form-check form-check-inline">
-            <input class="help-tree form-check-input" type="radio" name="ref-seq" id="refSeqYes" value="yes">
-            <label class="form-check-label" for="refSeqYes">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="help-tree form-check-input" type="radio" name="ref-seq" id="refSeqNo" value="no">
-            <label class="form-check-label" for="refSeqNo">No</label>
-        </div>
-
-        <br>
-
-        <div>Do you have one organism or several organisms?</div>
-        <div class="form-check form-check-inline">
-            <input class="help-tree organism-input form-check-input" type="radio" name="organisms" id="singleOrgansim" value="one">
-            <label class="form-check-label" for="singleOrgansim">One</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="help-tree organism-input form-check-input" type="radio" name="organisms" id="severalOrganisms" value="several">
-            <label class="form-check-label" for="severalOrganisms">Several</label>
-        </div>
-
-        <br>
-
-        <div>Do you have variants in the genome?</div>
-        <div class="form-check form-check-inline">
-            <input class="help-tree genome-input form-check-input" type="radio" name="variants" id="variants" value="yes">
-            <label class="form-check-label" for="variants">Yes</label>
-        </div>
-        <div class="form-check form-check-inline">
-            <input class="help-tree genome-input form-check-input" type="radio" name="variants" id="noVariants" value="no">
-            <label class="form-check-label" for="noVariants">No</label>
-        </div>
-
-        <br>
-
-        <div>What is the method or technology for genome sequencing?</div>
-        {% for method in methods %}
+        <div class="form-group">
+            <div>Do you have reference sequences?</div>
             <div class="form-check form-check-inline">
-                <input class="help-tree method-input form-check-input {{ method.lower() }}-input" type="radio" name="method" id="{{ method }}" value="{{ method }}">
-                <label class="form-check-label" for="{{ method }}">{{ method }}</label>
+                <input class="js-help-tree form-check-input" type="radio" name="ref-seq" id="refSeqYes" value="yes">
+                <label class="form-check-label" for="refSeqYes">Yes</label>
             </div>
-        {% endfor %}
+            <div class="form-check form-check-inline">
+                <input class="js-help-tree form-check-input" type="radio" name="ref-seq" id="refSeqNo" value="no">
+                <label class="form-check-label" for="refSeqNo">No</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>Do you have one organism or several organisms?</div>
+            <div class="form-check form-check-inline">
+                <input class="js-help-tree organism-input form-check-input" type="radio" name="organisms" id="singleOrgansim" value="one">
+                <label class="form-check-label" for="singleOrgansim">One</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="js-help-tree organism-input form-check-input" type="radio" name="organisms" id="severalOrganisms" value="several">
+                <label class="form-check-label" for="severalOrganisms">Several</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>Do you have variants in the genome?</div>
+            <div class="form-check form-check-inline">
+                <input class="js-help-tree genome-input form-check-input" type="radio" name="variants" id="variants" value="yes">
+                <label class="form-check-label" for="variants">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="js-help-tree genome-input form-check-input" type="radio" name="variants" id="noVariants" value="no">
+                <label class="form-check-label" for="noVariants">No</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div>What is the method or technology for genome sequencing?</div>
+            {% for method in methods %}
+                <div class="form-check form-check-inline">
+                    <input class="js-help-tree method-input form-check-input {{ method.lower() }}-input" type="radio" name="method" id="{{ method }}" value="{{ method }}">
+                    <label class="form-check-label" for="{{ method }}">{{ method }}</label>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="container">
+            <h5>Simulators</h5>
+            <ul>
+                <li class="js-help-tree-result" id="454sim">454Sim</li>
+                <li class="js-help-tree-result" id="art">ART</li>
+                <li class="js-help-tree-result" id="artificialfastqgenerator">ArtificialFastqGenerator</li>
+                <li class="js-help-tree-result" id="bear">BEAR</li>
+                <li class="js-help-tree-result" id="curesim">CuReSim</li>
+                <li class="js-help-tree-result" id="dwgsim">DWGSIM</li>
+                <li class="js-help-tree-result" id="eagle">EAGLE</li>
+                <li class="js-help-tree-result" id="fastqsim">FASTQSim</li>
+                <li class="js-help-tree-result" id="flowsim">Flowsim</li>
+                <li class="js-help-tree-result" id="gemsim">GemSim</li>
+                <li class="js-help-tree-result" id="grinder">Grinder</li>
+                <li class="js-help-tree-result" id="mason">Mason</li>
+                <li class="js-help-tree-result" id="metasim">MetaSim</li>
+                <li class="js-help-tree-result" id="nessm">NeSSM</li>
+                <li class="js-help-tree-result" id="pbsim">pbsim</li>
+                <li class="js-help-tree-result" id="pirs">pIRS</li>
+                <li class="js-help-tree-result" id="readsim">ReadSim</li>
+                <li class="js-help-tree-result" id="simhtsd">simhtsd</li>
+                <li class="js-help-tree-result" id="simngs">simNGS</li>
+                <li class="js-help-tree-result" id="simseq">SimSeq</li>
+                <li class="js-help-tree-result" id="sinc">SInC</li>
+                <li class="js-help-tree-result" id="wgsim">wgsim</li>
+                <li class="js-help-tree-result" id="xs">xs</li>
+            </ul>
+        </div>
     </div>
 {% endblock %}

@@ -1,7 +1,32 @@
-from bear import PARAMETRIC_ABUNDANCE
-
 SIMULATORS = {
-    'bear.parametric_abundance': PARAMETRIC_ABUNDANCE
+    'bear.parametric_abundance': {
+        'command': 'parametric_abundance.pl',
+        'arguments': ['input', 'complexity'],
+        'defaults': {
+            'complexity': 'high'
+        },
+        'format': '{input} {complexity}',
+        'stdout': True,
+        'title': 'Bear - Parametric Abundance',
+        'caption': 'Generate abundance values derived from power functions that can correspond to metagenomic communities with low, medium, or high species complexity.',
+        'route': 'bear_parametric_abundance'
+    },
+
+    '454sim': {
+        'command': 'fragsim',
+        'arguments': ['frag_count', 'frag_length', 'flow_simulation_count', 'generation', 'output'],
+        'defaults': {
+            'frag_count': 1000000,
+            'frag_length': 1000,
+            'flow_simulation_count': 800,
+            'generation': 'Ti'
+        },
+        'format': '-c {frag_count} -l {frag_length} | 454sim -n {flow_simulation_count}-o {output}',
+        'stdout': True,
+        'title': '454Sim',
+        'caption': 'Process standard FASTA and generate reads, one for each FASTA entry present in the file starting from the first base and until either the sequence ends or the simulated read ends.',
+        'route': 'bear_parametric_abundance'
+    }
 }
 
 def sim_json():

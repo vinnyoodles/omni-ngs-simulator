@@ -3,7 +3,7 @@ from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
 from app.simulators import SIMULATORS, sim_json
-from app.forms import LoginForm, RegistrationForm, BearParametricAbundanceForm
+from app.forms import *
 from app.tasks import create_and_start_job
 from app.models import User, Job
 from app import instance
@@ -73,6 +73,10 @@ def help():
 def simulators():
     return render_template('cards.html', title='Cards', simulators=SIMULATORS)
 
+"""
+Simulator Routes
+"""
+
 @instance.route('/simulators/bear/parametric_abundance', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def bear_parametric_abundance():
@@ -80,8 +84,16 @@ def bear_parametric_abundance():
     if form.validate_on_submit():
         create_and_start_job('bear.parametric_abundance', form.name.data, { 'complexity' : form.complexity.data }, form.file.data)
         return redirect(url_for('dashboard'))
-
     return render_template('simulators/bear_parametric_abundance.html', title='Bear', form=form)
+
+@instance.route('/simulators/454sim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def sim454():
+    form = Sim454Form()
+    if form.validate_on_submit():
+        # create_and_start_job('454sim', form.name.data, { }, form.file.data)
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/454sim.html', title='454Sim', form=form)
 
 """
 API Routes

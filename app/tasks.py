@@ -100,6 +100,7 @@ def create_and_start_job(sim_id, name, command_args, file):
     }
     job = Job(**data)
 
+    # If there is no job name, then set the job id as the job name.
     if name is None:
         job.name = name = str(job.id)
 

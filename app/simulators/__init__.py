@@ -1,3 +1,4 @@
+# TODO: make sure fragsim is available in the PATH.
 SIMULATORS = {
     'bear.parametric_abundance': {
         'command': 'parametric_abundance.pl',
@@ -25,7 +26,7 @@ SIMULATORS = {
         'stdout': True,
         'title': '454Sim',
         'caption': 'Process standard FASTA and generate reads, one for each FASTA entry present in the file starting from the first base and until either the sequence ends or the simulated read ends.',
-        'route': 'bear_parametric_abundance'
+        'route': 'sim454'
     }
 }
 

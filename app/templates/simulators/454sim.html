@@ -1,0 +1,67 @@
+{% extends "container.html" %}
+
+{% block content %}
+    <div class="text-center" style="padding-top:20px">
+        <h3 style="padding-bottom:10px">454Sim</h3>
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3 text-center">
+                <form action="" class="form job-form" method="POST" enctype="multipart/form-data" role="form">
+                    {{ form.hidden_tag() }}
+
+                    <div class="form-group row">
+                        {{ form.name.label(class_='col-4 col-form-label')}}
+                        <div class="col-8">
+                            {{ form.name(class_='form-control', placeholder='Default - Job ID')}}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <div class="custom-file">
+                            {{ form.file(class_='custom-file-input', accept='.fasta', required='') }}
+                            {{ form.file.label(class_='custom-file-label') }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form.generation.label(class_='col-4 col-form-label') }}
+                        <div class="col-8">
+                            {{ form.generation(class_='form-control') }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form.flow_simulation_count.label(class_='col-4 col-form-label') }}
+                        <div class="col-8">
+                            {{ form.flow_simulation_count(class_='form-control') }}
+                        </div>
+                        {% for error in form.flow_simulation_count.errors %}
+                            <div class="alert alert-danger" role="alert">{{ error }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form.frag_length.label(class_='col-4 col-form-label') }}
+                        <div class="col-8">
+                            {{ form.frag_length(class_='form-control') }}
+                        </div>
+                        {% for error in form.frag_length.errors %}
+                            <span class="alert alert-danger" role="alert">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <div class="form-group row">
+                        {{ form.frag_count.label(class_='col-4 col-form-label') }}
+                        <div class="col-8">
+                            {{ form.frag_count(class_='form-control') }}
+                        </div>
+                        {% for error in form.frag_count.errors %}
+                            <span class="alert alert-danger" role="alert">{{ error }}</span>
+                        {% endfor %}
+                    </div>
+
+                    {{ form.submit(class_='btn btn-outline-primary btn-block') }}
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

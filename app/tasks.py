@@ -61,6 +61,11 @@ def start_job(job_id, sim_id, params, output_file):
     # Validate parameters.
     for arg in sim['arguments']:
         if arg not in params:
+            # If the missing parameter exists in the default dictionary, then use that and continue.
+            if arg in sim['defaults']:
+                params[arg] = sim['defaults'][arg]
+                continue
+
             job.status = 'failed'
             job.err = 'Missing argument: {}'.format(arg)
             job.save()

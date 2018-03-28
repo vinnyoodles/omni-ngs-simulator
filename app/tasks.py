@@ -19,12 +19,21 @@ def start_job(job_id, sim_id, params, output_file):
 
             arguments: Array of required argument names that will be formatted in a given manner.
 
+            defaults: Dictionary where the keys represent the argument name and the value is the default value of the argument.
+               If no arguments have a default value, then this should be an empty dictionary.
+
             format: String denoting the format of arguments.
                 String formatting docs: https://docs.python.org/2/library/string.html#custom-string-formatting
 
             stdout: Boolean denoting whether the output is sent to stdout or directly to a file.
                 True if command sends to stdout (writing to output file will have to be done manually)
                 False otherwise
+
+            title:  String that will be rendered in application.
+
+            caption:  String that will be rendered in application.
+
+            route:  String representing the function of the specific simulator flask route.
         }
 
         The function should handle any updates to the database.

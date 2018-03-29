@@ -15,15 +15,15 @@ SIMULATORS = {
 
     '454sim': {
         'command': 'fragsim',
-        'arguments': ['frag_count', 'frag_length', 'flow_simulation_count', 'generation', 'output'],
+        'arguments': ['input', 'frag_count', 'frag_length', 'flow_simulation_count', 'generation', 'output'],
         'defaults': {
             'frag_count': 1000000,
             'frag_length': 1000,
             'flow_simulation_count': 800,
             'generation': 'Ti'
         },
-        'format': '-c {frag_count} -l {frag_length} | 454sim -n {flow_simulation_count}-o {output}',
-        'stdout': True,
+        'format': '-c {frag_count} -l {frag_length} {input} | 454sim -n {flow_simulation_count} -o {output}',
+        'stdout': False,
         'title': '454Sim',
         'caption': 'Process standard FASTA and generate reads, one for each FASTA entry present in the file starting from the first base and until either the sequence ends or the simulated read ends.',
         'route': 'sim454'

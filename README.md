@@ -61,7 +61,7 @@ to check if the function is called on a form submission.
 ...
 form = ExampleForm()
 if form.validate_on_submit():
-    create_and_start_job('bear.parametric_abundance', form.name.data, { 'complexity' : form.complexity.data }, form.file.data)
+    create_and_start_job('example_job_key', form.name.data, { ... }, form.file.data)
     return redirect(url_for('dashboard'))
 ```
 If the form is invalid (invalid or missing arguments), then the user is redirected back to the simulator's form page with the error message showing.

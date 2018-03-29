@@ -2,7 +2,7 @@
 
 A web-based suite of tools to simulate NGS data.
 
-## Building docker image
+## Running with Docker
 
 `Makefile` contains the commands to build and run all docker services.
 
@@ -54,6 +54,24 @@ The second decorator requires users to be logged in to visit the page.
 @login_required
 ```
 
+The route function handles both _GET_ and _POST_ requests. The POST request occurs on form submission. Therefore, there is conditional logic
+to check if the function is called on a form submission.
+
+```
+...
+form = ExampleForm()
+if form.validate_on_submit():
+    create_and_start_job('bear.parametric_abundance', form.name.data, { 'complexity' : form.complexity.data }, form.file.data)
+    return redirect(url_for('dashboard'))
+```
+If the form is invalid (invalid or missing arguments), then the user is redirected back to the simulator's form page with the error message showing.
+If the form is valid, then `create_and_start_job` would be called with 4 parameters. The parameters are the following:
+
+- Key value of the simulator in the dictionary specified in step 1.
+- User inputted name field from the form (if it was left blank, then this would be empty and the database ID would be used instead).
+- Dictionary of simulator specific arguments
+- Input file
+
 ### 3. Add form class in `app/forms.py`.
 
 The form class is for validation and helps with creating the HTML file.
@@ -99,11 +117,16 @@ The file should be created in `app/templates/simulators`. Also, make sure to inc
 {% endblock %}
 ```
 
+Use [the 454Sim.html](https://github.com/vinnyoodles/omni-ngs-simulator/blob/32e5313248f15decc849fee595cc8c9437796b38/app/templates/simulators/454sim.html#L25-L60) as an example and a reference for adding specific fields. The form library handles a majority of the work. We just have to pass in the styling classes. Basically, the form just has to be wrapped in a few `div`s and given the correct class names.
+
+The style classes (and any other HTML parameters) are passed in the following manner: https://stackoverflow.com/a/34748860/5334575.
+
 The HTML file requires a few parameters to be passed in, they are passed in from the route function.
 The parameters that are expected are, in the following order:
-    - path to the HTML file (relative to `routes.py`)
-    - title (keyword argument) used in other html files
-    - form (keyword argument) used to populate form fields
+
+- path to the HTML file (relative to `routes.py`)
+- title (keyword argument) used in other html files
+- form (keyword argument) used to populate form fields
 
 ```python
 @instance.route('/simulators/echo')

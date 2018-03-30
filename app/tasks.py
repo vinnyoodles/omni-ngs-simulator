@@ -75,6 +75,9 @@ def start_job(job_id, sim_id, params, output_file):
                 params[arg] = sim['defaults'][arg]
                 continue
 
+            elif arg in sim['optional']:
+                continue
+
             job.status = 'failed'
             job.err = 'Missing argument: {}'.format(arg)
             job.save()

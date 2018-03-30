@@ -77,7 +77,7 @@ def simulators():
 Simulator Routes
 """
 
-@instance.route('/simulators/bear/parametric_abundance', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/bear_parametric_abundance', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def bear_parametric_abundance():
     form = BearParametricAbundanceForm()
@@ -88,7 +88,7 @@ def bear_parametric_abundance():
 
 @instance.route('/simulators/454sim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def sim454():
+def sim_454():
     form = Sim454Form()
     if form.validate_on_submit():
         create_and_start_job('454sim', form.name.data, { 
@@ -100,6 +100,33 @@ def sim454():
         return redirect(url_for('dashboard'))
 
     return render_template('simulators/454sim.html', title='454Sim', form=form)
+
+@instance.route('/simulators/art454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def art_454():
+    form = Art454Form()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/art454.html', title='ART 454', form=form)
+
+@instance.route('/simulators/artsolid', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def art_solid():
+    form = ArtSolidForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/artsolid.html', title='ART 454', form=form)
+
+@instance.route('/simulators/artillumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def art_illumina():
+    form = ArtIlluminaForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/artillumina.html', title='ART 454', form=form)
 
 """
 API Routes

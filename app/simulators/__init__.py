@@ -7,6 +7,7 @@ SIMULATORS = {
             'complexity': 'high'
         },
         'format': '{input} {complexity}',
+        'optional': [],
         'stdout': True,
         'title': 'Bear - Parametric Abundance',
         'caption': 'Generate abundance values derived from power functions that can correspond to metagenomic communities with low, medium, or high species complexity.',
@@ -22,11 +23,46 @@ SIMULATORS = {
             'flow_simulation_count': 800,
             'generation': 'Ti'
         },
+        'optional': [],
         'format': '-c {frag_count} -l {frag_length} {input} | 454sim -n {flow_simulation_count} -o {output}',
         'stdout': False,
         'title': '454Sim',
         'caption': 'Process standard FASTA and generate reads, one for each FASTA entry present in the file starting from the first base and until either the sequence ends or the simulated read ends.',
-        'route': 'sim454'
+        'route': 'sim_454'
+    },
+
+    'art.solid': {
+        'command': 'art_SOLiD',
+        'arguments': ['input', 'output', 'read_len', 'fold_coverage'],
+        'defaults': {},
+        'format': '{input} {output} {read_len} {fold_coverage}',
+        'optional': [],
+        'stdout': False,
+        'title': 'ART - SOLiD',
+        'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
+        'route': 'art_solid'
+    },
+    'art.illumina': {
+        'command': 'art_illumina',
+        'arguments': ['input', 'output', 'sequencing_system', 'read_length', 'fold_coverage', 'num_reads_per_sequence', 'mean_fragsize', 'std_fragsize'],
+        'defaults': {},
+        'format': '-ss {sequencing_system} -sam -i {input} -l {read_length} -o {output}',
+        'optional': [],
+        'stdout': False,
+        'title': 'ART - Illumina',
+        'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
+        'route': 'art_illumina'
+    },
+    'art.454': {
+        'command': 'art_454',
+        'arguments': ['input', 'output', 'fold_coverage', 'mean_frag_len', 'std_dev', 'random_seed'],
+        'defaults': {},
+        'optional': ['mean_frag_len, std_dev', 'random_seed'],
+        'format': '{random_seed} {input} {output} {fold_coverage} {mean_frag_len} {std_dev}',
+        'stdout': False,
+        'title': 'ART - 454',
+        'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
+        'route': 'art_454'
     }
 }
 

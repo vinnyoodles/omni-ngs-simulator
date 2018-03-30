@@ -49,3 +49,6 @@ class ArtIlluminaForm(BaseSimulatorForm):
 class ArtSolidForm(BaseSimulatorForm):
     read_len = IntegerField('Read Length') 
     fold_coverage = IntegerField('Fold Coverage') 
+
+class ArtificialFastqGenerator(BaseSimulatorForm):
+    pass

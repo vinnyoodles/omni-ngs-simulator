@@ -84,7 +84,7 @@ def bear_parametric_abundance():
     if form.validate_on_submit():
         create_and_start_job('bear.parametric_abundance', form.name.data, { 'complexity' : form.complexity.data }, form.file.data)
         return redirect(url_for('dashboard'))
-    return render_template('simulators/bear_parametric_abundance.html', title='Bear', form=form)
+    return render_template('simulators/bear_parametric_abundance.html', title='Bear - Parametric Abundance', form=form)
 
 @instance.route('/simulators/454sim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
@@ -117,7 +117,7 @@ def art_solid():
     if form.validate_on_submit():
         pass
         return redirect(url_for('dashboard'))
-    return render_template('simulators/artsolid.html', title='ART 454', form=form)
+    return render_template('simulators/artsolid.html', title='ART SOLiD', form=form)
 
 @instance.route('/simulators/artillumina', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
@@ -126,7 +126,16 @@ def art_illumina():
     if form.validate_on_submit():
         pass
         return redirect(url_for('dashboard'))
-    return render_template('simulators/artillumina.html', title='ART 454', form=form)
+    return render_template('simulators/artillumina.html', title='ART Illumina', form=form)
+
+@instance.route('/simulators/artificial_fastq_generator', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def artificial_fastq_generator():
+    form = ArtificialFastqGenerator()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/artificial_fastq_generator.html', title='ArtificialFastqGenerator', form=form)
 
 """
 API Routes

@@ -63,6 +63,11 @@ SIMULATORS = {
         'title': 'ART - 454',
         'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
         'route': 'art_454'
+    },
+    'artificialfastqgenerator': {
+        'title': 'ArtificialFastqGenerator',
+        'caption': 'Outputs artificial FASTQ files that are derived from the reference. The user can customise DNA template/read length, gap size between paired-end reads, target coverage, whether to use quality scores taken from existing FASTQ files, and whether to simulate sequencing errors. Detailed coverage and error summary statistics are outputted.',
+        'route': 'artificial_fastq_generator'
     }
 }
 

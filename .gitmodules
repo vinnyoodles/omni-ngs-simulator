@@ -7,3 +7,12 @@
 [submodule "bin/EAGLE"]
 	path = bin/EAGLE
 	url = git@github.com:sequencing/EAGLE.git
+[submodule "bin/pirs"]
+	path = bin/pirs
+	url = git@github.com:galaxy001/pirs.git
+[submodule "bin/SimSeq"]
+	path = bin/SimSeq
+	url = git@github.com:jstjohn/SimSeq.git
+[submodule "bin/wgsim"]
+	path = bin/wgsim
+	url = git@github.com:lh3/wgsim.git

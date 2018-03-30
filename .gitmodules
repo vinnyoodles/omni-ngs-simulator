@@ -19,3 +19,6 @@
 [submodule "bin/xs"]
 	path = bin/xs
 	url = git@github.com:pratas/xs.git
+[submodule "bin/BEAR"]
+	path = bin/BEAR
+	url = git@github.com:sej917/BEAR.git

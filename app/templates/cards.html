@@ -3,7 +3,7 @@
 {% block content %}
     <div class="container" style="padding-top:50px; padding-bottom:50px">
         <div class="row">
-            <div class="col-sm-6" style="height:160px;padding-bottom: 10px;">
+            <div class="col-sm-6  sim-card">
                 <a style="text-decoration:none; color:inherit;" href="/simulators/help">
                     <div class="card hover-highlight" style="height:100%">
                         <div class="card-body">
@@ -14,7 +14,7 @@
                 </a>
             </div>
             {% for sim in simulators %}
-            <div class="col-sm-6" style="height:160px;padding-bottom: 10px;">
+            <div class="col-sm-6  sim-card">
                 <a style="text-decoration:none; color:inherit;" href="{{ url_for(simulators[sim]['route']) }}">
                     <div class="card hover-highlight" style="height:100%">
                         <div class="card-body">

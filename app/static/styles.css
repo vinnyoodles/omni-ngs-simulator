@@ -158,3 +158,8 @@ div.hover-highlight:hover {
 .job-form {
     max-width: 600px
 }
+
+.sim-card {
+    height:220px;
+    padding-bottom: 10px;
+}

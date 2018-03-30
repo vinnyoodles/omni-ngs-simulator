@@ -52,7 +52,7 @@ services:
     environment:
       - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
       - REDIS_URL=redis://sim_redis:6379/0
-      - PATH=$PATH:/app/simulators/bear/scripts
+      - PATH=$PATH:/art_bin_MountRainier:/454sim.1.04
     links:
       - sim_redis
       - sim_mongo

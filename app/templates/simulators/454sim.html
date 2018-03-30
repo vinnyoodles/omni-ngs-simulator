@@ -32,7 +32,7 @@
                     <div class="form-group row">
                         {{ form.flow_simulation_count.label(class_='col-4 col-form-label') }}
                         <div class="col-8">
-                            {{ form.flow_simulation_count(class_='form-control') }}
+                            {{ form.flow_simulation_count(class_='form-control', value='800') }}
                         </div>
                         {% for error in form.flow_simulation_count.errors %}
                             <div class="alert alert-danger" role="alert">{{ error }}</div>
@@ -42,7 +42,7 @@
                     <div class="form-group row">
                         {{ form.frag_length.label(class_='col-4 col-form-label') }}
                         <div class="col-8">
-                            {{ form.frag_length(class_='form-control') }}
+                            {{ form.frag_length(class_='form-control', value='1000') }}
                         </div>
                         {% for error in form.frag_length.errors %}
                             <span class="alert alert-danger" role="alert">{{ error }}</span>
@@ -52,7 +52,7 @@
                     <div class="form-group row">
                         {{ form.frag_count.label(class_='col-4 col-form-label') }}
                         <div class="col-8">
-                            {{ form.frag_count(class_='form-control') }}
+                            {{ form.frag_count(class_='form-control', value='1000000') }}
                         </div>
                         {% for error in form.frag_count.errors %}
                             <span class="alert alert-danger" role="alert">{{ error }}</span>

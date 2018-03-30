@@ -55,3 +55,57 @@ class ArtificialFastqGenerator(BaseSimulatorForm):
 
 class CuresimForm(BaseSimulatorForm):
     pass
+
+class DwgsimForm(BaseSimulatorForm):
+    pass
+
+class EagleForm(BaseSimulatorForm):
+    pass
+
+class FastqsimForm(BaseSimulatorForm):
+    pass
+
+class FlowsimForm(BaseSimulatorForm):
+    pass
+
+class GemsimForm(BaseSimulatorForm):
+    pass
+
+class GrinderForm(BaseSimulatorForm):
+    pass
+
+class MasonForm(BaseSimulatorForm):
+    pass
+
+class MetasimForm(BaseSimulatorForm):
+    pass
+
+class NessmForm(BaseSimulatorForm):
+    pass
+
+class PbsimForm(BaseSimulatorForm):
+    pass
+
+class ReadsimForm(BaseSimulatorForm):
+    pass
+
+class SincForm(BaseSimulatorForm):
+    pass
+
+class SimseqForm(BaseSimulatorForm):
+    pass
+
+class SimhtsdForm(BaseSimulatorForm):
+    pass
+
+class PirsForm(BaseSimulatorForm):
+    pass
+
+class SimngsForm(BaseSimulatorForm):
+    pass
+
+class WgsimForm(BaseSimulatorForm):
+    pass
+
+class XsForm(BaseSimulatorForm):
+    pass

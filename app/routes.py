@@ -146,6 +146,168 @@ def curesim():
         return redirect(url_for('dashboard'))
     return render_template('simulators/curesim.html', title='CuReSim', form=form)
 
+@instance.route('/simulators/dwgsim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def dwgsim():
+    form = DwgsimForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/dwgsim.html', title='DWGSIM', form=form)
+
+@instance.route('/simulators/eagle', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def eagle():
+    form = EagleForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/eagle.html', title='EAGLE', form=form)
+
+@instance.route('/simulators/fastqsim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def fastqsim():
+    form = FastqsimForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/fastqsim.html', title='FASTQSim', form=form)
+
+@instance.route('/simulators/flowsim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def flowsim():
+    form = FlowsimForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/flowsim.html', title='FlowSim', form=form)
+
+@instance.route('/simulators/gemsim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def gemsim():
+    form = GemsimForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/gemsim.html', title='GemSim', form=form)
+
+@instance.route('/simulators/grinder', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def grinder():
+    form = GrinderForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/grinder.html', title='Grinder', form=form)
+
+@instance.route('/simulators/mason', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def mason():
+    form = MasonForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/mason.html', title='Mason', form=form)
+
+@instance.route('/simulators/metasim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def metasim():
+    form = MetasimForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/metasim.html', title='MetaSim', form=form)
+
+@instance.route('/simulators/nessm', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def nessm():
+    form = NessmForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/nessm.html', title='NeSSM', form=form)
+
+@instance.route('/simulators/pbsim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def pbsim():
+    form = PbsimForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/pbsim.html', title='Pbsim', form=form)
+
+@instance.route('/simulators/readsim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def readsim():
+    form = ReadsimForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/readsim.html', title='ReadSim', form=form)
+
+@instance.route('/simulators/sinc', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def sinc():
+    form = SincForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/sinc.html', title='SInC', form=form)
+
+@instance.route('/simulators/simseq', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def simseq():
+    form = SimseqForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/simseq.html', title='SimSeq', form=form)
+
+@instance.route('/simulators/simhtsd', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def simhtsd():
+    form = SimhtsdForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/simhtsd.html', title='Simhtsd', form=form)
+
+@instance.route('/simulators/pirs', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def pirs():
+    form = PirsForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/pirs.html', title='pIRS', form=form)
+
+@instance.route('/simulators/simngs', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def simngs():
+    form = SimngsForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/simngs.html', title='simNGS', form=form)
+
+@instance.route('/simulators/wgsim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def wgsim():
+    form = WgsimForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/wgsim.html', title='wgsim', form=form)
+
+@instance.route('/simulators/xs', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def xs():
+    form = XsForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/xs.html', title='xs', form=form)
+
 """
 API Routes
 """

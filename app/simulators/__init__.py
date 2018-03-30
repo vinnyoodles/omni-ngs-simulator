@@ -73,6 +73,107 @@ SIMULATORS = {
         'title': 'CuReSim',
         'caption': 'Customized read simulator generates synthetic NGS reads, supporting read simulation for major letter-base sequencing platforms.',
         'route': 'curesim'
+    }, 
+    'dwgsim': {
+        'title': 'DWGSIM',
+        'caption': 'Whole Genome Simulator for Next-Generation Sequencing, based off of wgsim but handles ABI SOLiD and Ion Torrent data, as well as various assumptions about aligners and positions of indels.',
+        'route': 'dwgsim'
+    },
+    'eagle': {
+        'title' : 'EAGLE',
+        'caption': 'Enhanced Artificial Genome Engine, next generation sequencing reads simulator, is designed to simulate the behaviour of Illumina\'s Next Generation Sequencing instruments, in order to facilitate the development and testing of downstream applications.',
+        'route': 'eagle'
+    },
+    'fastqsim': {
+        'title': 'FASTQSim',
+        'caption': 'FASTQSim: Platform-Independent Data Characterizationa and In Silico Read Generation for NGS Datasets',
+        'route': 'fastqsim'
+    },
+    'flowsim': {
+        'title': 'Flowsim',
+        'caption': 'Generates simulated reads from them mimicing Roche\'s 454 pyrosequencing technology, writing output in 454\'s native SFF format. The flowgram generation is based on empirical distributions derived from real data',
+        'route': 'flowsim'
+    }, 
+    'gemsim': {
+        'title': 'GemSim',
+        'caption': 'A NGS simulator capable of generating single or paired-end reads for any sequencing technology compatible with the generic formats SAM and FASTQ. GemSIM creates and uses empirically derived, sequence-context based error models to realistically emulate individual sequencing runs and/or technologies.',
+        'route': 'gemsim'
+    },
+    'grinder': {
+        'title': 'Grinder',
+        'caption': 'A bioinformatics tool to create simulated omic shotgun and amplicon sequence libraries for all main sequencing platforms.',
+        'route':'grinder'
+    },
+    'mason': {
+        'title': 'Mason',
+        'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
+        'route': 'mason'
+    },
+
+    'metasim': {
+        'title': 'MetaSim',
+        'caption': 'Generates synthetic reads that reflect the diverse taxonomical composition of typical metagenome data sets, allows the user to design a metagenome by specifying the number of genomes present at different levels of the NCBI taxonomy, and then to collect reads from the metagenome using a simulation of a number of different sequencing technologies.',
+        'route': 'metasim'
+    },
+
+    'nessm': {
+        'title': 'NeSSM',
+        'caption': 'Next-generation Sequencing Simulator for Metagenomics, combining complete genomes currently available, a community composition table, and sequencing parameters, it can simulate metagenome sequencing better than existing systems.',
+        'route': 'nessm'
+    },
+
+    'pbsim': {
+        'title': 'Pbsim',
+        'caption': 'PacBio reads simulater (called PBSIM) in which sampling-based and model-based simulations are implemented.',
+        'route': 'pbsim'
+    },
+
+    'readsim': {
+        'title': 'ReadSim',
+        'caption': 'ReadSim is a fast and simple reads simulator to target long reads such as PacBio or Nanopore.',
+        'route': 'readsim'
+    },
+
+    'sinc': {
+        'title': 'SInC',
+        'caption': 'An accurate and fast error-model based simulator for SNPs, Indels and CNVs coupled with a read generator for short-read sequence data.',
+        'route': 'sinc'
+    },
+
+    'simseq': {
+        'title': 'SimSeq',
+        'caption': 'An illumina paired-end and mate-pair short read simulator, attempts to model as many of the quirks that exist in Illumina data as possible. Some of these quirks include the potential for chimeric reads, and non-biotinylated fragment pull down in mate-pair libraries.',
+        'route': 'simseq'
+    },
+
+    'simhtsd': {
+        'title': 'simhtsd',
+        'caption': 'Given a reference sequence, simhtsd will create a large set of short nucleotide reads, simulating the output from today\'s high-throughput DNA sequencers, such as the Illumina Genome Analyzer II.',
+        'route': 'simhtsd'
+    },
+
+    'pirs': {
+        'title': 'pIRS',
+        'caption': 'A tool for simulating paired-end reads from a reference genome. It is optimized for simulating reads similar to those generated from the Illumina platform.',
+        'route': 'pirs'
+    },
+
+    'simngs': {
+        'title': 'simNGS',
+        'caption': 'Simulating observations from Illumina sequencing machines using the statistical models behind the AYB base-calling software.',
+        'route': 'simngs'
+    },
+
+    'wgsim': {
+        'title': 'wgsim',
+        'caption': 'simulating sequence reads from a reference genome. It is able to simulate diploid genomes with SNPs and insertion/deletion (INDEL) polymorphisms, and simulate reads with uniform substitution sequencing errors.',
+        'route': 'wgsim'
+    },
+
+    'xs': {
+        'title': 'XS',
+        'caption': 'A FASTQ read simulation tool, flexible, portable (does not need a reference sequence) and aimed at testing computing infrastructures, namely cloud computing of large-scale projects, and testing FASTQ compression algorithms. Moreover, XS offers the possibility of simulating the three main FASTQ components individually (headers, DNA sequences and quality-scores).',
+        'route': 'xs'
     }
 }
 

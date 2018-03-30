@@ -52,3 +52,6 @@ class ArtSolidForm(BaseSimulatorForm):
 
 class ArtificialFastqGenerator(BaseSimulatorForm):
     pass
+
+class CuresimForm(BaseSimulatorForm):
+    pass

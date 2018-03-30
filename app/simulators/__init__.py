@@ -68,6 +68,11 @@ SIMULATORS = {
         'title': 'ArtificialFastqGenerator',
         'caption': 'Outputs artificial FASTQ files that are derived from the reference. The user can customise DNA template/read length, gap size between paired-end reads, target coverage, whether to use quality scores taken from existing FASTQ files, and whether to simulate sequencing errors. Detailed coverage and error summary statistics are outputted.',
         'route': 'artificial_fastq_generator'
+    },
+    'curesim': {
+        'title': 'CuReSim',
+        'caption': 'Customized read simulator generates synthetic NGS reads, supporting read simulation for major letter-base sequencing platforms.',
+        'route': 'curesim'
     }
 }
 

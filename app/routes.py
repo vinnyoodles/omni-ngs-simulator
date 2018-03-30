@@ -137,6 +137,15 @@ def artificial_fastq_generator():
         return redirect(url_for('dashboard'))
     return render_template('simulators/artificial_fastq_generator.html', title='ArtificialFastqGenerator', form=form)
 
+@instance.route('/simulators/curesim', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def curesim():
+    form = CuresimForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/curesim.html', title='CuReSim', form=form)
+
 """
 API Routes
 """

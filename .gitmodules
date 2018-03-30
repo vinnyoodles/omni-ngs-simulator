@@ -16,3 +16,6 @@
 [submodule "bin/wgsim"]
 	path = bin/wgsim
 	url = git@github.com:lh3/wgsim.git
+[submodule "bin/xs"]
+	path = bin/xs
+	url = git@github.com:pratas/xs.git

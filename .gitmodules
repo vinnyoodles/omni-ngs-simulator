@@ -1,3 +1,9 @@
 [submodule "simulators/bear"]
 	path = simulators/bear
 	url = git@github.com:sej917/BEAR.git
+[submodule "bin/DWGSIM"]
+	path = bin/DWGSIM
+	url = git@github.com:nh13/DWGSIM.git
+[submodule "bin/EAGLE"]
+	path = bin/EAGLE
+	url = git@github.com:sequencing/EAGLE.git

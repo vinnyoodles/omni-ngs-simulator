@@ -77,15 +77,6 @@ def simulators():
 Simulator Routes
 """
 
-@instance.route('/simulators/bear_parametric_abundance', methods=['GET', 'POST'], strict_slashes=False)
-@login_required
-def bear_parametric_abundance():
-    form = BearParametricAbundanceForm()
-    if form.validate_on_submit():
-        create_and_start_job('bear.parametric_abundance', form.name.data, { 'complexity' : form.complexity.data }, form.file.data)
-        return redirect(url_for('dashboard'))
-    return render_template('simulators/bear_parametric_abundance.html', title='Bear - Parametric Abundance', form=form)
-
 @instance.route('/simulators/454sim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def sim_454():

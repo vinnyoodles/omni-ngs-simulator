@@ -2,19 +2,26 @@
 
 {% block form_content %}
     <div class="form-group row">
+        {{ form.simulation_type.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.simulation_type(class_='form-control') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
         {{ form.fold_coverage.label(class_='col-4 col-form-label') }}
         <div class="col-8">
-            {{ form.fold_coverage(class_='form-control', required='') }}
+            {{ form.fold_coverage(class_='form-control', value='20', required='') }}
         </div>
         {% for error in form.fold_coverage.errors %}
-            <div class="alert alert-danger" role="alert">{{ error }}</div>
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
         {% endfor %}
     </div>
 
     <div class="form-group row">
         {{ form.mean_frag_len.label(class_='col-4 col-form-label') }}
         <div class="col-8">
-            {{ form.mean_frag_len(class_='form-control') }}
+            {{ form.mean_frag_len(class_='form-control', value='1500') }}
         </div>
         {% for error in form.mean_frag_len.errors %}
             <span class="alert alert-danger" role="alert">{{ error }}</span>
@@ -24,7 +31,7 @@
     <div class="form-group row">
         {{ form.std_dev.label(class_='col-4 col-form-label') }}
         <div class="col-8">
-            {{ form.std_dev(class_='form-control') }}
+            {{ form.std_dev(class_='form-control', value='20') }}
         </div>
         {% for error in form.std_dev.errors %}
             <span class="alert alert-danger" role="alert">{{ error }}</span>
@@ -34,7 +41,7 @@
     <div class="form-group row">
         {{ form.random_seed.label(class_='col-4 col-form-label') }}
         <div class="col-8">
-            {{ form.random_seed(class_='form-control') }}
+            {{ form.random_seed(class_='form-control', value=form.random_seed.data) }}
         </div>
         {% for error in form.random_seed.errors %}
             <span class="alert alert-danger" role="alert">{{ error }}</span>

@@ -26,12 +26,14 @@ SIMULATORS = {
         'route': 'art_454',
         'ready': True
     },
+
     'curesim': {
         'title': 'CuReSim',
         'caption': 'Customized read simulator generates synthetic NGS reads, supporting read simulation for major letter-base sequencing platforms.',
         'route': 'curesim',
         'ready': True
     }, 
+
     'dwgsim': {
         'title': 'DWGSIM',
         'caption': 'Whole Genome Simulator for Next-Generation Sequencing, based off of wgsim but handles ABI SOLiD and Ion Torrent data, as well as various assumptions about aligners and positions of indels.',
@@ -40,14 +42,14 @@ SIMULATORS = {
     },
 
     'mason.sanger': {
-        'title': 'Mason - sanger',
+        'title': 'Mason - Sanger',
         'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
         'route': 'mason',
         'ready': True
     },
 
     'mason.illumina': {
-        'title': 'Mason - illumina',
+        'title': 'Mason - Illumina',
         'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
         'route': 'mason',
         'ready': True

@@ -182,14 +182,23 @@ def grinder():
         return redirect(url_for('dashboard'))
     return render_template('simulators/grinder.html', title='Grinder', form=form)
 
-@instance.route('/simulators/mason', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/mason_sanger', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def mason():
-    form = MasonForm()
+def mason_sanger():
+    form = MasonSangerForm()
     if form.validate_on_submit():
         pass
         return redirect(url_for('dashboard'))
-    return render_template('simulators/mason.html', title='Mason', form=form)
+    return render_template('simulators/mason_sanger.html', title='Mason - Sanger', form=form)
+
+@instance.route('/simulators/mason_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def mason_illumina():
+    form = MasonIlluminaForm()
+    if form.validate_on_submit():
+        pass
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/mason_illumina.html', title='Mason - Illumna', form=form)
 
 @instance.route('/simulators/metasim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required

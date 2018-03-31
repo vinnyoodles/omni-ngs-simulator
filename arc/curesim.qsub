@@ -15,7 +15,6 @@
 # $7 -d double    deletion rate [0.01]
 # $8 -i double    insertion rate [0.005]
 # $9 -s double    substitution rate [0.005]
-# $10 -q char     quality encoding character ['5']
 
 java -jar $CURESIM_PATH/CuReSim.jar \
     -f $1 \
@@ -27,7 +26,6 @@ java -jar $CURESIM_PATH/CuReSim.jar \
     -d $7 \
     -i $8 \
     -s $9 \
-    -q $10 \
     2> /dev/null
 
 tar -czf $2.tar.gz $2

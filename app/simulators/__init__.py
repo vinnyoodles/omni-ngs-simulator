@@ -44,14 +44,14 @@ SIMULATORS = {
     'mason.sanger': {
         'title': 'Mason - Sanger',
         'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
-        'route': 'mason',
+        'route': 'mason_sanger',
         'ready': True
     },
 
     'mason.illumina': {
         'title': 'Mason - Illumina',
         'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
-        'route': 'mason',
+        'route': 'mason_illumina',
         'ready': True
     },
 

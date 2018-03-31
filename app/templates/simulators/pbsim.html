@@ -1,4 +1,83 @@
 {% extends "form_base.html" %}
 
 {% block form_content %}
+  <div class="form-group row">
+        {{ form.min_length.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.min_length(class_='form-control', value='100', required='') }}
+        </div>
+        {% for error in form.min_length.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.max_length.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.max_length(class_='form-control', value='25000', required='') }}
+        </div>
+        {% for error in form.max_length.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.min_accuracy.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.min_accuracy(class_='form-control', value='0.75', required='') }}
+        </div>
+        {% for error in form.min_accuracy.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.max_accuracy.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.max_accuracy(class_='form-control', value='1', required='') }}
+        </div>
+        {% for error in form.max_accuracy.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.substition_percentage.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.substition_percentage(class_='form-control', value='0.1', required='') }}
+        </div>
+        {% for error in form.substition_percentage.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.insertion_percentage.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.insertion_percentage(class_='form-control', value='0.6', required='') }}
+        </div>
+        {% for error in form.insertion_percentage.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.deletion_percentage.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.deletion_percentage(class_='form-control', value='0.3', required='') }}
+        </div>
+        {% for error in form.deletion_percentage.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.random_seed.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.random_seed(class_='form-control', value=form.random_seed.data, required='') }}
+        </div>
+        {% for error in form.random_seed.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
 {% endblock %}

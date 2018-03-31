@@ -14,16 +14,18 @@
                 </a>
             </div>
             {% for sim in simulators %}
-            <div class="col-sm-6  sim-card">
-                <a style="text-decoration:none; color:inherit;" href="{{ url_for(simulators[sim]['route']) }}">
-                    <div class="card hover-highlight" style="height:100%">
-                        <div class="card-body">
-                            <h5 class="card-title">{{ simulators[sim]['title'] }}</h5>
-                            <p class="card-text">{{ simulators[sim]['caption'] }}</p>
-                        </div>
+                {% if simulators[sim]['ready'] %}
+                    <div class="col-sm-6  sim-card">
+                        <a style="text-decoration:none; color:inherit;" href="{{ url_for(simulators[sim]['route']) }}">
+                            <div class="card hover-highlight" style="height:100%">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ simulators[sim]['title'] }}</h5>
+                                    <p class="card-text">{{ simulators[sim]['caption'] }}</p>
+                                </div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-            </div>
+                {% endif %}
             {% endfor %}
         </div>
     </div>

@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#PBS -l walltime=100:00:00
+#PBS -q normal_q
+#PBS -A cs4884s18
+#PBS -W group_list=newriver
+
+# Arguments
+# $1 input path
+# $2 output path
+# $3 fragment count
+# $4 fragment length
+# $5 flow simulation count (default=800)
+# $6 generation (available=GS,FLX,Ti, default=Ti)
+
+fragsim -c $3 -l $4 $1 | 454sim -n $5 -o $2 -d $SIM454_GEN_PATH -g $6
+
+tar -czf $2.tar.gz $2

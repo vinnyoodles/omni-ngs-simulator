@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#PBS -l walltime=100:00:00
+#PBS -q normal_q
+#PBS -A cs4884s18
+#PBS -W group_list=newriver
+
+# Arguments
+# $1 input
+# $2 output
+# $3 number of reads
+# $4 -m <sequencing_method>          'sanger' or '454' or 'illumina', default 'illumina'.
+# $5 -l <sequencing length>          length of the reads, default for illumina sequencing 36(36bp).
+# $6 -w <width of pairs>             gap length of pairs, for paired-end only. default 200.
+
+NeSSM_CPU -list $1 -o $2 -r $3

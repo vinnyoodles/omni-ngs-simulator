@@ -42,17 +42,7 @@ SIMULATORS = {
         'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
         'route': 'art_solid'
     },
-    'art.illumina': {
-        'command': 'art_illumina',
-        'arguments': ['input', 'output', 'sequencing_system', 'read_length', 'fold_coverage', 'num_reads_per_sequence', 'mean_fragsize', 'std_fragsize'],
-        'defaults': {},
-        'format': '-ss {sequencing_system} -sam -i {input} -l {read_length} -o {output}',
-        'optional': [],
-        'stdout': False,
-        'title': 'ART - Illumina',
-        'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
-        'route': 'art_illumina'
-    },
+
     'art.454': {
         'command': 'art_454',
         'arguments': ['input', 'output', 'fold_coverage', 'mean_frag_len', 'std_dev', 'random_seed'],

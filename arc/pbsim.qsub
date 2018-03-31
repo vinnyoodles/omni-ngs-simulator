@@ -1,0 +1,39 @@
+#!/bin/bash
+
+#PBS -l walltime=100:00:00
+#PBS -q normal_q
+#PBS -A cs4884s18
+#PBS -W group_list=newriver
+
+# Arguments
+# $1 input reference
+# $2 output
+
+# $3 --length-min         minimum length (100).
+# $4 --length-max         maximum length (CLR: 25000, CCS: 2500).
+# $5 --accuracy-min       minimum accuracy.
+                   # (CLR: 0.75, CCS: fixed as 0.75).
+                   # this option can be used only in case of CLR.
+# $6 --accuracy-max       maximum accuracy.
+                   # (CLR: 1.00, CCS: fixed as 1.00).
+                   # this option can be used only in case of CLR.
+# $7 --difference-ratio   ratio of differences. substitution:insertion:deletion.
+                   # each value up to 1000 (CLR: 10:60:30, CCS:6:21:73).
+# $8 --seed               for a pseudorandom number generator (Unix time).
+# $9 fastq file to sample
+
+
+
+pbsim \
+    --length-min $3 \
+    --length-max $4 \
+    --accuracy-min $5 \
+    --accuracy-max $6 \
+    --difference-ratio $7 \
+    --seed $8 \
+    --prefix $2 \
+    --sample-fastq $9 \
+    $1
+
+
+tar -czf $2.tar.gz $2_0001.fastq $2_0001.maf $2_0001.ref

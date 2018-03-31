@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#PBS -l walltime=100:00:00
+#PBS -q normal_q
+#PBS -A cs4884s18
+#PBS -W group_list=newriver
+
+# Arguments
+# $1 input reference
+# $2 output
+
+# $3 -l LEN, --read-len=LEN
+#               Generate reads having a length of LEN.  Default: 100
+
+# $4 -x VAL, --coverage=VAL
+#                Set the average sequencing coverage (sometimes called depth).
+#                It may be either a floating-point number or an integer.
+
+# $5 -m LEN, --insert-len-mean=LEN
+#                Generate inserts (fragments) having an average length of LEN.
+#                Default: 180
+
+# $6 -v LEN, --insert-len-sd=LEN
+#                Set the standard deviation of the insert (fragment) length.
+#                Default: 10% of insert length mean.
+
+# $7 -S SEED, --random-seed=SEED
+#                Use SEED as the random seed. Default:
+#                time(NULL) * getpid().  Note: If pIRS was not compiled with
+#                --disable-threads, each thread actually uses its own random
+#                number generator that is seeded by this base seed added to
+#                the thread number; also, if you need pIRS's output to be
+#                exactly reproducible, you must specify the random seed as well
+#                as use only 1 simulator thread (--threads=1, or configure
+#                with --disable-threads, or run on system with 4 or fewer
+#                processors).
+
+ pirs simulate \
+     -B Profiles/Base-Calling_Profiles/humNew.PE100.matrix.gz \
+     -I Profiles/InDel_Profiles/phixv2.InDel.matrix \
+     -G Profiles/GC-depth_Profiles/humNew.gcdep_100.dat \
+     -l $3 \
+     -x $4 \
+     -m $5 \
+     -v $6 \
+     -S $7 \
+     -o $2 \
+     $1
+
+tar -czf $2.tar.gz $2_100_180_1.fq $2_100_180_2.fq

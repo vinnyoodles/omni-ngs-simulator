@@ -42,10 +42,6 @@ class Art454Form(BaseSimulatorForm):
     std_dev = DecimalField('Standard Deviation (For Paired End Reads)', validators=[Optional()])
     random_seed = IntegerField('Random Seed', validators=[Optional()])
 
-class ArtIlluminaForm(BaseSimulatorForm):
-    sequencing_system = SelectField('Sequencing System', choices=[('GA1', 'GenomeAnalyzer'), ('GA2', 'GenomeAnalyzer'), ('HS10', 'HiSeq'), ('HS20', 'HiSeq'), ('HS25', 'HiSeq'), ('HSXn', 'HiSeqX'), ('HSXt', 'HiSeqX'), ('MinS', 'MiniSeq'), ('MSv1', 'MiSeq'), ('MSv3', 'MiSeq'), ('NS50', 'NextSeq500')])
-    read_len = IntegerField('Read Length') 
-
 class ArtSolidForm(BaseSimulatorForm):
     read_len = IntegerField('Read Length') 
     fold_coverage = IntegerField('Fold Coverage') 

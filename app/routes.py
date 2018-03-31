@@ -119,15 +119,6 @@ def art_solid():
         return redirect(url_for('dashboard'))
     return render_template('simulators/artsolid.html', title='ART SOLiD', form=form)
 
-@instance.route('/simulators/artillumina', methods=['GET', 'POST'], strict_slashes=False)
-@login_required
-def art_illumina():
-    form = ArtIlluminaForm()
-    if form.validate_on_submit():
-        pass
-        return redirect(url_for('dashboard'))
-    return render_template('simulators/artillumina.html', title='ART Illumina', form=form)
-
 @instance.route('/simulators/artificial_fastq_generator', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def artificial_fastq_generator():

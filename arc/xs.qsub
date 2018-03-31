@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#PBS -l walltime=100:00:00
+#PBS -q normal_q
+#PBS -A cs4884s18
+#PBS -W group_list=newriver
+
+# Arguments
+# NO INPUT FILE
+# $1 output
+
+# Main FASTQ options:
+# $2 -t  <sequencingType>     type: 1=Roche-454, 2=Illumina, 3=ABI SOLiD, 4=Ion Torrent
+# $3 -hf <headerFormat>       header format: 1=Length appendix, 2=Pair End
+# $4 -n  <numberOfReads>      number of reads per file
+
+# DNA options:
+# $5  -f  <A>,<C>,<G>,<T>,<N>  symbols frequency
+# $6  -rn <numberOfRepeats>    repeats: number (default: 0)
+# $7  -ri <repeatsMinSize>     repeats: minimum size
+# $8  -ra <repeatsMaxSize>     repeats: maximum size
+# $9  -rm <mutationRate>       repeats: mutation frequency
+# $10 -rr                      repeats: use reverse complement repeats
+
+# $11 -s  <seed>               generation seed
+
+# Common usage:
+#  ./XS -v -t 1 -i n=MySeq -ld 30:80 -n 20000 -qt=1 -qc 33,36,39:43 File
+#  ./XS -v -ls 100 -n 10000 -eh -eo -es -edb -f 0.3,0.2,0.2,0.3,0.0 -rn 50 -ri 300 -ra 3000 -rm 0.1 File
+
+XS \
+    -t $2 \
+    -hf $3 \
+    -n $4 \
+    -f $5 \
+    -rn $6 \
+    -ri $7 \
+    -ra $8 \
+    -rm $9 \
+    -rr $10 \
+    -s $11 \
+    $1

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#PBS -l walltime=100:00:00
+#PBS -q normal_q
+#PBS -A cs4884s18
+#PBS -W group_list=newriver
+
+# Arguments
+# $1 input path
+# $2 output path
+# $3 read length
+# $4 type of simulation (1=single end, 2=mate paired end, 3=paired end)
+# $5 random seed
+
+if [ $4 -eq 1 ]; then
+    # SINGLE-END (F3 READ) SIMULATION
+    # art_SOLiD [ options ] <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <LEN_READ> <FOLD_COVERAGE>
+    # $6 fold coverage
+    art_SOLiD -r $4 $1 $2 $3 $6
+
+elif [ $4 -eq 2 ]; then
+    # MATE-PAIR READS (F3-R3 PAIR) SIMULATION
+    # art_SOLiD [ options ] <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <LEN_READ> <FOLD_COVERAGE> <MEAN_FRAG_LEN> <STD_DEV>
+    # $6 fold coverage
+    # $7 mean fragment length
+    # $8 standard deviation
+    art_SOLiD -r $4 $1 $2 $3 $6 $7 $8
+
+elif [ $4 -eq 3 ]; then
+    # PAIRED-END READS (F3-F5 PAIR) SIMULATION
+    # art_SOLiD [ options ] <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <LEN_READ_F3> <LEN_READ_F5> <FOLD_COVERAGE> <MEAN_FRAG_LEN> <STD_DEV>
+    # $6 read length f5
+    # $7 fold coverage
+    # $8 mean fragment length
+    # $9 standard deviation
+    art_SOLiD -r $4 $1 $2 $3 $6 $7 $8 $9
+
+else
+    # TODO: curl job failure
+    exit
+fi

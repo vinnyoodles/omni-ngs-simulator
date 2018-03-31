@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#PBS -l walltime=100:00:00
+#PBS -q normal_q
+#PBS -A cs4884s18
+#PBS -W group_list=newriver
+
+# Arguments
+# $1 input path
+# $2 output path
+# $3 number of flow cycles by the sequencer
+# $4 random seed
+# $5 type of simulation (1=single end, 2=paired end)
+
+if [ $5 -eq 1 ]; then
+    # SINGLE-END SIMULATION
+    # art_454 <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <FOLD_COVERAGE>
+    # $6 fold coverage
+    art_454 -c $3 -r $4 $1 $2 $6
+
+elif [ $5 -eq 2 ]; then
+    # PAIRED-END SIMULATION
+    # art_454 <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <FOLD_COVERAGE> <MEAN_FRAG_LEN> <STD_DEV>
+    # $6 fold coverage
+    # $7 mean fragment length
+    # $8 standard deviation
+    art_454 -c $3 -r $4 $1 $2 $6 $7 $8
+
+else
+    # TODO: curl job failure
+    exit
+fi

@@ -116,16 +116,16 @@ class GrinderForm(BaseSimulatorForm):
 class MasonSangerForm(BaseSimulatorForm):
     read_count = IntegerField('Number of reads to simulate', default=1000, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
     random_source_sequence_length = IntegerField('Length of random source sequence', default=1000000, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
-    a_probability = DecimalField('Probability for A in random sequence', default=0.25, validators=[DataRequired()])
-    c_probability = DecimalField('Probability for C in random sequence', default=0.25, validators=[DataRequired()])
-    g_probability = DecimalField('Probability for G in random sequence', default=0.25, validators=[DataRequired()])
+    a_probability = DecimalField('Probability for A in random sequence', default=0.25, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    c_probability = DecimalField('Probability for C in random sequence', default=0.25, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    g_probability = DecimalField('Probability for G in random sequence', default=0.25, validators=[DataRequired(), NumberRange(min=0, max=1)])
 
-    mismatch_begin_probability = DecimalField('Probability for a mismatch to begin', default=0.005, validators=[DataRequired()])
-    mismatch_end_probability = DecimalField('Probability for a mismatch to end', default=0.01, validators=[DataRequired()])
-    insertion_begin_probability = DecimalField('Probability for a insertion to begin', default=0.0025, validators=[DataRequired()])
-    insertion_end_probability = DecimalField('Probability for a insertion to end', default=0.005, validators=[DataRequired()])
-    deletion_begin_probability = DecimalField('Probability for a deletion to begin', default=0.0025, validators=[DataRequired()])
-    deletion_end_probability = DecimalField('Probability for a deletion to end', default=0.005, validators=[DataRequired()])
+    mismatch_begin_probability = DecimalField('Probability for a mismatch to begin', default=0.005, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    mismatch_end_probability = DecimalField('Probability for a mismatch to end', default=0.01, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    insertion_begin_probability = DecimalField('Probability for a insertion to begin', default=0.0025, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    insertion_end_probability = DecimalField('Probability for a insertion to end', default=0.005, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    deletion_begin_probability = DecimalField('Probability for a deletion to begin', default=0.0025, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    deletion_end_probability = DecimalField('Probability for a deletion to end', default=0.005, validators=[DataRequired(), NumberRange(min=0, max=1)])
     random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=2000000)])
 
     def __init__(self, *args, **kwargs):
@@ -135,15 +135,15 @@ class MasonSangerForm(BaseSimulatorForm):
 class MasonIlluminaForm(BaseSimulatorForm):
     read_count = IntegerField('Number of reads to simulate', default=1000, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
     random_source_sequence_length = IntegerField('Length of random source sequence', default=1000000, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
-    a_probability = DecimalField('Probability for A in random sequence', default=0.25, validators=[DataRequired()])
-    c_probability = DecimalField('Probability for C in random sequence', default=0.25, validators=[DataRequired()])
-    g_probability = DecimalField('Probability for G in random sequence', default=0.25, validators=[DataRequired()])
+    a_probability = DecimalField('Probability for A in random sequence', default=0.25, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    c_probability = DecimalField('Probability for C in random sequence', default=0.25, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    g_probability = DecimalField('Probability for G in random sequence', default=0.25, validators=[DataRequired(), NumberRange(min=0, max=1)])
 
-    insertion_probability = DecimalField('Probability of an insertion', default=0.001, validators=[DataRequired()])
-    deletion_probability = DecimalField('Probability of a deletion', default=0.001, validators=[DataRequired()])
-    avg_mismatch_probability = DecimalField('Average Mismatch Probability', default=0.004, validators=[DataRequired()])
-    first_base_mismatch_probability = DecimalField('Probability of a mismatch at the first base', default=0.002, validators=[DataRequired()])
-    last_base_mismatch_probability = DecimalField('Probability of a mismatch at the last base', default=0.012, validators=[DataRequired()])
+    insertion_probability = DecimalField('Probability of an insertion', default=0.001, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    deletion_probability = DecimalField('Probability of a deletion', default=0.001, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    avg_mismatch_probability = DecimalField('Average Mismatch Probability', default=0.004, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    first_base_mismatch_probability = DecimalField('Probability of a mismatch at the first base', default=0.002, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    last_base_mismatch_probability = DecimalField('Probability of a mismatch at the last base', default=0.012, validators=[DataRequired(), NumberRange(min=0, max=1)])
     random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=2000000)])
 
     def __init__(self, *args, **kwargs):
@@ -162,9 +162,9 @@ class PbsimForm(BaseSimulatorForm):
     max_length = IntegerField('Maximum length', default=25000, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
     min_accuracy = DecimalField('Minimum accuracy', default=0.75, validators=[DataRequired()])
     max_accuracy = DecimalField('Maximum accuracy', default=1, validators=[DataRequired()])
-    substition_percentage = DecimalField('Substitution percentage', default=0.1, validators=[DataRequired()])
-    insertion_percentage = DecimalField('Insertion percentage', default=0.6, validators=[DataRequired()])
-    deletion_percentage = DecimalField('Deletion percentage', default=0.3, validators=[DataRequired()])
+    substition_percentage = DecimalField('Substitution percentage', default=0.1, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    insertion_percentage = DecimalField('Insertion percentage', default=0.6, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    deletion_percentage = DecimalField('Deletion percentage', default=0.3, validators=[DataRequired(), NumberRange(min=0, max=1)])
     random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=2000000)])
 
     def __init__(self, *args, **kwargs):
@@ -184,13 +184,50 @@ class SimhtsdForm(BaseSimulatorForm):
     pass
 
 class PirsForm(BaseSimulatorForm):
-    pass
+    read_len = IntegerField('Length of generated reads', default=100, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
+    coverage = IntegerField('Average sequencing coverage (depth)', default=200, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
+    insertion_len = IntegerField('Average length of generated insertion', default=100, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
+    std_dev_insertion_len = IntegerField('Standard deviation of insertion legnth', default=0.1, validators=[DataRequired()])
+    random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=2000000)])
+
+    def __init__(self, *args, **kwargs):
+        super(PirsForm, self).__init__(*args, **kwargs)
+        self.random_seed.data = rand_seed()
 
 class SimngsForm(BaseSimulatorForm):
     pass
 
 class WgsimForm(BaseSimulatorForm):
-    pass
+    base_error_rate = DecimalField('Base error rate', default=0.02, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    outer_distance = IntegerField('Outer distance between two ends', default=500, validators=[DataRequired()])
+    std_dev = IntegerField('Standard Deviation', default=50, validators=[DataRequired()])
+    read_pair_count = IntegerField('Number of read pairs', default=1000000, validators=[DataRequired()])
+    first_read_len = IntegerField('Length of the first read', default=70, validators=[DataRequired()])
+    second_read_len = IntegerField('Length of the second read', default=70, validators=[DataRequired()])
+    mutation_rate = DecimalField('Mutation rate', default=0.001, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    indel_fraction = DecimalField('Indel percentage', default=0.15, validators=[DataRequired()])
+    indel_extension_rate = DecimalField('Probability of indel extension', default=0.30, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=2000000)])
+
+    def __init__(self, *args, **kwargs):
+        super(WgsimForm, self).__init__(*args, **kwargs)
+        self.random_seed.data = rand_seed()
 
 class XsForm(BaseSimulatorForm):
-    pass
+    technology = SelectField('Technology', choices=[('1', '454'), ('2', 'Illumina'), ('3', 'SOLiD'), ('4', 'Ion Torrent')], validators=[DataRequired()])
+    header_format = SelectField('Header format', choices=[('1', 'Length appendix'), ('2', 'Pair end')], validators=[DataRequired()])
+    read_per_file = IntegerField('Number of reads per file', default=100, validators=[DataRequired()])
+    a_probability = DecimalField('Frequency of A', default=0.20, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    c_probability = DecimalField('Frequency of C', default=0.20, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    g_probability = DecimalField('Frequency of G', default=0.20, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    t_probability = DecimalField('Frequency of T', default=0.20, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    n_probability = DecimalField('Frequency of N', default=0.20, validators=[DataRequired(), NumberRange(min=0, max=1)])
+    repeat_count = IntegerField('Number of repeats', default=0, validators=[DataRequired()])
+    repeat_min = IntegerField('Minimum repeat size', default=0, validators=[DataRequired()])
+    repeat_max = IntegerField('Maximum repeat size', default=0, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
+    mutation_frequency = DecimalField('Mutation rate', default=0.001, validators=[DataRequired(), NumberRange(min=1, max=1)])
+    random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=2000000)])
+
+    def __init__(self, *args, **kwargs):
+        super(XsForm, self).__init__(*args, **kwargs)
+        self.random_seed.data = rand_seed()

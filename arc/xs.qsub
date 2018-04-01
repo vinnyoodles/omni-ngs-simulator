@@ -20,9 +20,8 @@
 # $7  -ri <repeatsMinSize>     repeats: minimum size
 # $8  -ra <repeatsMaxSize>     repeats: maximum size
 # $9  -rm <mutationRate>       repeats: mutation frequency
-# $10 -rr                      repeats: use reverse complement repeats
 
-# $11 -s  <seed>               generation seed
+# $10 -s  <seed>               generation seed
 
 # Common usage:
 #  ./XS -v -t 1 -i n=MySeq -ld 30:80 -n 20000 -qt=1 -qc 33,36,39:43 File
@@ -37,6 +36,5 @@ XS \
     -ri $7 \
     -ra $8 \
     -rm $9 \
-    -rr $10 \
-    -s $11 \
+    -s $10 \
     $1

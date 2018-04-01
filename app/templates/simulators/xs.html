@@ -1,4 +1,127 @@
 {% extends "form_base.html" %}
 
 {% block form_content %}
+    <div class="form-group row">
+        {{ form.technology.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.technology(class_='form-control', required='') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.header_format.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.header_format(class_='form-control', required='') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.read_per_file.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.read_per_file(class_='form-control', value='100', required='') }}
+        </div>
+        {% for error in form.read_per_file.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.a_probability.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.a_probability(class_='form-control', value='0.2', required='') }}
+        </div>
+        {% for error in form.a_probability.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.c_probability.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.c_probability(class_='form-control', value='0.2', required='') }}
+        </div>
+        {% for error in form.c_probability.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.g_probability.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.g_probability(class_='form-control', value='0.2', required='') }}
+        </div>
+        {% for error in form.g_probability.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.t_probability.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.t_probability(class_='form-control', value='0.2', required='') }}
+        </div>
+        {% for error in form.t_probability.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.n_probability.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.n_probability(class_='form-control', value='0.2', required='') }}
+        </div>
+        {% for error in form.n_probability.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.repeat_count.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.repeat_count(class_='form-control', value='0', required='') }}
+        </div>
+        {% for error in form.repeat_count.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.repeat_min.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.repeat_min(class_='form-control', value='0', required='') }}
+        </div>
+        {% for error in form.repeat_min.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.repeat_max.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.repeat_max(class_='form-control', value='0', required='') }}
+        </div>
+        {% for error in form.repeat_max.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.mutation_frequency.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.mutation_frequency(class_='form-control', value='0.001', required='') }}
+        </div>
+        {% for error in form.mutation_frequency.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.random_seed.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.random_seed(class_='form-control', value=form.random_seed.data, required='') }}
+        </div>
+        {% for error in form.random_seed.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
 {% endblock %}

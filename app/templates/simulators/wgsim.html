@@ -1,4 +1,103 @@
 {% extends "form_base.html" %}
 
 {% block form_content %}
+    <div class="form-group row">
+        {{ form.base_error_rate.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.base_error_rate(class_='form-control', value='0.02', required='') }}
+        </div>
+        {% for error in form.base_error_rate.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.outer_distance.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.outer_distance(class_='form-control', value='500', required='') }}
+        </div>
+        {% for error in form.outer_distance.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.std_dev.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.std_dev(class_='form-control', value='50', required='') }}
+        </div>
+        {% for error in form.std_dev.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.read_pair_count.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.read_pair_count(class_='form-control', value='1000000', required='') }}
+        </div>
+        {% for error in form.read_pair_count.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.first_read_len.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.first_read_len(class_='form-control', value='0.70', required='') }}
+        </div>
+        {% for error in form.first_read_len.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.second_read_len.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.second_read_len(class_='form-control', value='70', required='') }}
+        </div>
+        {% for error in form.second_read_len.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.mutation_rate.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.mutation_rate(class_='form-control', value='0.001', required='') }}
+        </div>
+        {% for error in form.mutation_rate.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.indel_fraction.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.indel_fraction(class_='form-control', value='0.15', required='') }}
+        </div>
+        {% for error in form.indel_fraction.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.indel_extension_rate.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.indel_extension_rate(class_='form-control', value='0.30', required='') }}
+        </div>
+        {% for error in form.indel_extension_rate.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.random_seed.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.random_seed(class_='form-control', value=form.random_seed.data, required='') }}
+        </div>
+        {% for error in form.random_seed.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
 {% endblock %}

@@ -1,4 +1,54 @@
 {% extends "form_base.html" %}
 
 {% block form_content %}
+    <div class="form-group row">
+        {{ form.read_len.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.read_len(class_='form-control', value='100', required='') }}
+        </div>
+        {% for error in form.read_len.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.coverage.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.coverage(class_='form-control', value='200', required='') }}
+        </div>
+        {% for error in form.coverage.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.insertion_len.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.insertion_len(class_='form-control', value='100', required='') }}
+        </div>
+        {% for error in form.insertion_len.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.std_dev_insertion_len.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.std_dev_insertion_len(class_='form-control', value='0.1', required='') }}
+        </div>
+        {% for error in form.std_dev_insertion_len.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.random_seed.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.random_seed(class_='form-control', value=form.random_seed.data, required='') }}
+        </div>
+        {% for error in form.random_seed.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
 {% endblock %}
+

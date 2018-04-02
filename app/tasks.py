@@ -4,6 +4,8 @@ from simulators import SIMULATORS, parse_commandline
 from flask_login import current_user
 from app.models import Job
 
+ARC_DIR = '$WORK/omningssimulator'
+
 @celery.task
 def start_job(job_id, sim_id, params, output_file):
     """
@@ -103,36 +105,28 @@ def start_job(job_id, sim_id, params, output_file):
     job.save()
     return job_id
 
-def create_and_start_job(sim_id, name, command_args, file):
-    data = {
-        'status'    : 'pending',
-        'simulator' : sim_id,
-        'user_id'   : current_user.id,
-        'name'      : name
-    }
+def create_and_start_job(sim_id, form):
+    job_attrs = dict()
+    data = { 'simulator' : sim_id, 'status' : 'created', 'user_id' : current_user.id, 'attrs' : job_attrs }
+    for name, value in form.data.items():
+        if name == 'name':
+            data['name'] = value
+        elif name != 'csrf_token' and name != 'file' and name != 'submit':
+            job_attrs[name] = value
     job = Job(**data)
-
-    # If there is no job name, then set the job id as the job name.
-    if name is None:
-        job.name = name = str(job.id)
-
     job.save()
 
-    # The path where all output files are written to is the project's directory.
-    # TODO: for dev purposes, this is okay (change for production)
-    prefix = '{}_{}'.format(sim_id, job.id).replace('.', '_')
-    input_filename = os.path.join('/app', '{}.in'.format(prefix))
-    output_filename = os.path.join('/app', '{}.out'.format(prefix))
-    file.save(input_filename)
+    # # If there is no job name, then set the job id as the job name.
+    if job.name == '':
+        job.name = str(job.id)
+        job.save()
 
-    command_args['input'] = input_filename
-    command_args['output'] = output_filename
+    # # The path where all output files are written to is the project's directory.
+    project_dir = os.path.join(ARC_DIR, str(job.id))
+    filename = form.file.data.filename
+    tmp_path = os.path.join('/tmp', filename)
+    file.save(tmp_path)
 
-    # Omit the input filename for db storage
-    arg_clone = command_args.copy()
-    arg_clone['input'] = '<input>'
-    arg_clone['output'] = '<output>'
+    # TODO: copy tmp_path to project_dir
 
-    job.command = ' '.join(parse_commandline(SIMULATORS[sim_id], arg_clone))
-    job.save()
-    start_job.apply_async(args=[str(job.id), sim_id, command_args, output_filename])
+    # start_job.apply_async(args=[str(job.id), sim_id, command_args, output_filename])

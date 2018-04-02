@@ -3,7 +3,8 @@ SIMULATORS = {
         'title': '454Sim',
         'caption': 'Process standard FASTA and generate reads, one for each FASTA entry present in the file starting from the first base and until either the sequence ends or the simulated read ends.',
         'route': 'sim_454',
-        'ready': True
+        'ready': True,
+        'arguments': [ 'input', 'output', 'frag_count', 'frag_length', 'flow_simulation_count', 'generation' ]
     },
 
     'artificialfastqgenerator': {

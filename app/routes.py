@@ -82,12 +82,7 @@ Simulator Routes
 def sim_454():
     form = Sim454Form()
     if form.validate_on_submit():
-        create_and_start_job('454sim', form.name.data, { 
-            'frag_count': form.frag_count.data, 
-            'frag_length': form.frag_length.data, 
-            'flow_simulation_count': form.flow_simulation_count.data, 
-            'generation': form.generation.data
-        }, form.file.data)
+        create_and_start_job('454sim', form)
         return redirect(url_for('dashboard'))
 
     return render_template('simulators/454sim.html', title='454Sim', form=form)

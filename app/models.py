@@ -16,9 +16,10 @@ class User(UserMixin, Document):
 
 class Job(Document):
     user_id            = ObjectIdField(required=True)
-    name               = StringField(required=True)
+    name               = StringField()
     simulator          = StringField(required=True)
     status             = StringField(required=True)
+    attrs              = DictField(required=True)
     command            = StringField()
     err                = StringField()
 

@@ -17,10 +17,10 @@
 # $6 --accuracy-max       maximum accuracy.
                    # (CLR: 1.00, CCS: fixed as 1.00).
                    # this option can be used only in case of CLR.
-# $7 --difference-ratio   ratio of differences. substitution:insertion:deletion.
+# $7:$8:$9 --difference-ratio   ratio of differences. substitution:insertion:deletion.
                    # each value up to 1000 (CLR: 10:60:30, CCS:6:21:73).
-# $8 --seed               for a pseudorandom number generator (Unix time).
-# $9 fastq file to sample
+# $10 --seed               for a pseudorandom number generator (Unix time).
+# $11 fastq file to sample
 
 
 
@@ -29,10 +29,10 @@ pbsim \
     --length-max $4 \
     --accuracy-min $5 \
     --accuracy-max $6 \
-    --difference-ratio $7 \
-    --seed $8 \
+    --difference-ratio $7:$8:$9 \
+    --seed $10 \
     --prefix $2 \
-    --sample-fastq $9 \
+    --sample-fastq $11 \
     $1
 
 

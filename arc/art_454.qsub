@@ -8,23 +8,21 @@
 # Arguments
 # $1 input path
 # $2 output path
-# $3 number of flow cycles by the sequencer
-# $4 random seed
-# $5 type of simulation (1=single end, 2=paired end)
+# $3 random seed
+# $4 type of simulation (1=single end, 2=paired end)
+# $5 fold coverage
 
-if [ $5 -eq 1 ]; then
+if [ $4 -eq 1 ]; then
     # SINGLE-END SIMULATION
     # art_454 <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <FOLD_COVERAGE>
-    # $6 fold coverage
-    art_454 -c $3 -r $4 $1 $2 $6
+    art_454 -c $3 -r $4 $1 $2 $5
 
-elif [ $5 -eq 2 ]; then
+elif [ $4 -eq 2 ]; then
     # PAIRED-END SIMULATION
     # art_454 <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <FOLD_COVERAGE> <MEAN_FRAG_LEN> <STD_DEV>
-    # $6 fold coverage
-    # $7 mean fragment length
-    # $8 standard deviation
-    art_454 -c $3 -r $4 $1 $2 $6 $7 $8
+    # $6 mean fragment length
+    # $7 standard deviation
+    art_454 -c $3 -r $4 $1 $2 $5 $6 $7
 
 else
     # TODO: curl job failure

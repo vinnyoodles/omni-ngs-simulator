@@ -3,14 +3,15 @@ SIMULATORS = {
         'title': '454Sim',
         'caption': 'Process standard FASTA and generate reads, one for each FASTA entry present in the file starting from the first base and until either the sequence ends or the simulated read ends.',
         'route': 'sim_454',
-        'ready': True,
-        'arguments': [ 'input', 'output', 'frag_count', 'frag_length', 'flow_simulation_count', 'generation' ]
+        'arguments': [ 'input', 'output', 'frag_count', 'frag_length', 'flow_simulation_count', 'generation' ],
+        'ready': True
     },
 
     'artificialfastqgenerator': {
         'title': 'ArtificialFastqGenerator',
         'caption': 'Outputs artificial FASTQ files that are derived from the reference. The user can customise DNA template/read length, gap size between paired-end reads, target coverage, whether to use quality scores taken from existing FASTQ files, and whether to simulate sequencing errors. Detailed coverage and error summary statistics are outputted.',
         'route': 'artificial_fastq_generator',
+        'arguments': [ 'input', 'output', 'sequence_identifier', 'coverage_mean', 'peak_coverage_mean', 'gc_content_peak', 'coverage_std_dev', 'read_length', 'mean_length', 'std_dev' ],
         'ready': True
     },
 
@@ -18,6 +19,7 @@ SIMULATORS = {
         'title': 'ART - SOLiD',
         'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
         'route': 'art_solid',
+        'arguments': [ 'input', 'output', 'random_seed','simulation_type','fold_coverage','mean_frag_len','std_dev' ],
         'ready': True
     },
 
@@ -25,6 +27,7 @@ SIMULATORS = {
         'title': 'ART - 454',
         'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
         'route': 'art_454',
+        'arguments': [ 'input', 'output', 'read_len', 'simulation_type', 'random_seed', 'fold_coverage', 'mean_frag_len', 'std_dev' ],
         'ready': True
     },
 
@@ -32,6 +35,7 @@ SIMULATORS = {
         'title': 'CuReSim',
         'caption': 'Customized read simulator generates synthetic NGS reads, supporting read simulation for major letter-base sequencing platforms.',
         'route': 'curesim',
+        'arguments': [ 'input', 'output', 'read_count', 'read_mean', 'read_size_std_dev', 'random_read_count', 'deletion_rate', 'insertion_rate', 'substitution_rate' ],
         'ready': True
     }, 
 
@@ -39,6 +43,7 @@ SIMULATORS = {
         'title': 'DWGSIM',
         'caption': 'Whole Genome Simulator for Next-Generation Sequencing, based off of wgsim but handles ABI SOLiD and Ion Torrent data, as well as various assumptions about aligners and positions of indels.',
         'route': 'dwgsim',
+        'arguments': [ 'input', 'output', 'pair_outer_distance', 'distance_std_dev', 'mean_coverage', 'mutation_rate', 'mutation_frequency', 'mutation_indel_percentage', 'indel_extension_rate', 'min_indel_length', 'random_read_probability', 'technology', 'random_seed' ],
         'ready': True
     },
 
@@ -46,6 +51,7 @@ SIMULATORS = {
         'title': 'Mason - Sanger',
         'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
         'route': 'mason_sanger',
+        'arguments': [ 'input', 'output', 'random_seed', 'read_count', 'random_source_sequence_length', 'a_probability', 'c_probability', 'g_probability', 'mismatch_begin_probability', 'mismatch_end_probability', 'insertion_begin_probability', 'insertion_end_probability', 'deletion_begin_probability', 'deletion_end_probability' ],
         'ready': True
     },
 
@@ -53,6 +59,7 @@ SIMULATORS = {
         'title': 'Mason - Illumina',
         'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
         'route': 'mason_illumina',
+        'arguments': [ 'input', 'output', 'random_seed', 'read_count', 'random_source_sequence_length', 'a_probability', 'c_probability', 'g_probability', 'insertion_probability', 'deletion_probability', 'avg_mismatch_probability', 'first_base_mismatch_probability', 'last_base_mismatch_probability' ],
         'ready': True
     },
 
@@ -60,12 +67,14 @@ SIMULATORS = {
         'title': 'Pbsim',
         'caption': 'PacBio reads simulater (called PBSIM) in which sampling-based and model-based simulations are implemented.',
         'route': 'pbsim',
+        'arguments': [ 'input', 'output', 'min_length', 'max_length', 'min_accuracy', 'max_accuracy', 'substition_percentage', 'insertion_percentage', 'deletion_percentage', 'random_seed' ],
         'ready': True
     },
     'pirs': {
         'title': 'pIRS',
         'caption': 'A tool for simulating paired-end reads from a reference genome. It is optimized for simulating reads similar to those generated from the Illumina platform.',
         'route': 'pirs',
+        'arguments': [ 'input', 'output', 'read_len', 'coverage', 'insertion_len', 'std_dev_insertion_len', 'random_seed' ],
         'ready': True
     },
 
@@ -73,6 +82,7 @@ SIMULATORS = {
         'title': 'wgsim',
         'caption': 'simulating sequence reads from a reference genome. It is able to simulate diploid genomes with SNPs and insertion/deletion (INDEL) polymorphisms, and simulate reads with uniform substitution sequencing errors.',
         'route': 'wgsim',
+        'arguments': [ 'input', 'output', 'base_error_rate', 'outer_distance', 'std_dev', 'read_pair_count', 'first_read_len', 'second_read_len', 'mutation_rate', 'indel_fraction', 'indel_extension_rate', 'random_seed' ],
         'ready': True
     },
 
@@ -80,6 +90,7 @@ SIMULATORS = {
         'title': 'XS',
         'caption': 'A FASTQ read simulation tool, flexible, portable (does not need a reference sequence) and aimed at testing computing infrastructures, namely cloud computing of large-scale projects, and testing FASTQ compression algorithms. Moreover, XS offers the possibility of simulating the three main FASTQ components individually (headers, DNA sequences and quality-scores).',
         'route': 'xs',
+        'arguments': [ 'input', 'output', 'technology', 'header_format', 'read_per_file', 'a_probability', 'c_probability', 'g_probability', 't_probability', 'n_probability', 'repeat_count', 'repeat_min', 'repeat_max', 'mutation_frequency', 'random_seed' ],
         'ready': True
     },
 

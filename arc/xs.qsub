@@ -15,13 +15,13 @@
 # $4 -n  <numberOfReads>      number of reads per file
 
 # DNA options:
-# $5  -f  <A>,<C>,<G>,<T>,<N>  symbols frequency
-# $6  -rn <numberOfRepeats>    repeats: number (default: 0)
-# $7  -ri <repeatsMinSize>     repeats: minimum size
-# $8  -ra <repeatsMaxSize>     repeats: maximum size
-# $9  -rm <mutationRate>       repeats: mutation frequency
+# $5,$6,$7,$8,$9  -f  <A>,<C>,<G>,<T>,<N>  symbols frequency
+# $10             -rn <numberOfRepeats>    repeats: number (default: 0)
+# $11             -ri <repeatsMinSize>     repeats: minimum size
+# $12             -ra <repeatsMaxSize>     repeats: maximum size
+# $13             -rm <mutationRate>       repeats: mutation frequency
 
-# $10 -s  <seed>               generation seed
+# $14 -s  <seed>               generation seed
 
 # Common usage:
 #  ./XS -v -t 1 -i n=MySeq -ld 30:80 -n 20000 -qt=1 -qc 33,36,39:43 File
@@ -31,10 +31,10 @@ XS \
     -t $2 \
     -hf $3 \
     -n $4 \
-    -f $5 \
-    -rn $6 \
-    -ri $7 \
-    -ra $8 \
-    -rm $9 \
-    -s $10 \
+    -f $5,$6,$7,$8,$9 \
+    -rn $10 \
+    -ri $11 \
+    -ra $12 \
+    -rm $13 \
+    -s $14 \
     $1

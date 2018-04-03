@@ -1,6 +1,6 @@
 import subprocess, os
 from . import celery
-from simulators import SIMULATORS, parse_commandline
+from simulators import SIMULATORS
 from flask_login import current_user
 from app.models import Job
 import arc
@@ -39,8 +39,6 @@ def start_job(job_id):
 
     sim = SIMULATORS[sim_id]
 
-    print(job, sim)
-
     # Validate parameters.
     for arg in sim['arguments']:
         if arg == 'input' or arg == 'output':
@@ -51,7 +49,17 @@ def start_job(job_id):
             job.save()
             return False
 
-    # commandline = parse_commandline(sim, params)
+    remote_path = arc.get_remote_path(job.id)
+    input_path = os.path.join(remote_path, 'input.fasta')
+    output_path = os.path.join(remote_path, 'output')
+
+    client = arc.Client('newriver1.arc.vt.edu', 'vincentl')
+    # TODO: check queue status on arc
+    client.run()
+
+    # TODO: submit job to arc
+    client.run()
+    client.close()
 
     job.status = 'completed'
     job.save()
@@ -82,5 +90,6 @@ def create_and_start_job(sim_id, form):
     remote_path = arc.get_remote_path(job.id)
     client = arc.Client('newriver1.arc.vt.edu', 'vincentl')
     client.put_file(tmp_path, os.path.join(remote_path, 'input.fasta'))
+    client.close()
 
     start_job.apply_async(args=[str(job.id)])

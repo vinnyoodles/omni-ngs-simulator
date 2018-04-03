@@ -5,5 +5,7 @@ Flask-Login==0.4.1
 Flask-WTF==0.14.2
 mongoengine==0.15.0
 # numpy==1.14.2
+paramiko==2.4.1
 # qiime==1.9.1
 redis==2.10.6
+scp=0.10.2

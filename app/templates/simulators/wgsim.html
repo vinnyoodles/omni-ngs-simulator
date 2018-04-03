@@ -44,7 +44,7 @@
     <div class="form-group row">
         {{ form.first_read_len.label(class_='col-4 col-form-label') }}
         <div class="col-8">
-            {{ form.first_read_len(class_='form-control', value='0.70', required='') }}
+            {{ form.first_read_len(class_='form-control', value='70', required='') }}
         </div>
         {% for error in form.first_read_len.errors %}
             <span class="alert alert-danger" role="alert">{{ error }}</span>

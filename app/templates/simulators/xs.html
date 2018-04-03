@@ -78,7 +78,7 @@
     <div class="form-group row">
         {{ form.repeat_count.label(class_='col-4 col-form-label') }}
         <div class="col-8">
-            {{ form.repeat_count(class_='form-control', value='0', required='') }}
+            {{ form.repeat_count(class_='form-control', value='1', required='') }}
         </div>
         {% for error in form.repeat_count.errors %}
             <span class="alert alert-danger" role="alert">{{ error }}</span>
@@ -88,7 +88,7 @@
     <div class="form-group row">
         {{ form.repeat_min.label(class_='col-4 col-form-label') }}
         <div class="col-8">
-            {{ form.repeat_min(class_='form-control', value='0', required='') }}
+            {{ form.repeat_min(class_='form-control', value='1', required='') }}
         </div>
         {% for error in form.repeat_min.errors %}
             <span class="alert alert-danger" role="alert">{{ error }}</span>
@@ -98,7 +98,7 @@
     <div class="form-group row">
         {{ form.repeat_max.label(class_='col-4 col-form-label') }}
         <div class="col-8">
-            {{ form.repeat_max(class_='form-control', value='0', required='') }}
+            {{ form.repeat_max(class_='form-control', value='10', required='') }}
         </div>
         {% for error in form.repeat_max.errors %}
             <span class="alert alert-danger" role="alert">{{ error }}</span>

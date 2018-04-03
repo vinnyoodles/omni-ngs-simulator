@@ -2,8 +2,8 @@ version: "2"
 
 services:
   # The main server (node.js) instance
-  simulator:
-    container_name: simulator
+  server:
+    container_name: server
 
     # Use Dockerfile for build commands
     build: ./docker/server

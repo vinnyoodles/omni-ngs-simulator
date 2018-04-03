@@ -5,4 +5,4 @@ Flask-WTF==0.14.2
 mongoengine==0.15.0
 paramiko==2.4.1
 redis==2.10.6
-scp=0.10.2
+scp==0.10.2

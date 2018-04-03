@@ -15,7 +15,7 @@ SIMULATORS = {
         'ready': True
     },
 
-    'art.solid': {
+    'art_solid': {
         'title': 'ART - SOLiD',
         'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
         'route': 'art_solid',
@@ -23,7 +23,7 @@ SIMULATORS = {
         'ready': True
     },
 
-    'art.454': {
+    'art_454': {
         'title': 'ART - 454',
         'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
         'route': 'art_454',
@@ -47,7 +47,7 @@ SIMULATORS = {
         'ready': True
     },
 
-    'mason.sanger': {
+    'mason_sanger': {
         'title': 'Mason - Sanger',
         'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
         'route': 'mason_sanger',
@@ -55,7 +55,7 @@ SIMULATORS = {
         'ready': True
     },
 
-    'mason.illumina': {
+    'mason_illumina': {
         'title': 'Mason - Illumina',
         'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
         'route': 'mason_illumina',
@@ -187,7 +187,7 @@ def sim_json():
     """
     result = {}
     for key in SIMULATORS:
-        name, subname = key.split('.')
+        name, subname = key.split('_')
         if name not in result:
             result[name] = {}
 

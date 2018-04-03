@@ -3,6 +3,7 @@ from . import celery
 from simulators import SIMULATORS, parse_commandline
 from flask_login import current_user
 from app.models import Job
+import arc
 
 ARC_DIR = '$WORK/omningssimulator'
 
@@ -127,6 +128,8 @@ def create_and_start_job(sim_id, form):
     tmp_path = os.path.join('/tmp', filename)
     file.save(tmp_path)
 
-    # TODO: copy tmp_path to project_dir
+    remote_path = arc.get_remote_path(job.id)
+    client = arc.Client('newriver1.arc.vt.edu', 'vincentl')
+    client.put_file(tmp_path, os.path.join(remote_path, 'input.fasta'))
 
     # start_job.apply_async(args=[str(job.id), sim_id, command_args, output_filename])

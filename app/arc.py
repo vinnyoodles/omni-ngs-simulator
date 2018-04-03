@@ -26,3 +26,7 @@ class Client:
 
     def _scp_client(self):
         return SCPClient(self.client.get_transport())
+
+
+def get_remote_path(job_id):
+    return '$WORK/omningssimulator/{}'.format(job_id)

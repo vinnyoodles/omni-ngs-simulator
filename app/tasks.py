@@ -94,21 +94,25 @@ def create_and_start_job(sim_id, form):
     job = Job(**data)
     job.save()
 
-    # # If there is no job name, then set the job id as the job name.
+    # If there is no job name, then set the job id as the job name.
     if job.name == '':
         job.name = str(job.id)
         job.save()
 
-    # # The path where all output files are written to is the project's directory.
-    project_dir = os.path.join(arc.ARC_DIR, str(job.id))
-    filename = form.file.data.filename
-    tmp_path = os.path.join('/tmp', filename)
-    form.file.data.save(tmp_path)
-
-    remote_path = arc.get_remote_path(arc.ARC_USER, job.id)
     client = arc.Client('newriver1.arc.vt.edu', arc.ARC_USER)
+    remote_path = arc.get_remote_path(arc.ARC_USER, job.id)
     client.run('mkdir {}'.format(remote_path))
-    client.put_file(tmp_path, os.path.join(remote_path, 'input.fasta'))
+
+    # The path where all output files are written to is the project's directory.
+    # NOTE: not all simulators have an input file (ex. xs)
+    if hasattr(form, 'file'):
+        project_dir = os.path.join(arc.ARC_DIR, str(job.id))
+        filename = form.file.data.filename
+        tmp_path = os.path.join('/tmp', filename)
+        form.file.data.save(tmp_path)
+
+        client.put_file(tmp_path, os.path.join(remote_path, 'input.fasta'))
+
     client.close()
 
     start_job.apply_async(args=[str(job.id)])

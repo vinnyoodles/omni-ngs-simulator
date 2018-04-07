@@ -215,7 +215,7 @@ class WgsimForm(BaseSimulatorForm):
         super(WgsimForm, self).__init__(*args, **kwargs)
         self.random_seed.data = rand_seed()
 
-class XsForm(BaseSimulatorForm):
+class XsForm(FlaskForm):
     technology = SelectField('Technology', choices=[('1', '454'), ('2', 'Illumina'), ('3', 'SOLiD'), ('4', 'Ion Torrent')], validators=[DataRequired()])
     header_format = SelectField('Header format', choices=[('1', 'Length appendix'), ('2', 'Pair end')], validators=[DataRequired()])
     read_per_file = IntegerField('Number of reads per file', default=100, validators=[DataRequired()])
@@ -229,6 +229,9 @@ class XsForm(BaseSimulatorForm):
     repeat_max = IntegerField('Maximum repeat size', default=0, validators=[DataRequired()])
     mutation_frequency = DecimalField('Mutation rate', default=0.001, validators=[DataRequired(), NumberRange(min=0, max=1)])
     random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=RAND_SEED_MAX)])
+
+    name = StringField('Name')
+    submit = SubmitField('Submit')
 
     def __init__(self, *args, **kwargs):
         super(XsForm, self).__init__(*args, **kwargs)

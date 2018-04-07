@@ -90,7 +90,7 @@ SIMULATORS = {
         'title': 'XS',
         'caption': 'A FASTQ read simulation tool, flexible, portable (does not need a reference sequence) and aimed at testing computing infrastructures, namely cloud computing of large-scale projects, and testing FASTQ compression algorithms. Moreover, XS offers the possibility of simulating the three main FASTQ components individually (headers, DNA sequences and quality-scores).',
         'route': 'xs',
-        'arguments': [ 'input', 'output', 'technology', 'header_format', 'read_per_file', 'a_probability', 'c_probability', 'g_probability', 't_probability', 'n_probability', 'repeat_count', 'repeat_min', 'repeat_max', 'mutation_frequency', 'random_seed' ],
+        'arguments': [ 'output', 'technology', 'header_format', 'read_per_file', 'a_probability', 'c_probability', 'g_probability', 't_probability', 'n_probability', 'repeat_count', 'repeat_min', 'repeat_max', 'mutation_frequency', 'random_seed' ],
         'ready': True
     },
 

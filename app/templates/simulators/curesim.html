@@ -34,7 +34,7 @@
     <div class="form-group row">
         {{ form.random_read_count.label(class_='col-4 col-form-label') }}
         <div class="col-8">
-            {{ form.random_read_count(class_='form-control', value='0', required='') }}
+            {{ form.random_read_count(class_='form-control', value='1', required='') }}
         </div>
         {% for error in form.random_read_count.errors %}
             <span class="alert alert-danger" role="alert">{{ error }}</span>

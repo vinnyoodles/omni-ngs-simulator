@@ -6,6 +6,8 @@ from app.models import Job
 import arc
 
 ARC_DIR = '$WORK/omningssimulator'
+ARC_USER = 'vincentl'
+JOB_THRESHOLD = 6
 
 @celery.task
 def start_job(job_id):
@@ -49,21 +51,27 @@ def start_job(job_id):
             job.save()
             return False
 
-    remote_path = arc.get_remote_path(job.id)
+    remote_path = arc.get_remote_path(ARC_USER, job.id)
     input_path = os.path.join(remote_path, 'input.fasta')
     output_path = os.path.join(remote_path, 'output')
 
-    client = arc.Client('newriver1.arc.vt.edu', 'vincentl')
-    # TODO: check queue status on arc
-    client.run()
+    client = arc.Client('newriver1.arc.vt.edu', ARC_USER)
+    try:
+        current_job_count = int(client.run('qstat | grep {} | wc -l'.format(ARC_USER)))
+        if current_job_count > JOB_THRESHOLD:
+            submit_retry(job)
+    except ValueError:
+        submit_retry(job)
+        return False
 
     # TODO: submit job to arc
-    client.run()
+    print(job.attrs)
+    # client.run()
     client.close()
 
     job.status = 'completed'
     job.save()
-    return job_id
+    return True
 
 def create_and_start_job(sim_id, form):
     job_attrs = dict()
@@ -87,9 +95,16 @@ def create_and_start_job(sim_id, form):
     tmp_path = os.path.join('/tmp', filename)
     form.file.data.save(tmp_path)
 
-    remote_path = arc.get_remote_path(job.id)
-    client = arc.Client('newriver1.arc.vt.edu', 'vincentl')
+    remote_path = arc.get_remote_path(ARC_USER, job.id)
+    client = arc.Client('newriver1.arc.vt.edu', ARC_USER)
+    client.run('mkdir {}'.format(remote_path))
     client.put_file(tmp_path, os.path.join(remote_path, 'input.fasta'))
     client.close()
 
     start_job.apply_async(args=[str(job.id)])
+
+
+def submit_retry(job):
+    # delay for a day (in seconds)
+    delay = 60 * 60 * 24
+    start_job.apply_async(args=[str(job.id)], countdown=delay)

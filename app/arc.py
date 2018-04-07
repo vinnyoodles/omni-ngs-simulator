@@ -12,14 +12,15 @@ class Client:
 
     def put_file(self, local_path, remote_path):
         scp = self._scp_client()
-        scp.put(path, remove_path)
+        scp.put(local_path, remote_path)
 
     def get_file(self, remote_path):
         scp = self._scp_client()
         scp.get(remote_path)
 
     def run(self, command):
-        return self.client.exec_command(command)
+        stdin, stdout, stderr = self.client.exec_command(command)
+        return ' '.join(stdout)
 
     def close(self):
         self.client.close()
@@ -28,5 +29,5 @@ class Client:
         return SCPClient(self.client.get_transport())
 
 
-def get_remote_path(job_id):
-    return '$WORK/omningssimulator/{}'.format(job_id)
+def get_remote_path(user, job_id):
+    return '/work/newriver/{}/omningssimulator/{}'.format(user, job_id)

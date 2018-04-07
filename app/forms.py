@@ -53,11 +53,11 @@ class Art454Form(BaseSimulatorForm):
 
 class ArtSolidForm(BaseSimulatorForm):
     read_len = IntegerField('Read Length', validators=[DataRequired(), NumberRange(min=1, max=2000000)])
+    simulation_type = SelectField('Simulation Type', choices=[('1', 'Single End'), ('2', 'Paired Ends')], validators=[DataRequired()])
+    random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=RAND_SEED_MAX)])
     fold_coverage = IntegerField('Fold Coverage', validators=[NumberRange(min=1, max=1000000)])
     mean_frag_len = IntegerField('Mean Fragment Length (For Paired End Reads)', validators=[Optional()])
     std_dev = DecimalField('Standard Deviation (For Paired End Reads)', validators=[Optional()])
-    random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=RAND_SEED_MAX)])
-    simulation_type = SelectField('Simulation Type', choices=[('1', 'Single End'), ('2', 'Paired Ends')], validators=[DataRequired()])
 
     def __init__(self, *args, **kwargs):
         super(ArtSolidForm, self).__init__(*args, **kwargs)

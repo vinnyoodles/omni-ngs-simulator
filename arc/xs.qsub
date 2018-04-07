@@ -28,19 +28,19 @@
 #  ./XS -v -t 1 -i n=MySeq -ld 30:80 -n 20000 -qt=1 -qc 33,36,39:43 File
 #  ./XS -v -ls 100 -n 10000 -eh -eo -es -edb -f 0.3,0.2,0.2,0.3,0.0 -rn 50 -ri 300 -ra 3000 -rm 0.1 File
 
-interpolated_command="\"XS -t output -hf $4 -n $5 -f $6,$7,$8,$9,$10 -rn $11 -ri $12 -ra $13 -rm $14 -s $15 input\""
+interpolated_command="\"XS -t output -hf $4 -n $5 -f $6,$7,$8,$9,${10} -rn ${11} -ri ${12} -ra ${13} -rm ${14} -s ${15} input\""
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 XS \
     -t $3 \
     -hf $4 \
     -n $5 \
-    -f $6,$7,$8,$9,$10 \
-    -rn $11 \
-    -ri $12 \
-    -ra $13 \
-    -rm $14 \
-    -s $15 \
+    -f $6,$7,$8,$9,${10} \
+    -rn ${11} \
+    -ri ${12} \
+    -ra ${13} \
+    -rm ${14} \
+    -s ${15} \
     $2
     
 cd /work/newriver/vincentl/omningssimulator/${1}

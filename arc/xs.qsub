@@ -43,5 +43,6 @@ XS \
     -s $15 \
     $2
     
-tar -czf $2.tar.gz -C $2
+cd /work/newriver/vincentl/omningssimulator/${1}
+tar -czf $2.tar.gz $2
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

@@ -51,5 +51,6 @@ ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.
      -o $3 \
      $2
 
-tar -czf $3.tar.gz -C $3_100_180_1.fq $3_100_180_2.fq
+cd /work/newriver/vincentl/omningssimulator/${1}
+tar -czf $3.tar.gz $3_100_180_1.fq $3_100_180_2.fq
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

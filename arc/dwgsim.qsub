@@ -43,7 +43,8 @@ dwgsim $2 $3 \
     -z $14 \
     2> /dev/null
 
-tar -czf $3.tar.gz -C \
+cd /work/newriver/vincentl/omningssimulator/${1}
+tar -czf $3.tar.gz \
     $3.bfast.fastq.gz \
     $3.bwa.read1.fastq.gz \
     $3.bwa.read2.fastq.gz \

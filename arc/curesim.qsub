@@ -32,5 +32,6 @@ java -jar $CURESIM_PATH/CuReSim.jar \
     -s $10 \
     2> /dev/null
 
-tar -czf $3.tar.gz -C $3
+cd /work/newriver/vincentl/omningssimulator/${1}
+tar -czf $3.tar.gz $3
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

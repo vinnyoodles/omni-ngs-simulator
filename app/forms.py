@@ -64,7 +64,7 @@ class ArtSolidForm(BaseSimulatorForm):
         self.random_seed.data = rand_seed()
 
 class ArtificialFastqGeneratorForm(BaseSimulatorForm):
-    sequence_identifier = StringField('Sequence Identifier in reference where read generation will begin')
+    sequence_identifier = StringField('Sequence Identifier in reference where read generation will begin (Must begin with a >)')
     coverage_mean = DecimalField('Spread of Coverage Mean', default=0.22)
     peak_coverage_mean = DecimalField('Peak Coverage Mean', default=37.7)
     gc_content_peak = DecimalField('GC Content for Regions with Peak Coverage Mean', default=0.45)

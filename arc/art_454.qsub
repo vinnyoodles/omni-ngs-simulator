@@ -14,24 +14,27 @@
 # $6 fold coverage
 
 if [ $5 -eq 1 ]; then
-    interpolated_command="\"art_454 -c $4 -r $5 input output $6\""
+    interpolated_command="\"art_454 -r $4 input output $6\""
     ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
     # SINGLE-END SIMULATION
     # art_454 <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <FOLD_COVERAGE>
-    art_454 -c $4 -r $5 $2 $3 $6
+    art_454 -r $4 $2 $3 $6
+    cd /work/newriver/vincentl/omningssimulator/${1}
+    tar -czf $3.tar.gz ${3}.fq ${3}.stat
 
 elif [ $5 -eq 2 ]; then
-    interpolated_command="\"art_454 -c $4 -r $5 input output $6 $7 $7\""
+    interpolated_command="\"art_454 -r $4 input output $6 $7 $8\""
     ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
     # PAIRED-END SIMULATION
     # art_454 <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <FOLD_COVERAGE> <MEAN_FRAG_LEN> <STD_DEV>
     # $7 mean fragment length
     # $8 standard deviation
-    art_454 -c $4 -r $5 $2 $3 $6 $7 $8
+    art_454 -r $4 $2 $3 $6 $7 $8
+    cd /work/newriver/vincentl/omningssimulator/${1}
+    tar -czf $3.tar.gz ${3}1.fq ${3}2.fq
 
 else
     exit
 fi
 
-tar -czf $3.tar.gz -C $3.fq $3.sam
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

@@ -27,7 +27,7 @@ SIMULATORS = {
         'title': 'ART - 454',
         'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
         'route': 'art_454',
-        'arguments': [ 'input', 'output', 'read_len', 'simulation_type', 'random_seed', 'fold_coverage', 'mean_frag_len', 'std_dev' ],
+        'arguments': [ 'input', 'output', 'random_seed', 'simulation_type', 'fold_coverage', 'mean_frag_len', 'std_dev' ],
         'ready': True
     },
 

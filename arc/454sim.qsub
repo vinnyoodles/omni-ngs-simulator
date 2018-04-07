@@ -19,6 +19,5 @@ ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.
 
 fragsim -c $4 -l $5 $2 | 454sim -n $6 -o $3 -d $SIM454_GEN_PATH -g $7
 
-cd /work/newriver/vincentl/omningssimulator/${1}
-tar -czf $3.tar.gz $3
+tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

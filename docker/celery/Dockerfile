@@ -1,39 +1,8 @@
 FROM python:2.7.14
 
-RUN apt-get update && apt-get install -y \
-    wget \
-    unzip 
-
 COPY . /celery
 RUN python -m pip install -r /celery/requirements.txt
 
-RUN wget https://www.niehs.nih.gov/research/resources/assets/docs/artbinmountrainier20160605linux64tgz.tgz && \
-    tar -xvf artbinmountrainier20160605linux64tgz.tgz
-
-RUN wget https://downloads.sourceforge.net/project/bioinfo-454sim/454sim.1.04.linux.intel.x86-64.zip && \
-    unzip 454sim.1.04.linux.intel.x86-64.zip
-
-ENV PATH="/art_bin_MountRainier:/454sim.1.04:${PATH}"
+COPY arc_rsa /root/.ssh/id_rsa
 
 WORKDIR /app
-
-# Install python dependencies for python 2.7
-# NOTE: Running two commands of pip install because of an issue with "cogent" module
-    # python2.7 -m pip install numpy && \
-    # python2.7 -m pip install -r /app/requirements.txt
-
-# uclust is a dependency of qiime
-# RUN curl http://www.drive5.com/uclust/uclustq1.2.22_i86linux64 > uclustq1.2.22_i86linux64 && \
-#     ln -s uclustq1.2.22_i86linux64 /usr/bin/uclust
-
-# # Install perl dependencies
-# RUN perlbrew install-cpanm && /root/perl5/perlbrew/bin/cpanm Bio::Perl
-
-# RUN git clone https://github.com/MG-RAST/DRISEE.git
-
-# COPY dependencies/cdbfasta.tar.gz /home/cdbfasta.tar.gz
-# RUN tar -xvf /home/cdbfasta.tar.gz && \
-#     make -C /cdbfasta && \
-#     ln -s /cdbfasta/cdbfasta /usr/bin/cdbfasta && \
-#     ln -s /cdbfasta/cdbyank /usr/bin/cdbyank
-

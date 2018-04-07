@@ -105,12 +105,12 @@ def base_simulator_route(simulator, title, FormClass):
 def sim_454():
     return base_simulator_route('454sim', '454Sim', Sim454Form)
 
-@instance.route('/simulators/art454', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/art_454', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def art_454():
     return base_simulator_route('art_454', 'ART 454', Art454Form)
 
-@instance.route('/simulators/artsolid', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/art_solid', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def art_solid():
     return base_simulator_route('art_solid', 'ART SOLiD', ArtSolidForm)

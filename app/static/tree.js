@@ -1,4 +1,86 @@
-var sims = {"454Sim":{"name":"454Sim"},"ART":{"name":"ART"},"ArtificialFastqGenerator":{"name":"ArtificialFastqGenerator"},"BEAR":{"name":"BEAR"},"CuReSim":{"name":"CuReSim"},"DWGSIM":{"name":"DWGSIM"},"EAGLE":{"name":"EAGLE"},"FASTQSim":{"name":"FASTQSim"},"Flowsim":{"name":"Flowsim"},"GemSim":{"name":"GemSim"},"Grinder":{"name":"Grinder"},"Mason":{"name":"Mason"},"MetaSim":{"name":"MetaSim"},"NeSSM":{"name":"NeSSM"},"pbsim":{"name":"pbsim"},"pIRS":{"name":"pIRS"},"ReadSim":{"name":"ReadSim"},"simhtsd":{"name":"simhtsd"},"simNGS":{"name":"simNGS"},"SimSeq":{"name":"SimSeq"},"SInC":{"name":"SInC"},"wgsim":{"name":"wgsim"},"XS":{"name":"XS"}}
+var sims = {
+    "454Sim":{
+        "name":"454Sim",
+        "link":"454sim"
+    },
+    "ART":{
+        "name":"ART",
+        "link":"ART",
+        "parent_dep":true
+    },
+    "ArtificialFastqGenerator":{
+        "name":"ArtificialFastqGenerator",
+        "link":"artificial_fastq_generator"
+    },
+    "BEAR":{
+        "name":"BEAR"
+    },
+    "CuReSim":{
+        "name":"CuReSim",
+        "link":"curesim"
+    },
+    "DWGSIM":{
+        "name":"DWGSIM",
+        "link":"dwgsim"
+    },
+    "EAGLE":{
+        "name":"EAGLE"
+    },
+    "FASTQSim":{
+        "name":"FASTQSim"
+    },
+    "Flowsim":{
+        "name":"Flowsim"
+    },
+    "GemSim":{
+        "name":"GemSim"
+    },
+    "Grinder":{
+        "name":"Grinder"
+    },
+    "Mason":{
+        "name":"Mason",
+        "link":"mason",
+        "parent_dep":true
+    },
+    "MetaSim":{
+        "name":"MetaSim"
+    },
+    "NeSSM":{
+        "name":"NeSSM"
+    },
+    "pbsim":{
+        "name":"pbsim",
+        "link":"pbsim"
+    },
+    "pIRS":{
+        "name":"pIRS",
+        "link":"pirs"
+    },
+    "ReadSim":{
+        "name":"ReadSim"
+    },
+    "simhtsd":{
+        "name":"simhtsd"
+    },
+    "simNGS":{
+        "name":"simNGS"
+    },
+    "SimSeq":{
+        "name":"SimSeq"
+    },
+    "SInC":{
+        "name":"SInC"
+    },
+    "wgsim":{
+        "name":"wgsim",
+        "link":"wgsim"
+    },
+    "XS":{
+        "name":"XS",
+        "link":"xs"
+    }
+};
 
 function setParent(arr, parent) {
     return arr.slice(0).map(function(obj) { 
@@ -176,6 +258,13 @@ function update(source) {
 }
 
 function click(d) {
+    if (d.link) {
+        var link = d.link;
+        if (d.parent) {
+            link += '_' + d.parent.name;
+        }
+        window.location.href = "/simulators/" + link.toLowerCase();
+    }
     if (d.children) {
         d._children = d.children;
         d.children = null;

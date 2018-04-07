@@ -219,3 +219,19 @@ def get_jobs():
 @instance.route('/api/simulators', methods=['GET'], strict_slashes=False)
 def get_simulators():
     return jsonify(sim_json())
+
+@instance.route('/api/jobs/started/<job_id>', methods=['POST'], strict_slashes=False)
+def started_job(job_id):
+    command = request.json['command']
+    job = Job.objects(id=job_id).first()
+    job.status = 'started'
+    job.command = command
+    job.save()
+    return jsonify({ 'message' : 'ok' })
+
+@instance.route('/api/jobs/finished/<job_id>', methods=['POST'], strict_slashes=False)
+def finished_job(job_id):
+    job = Job.objects(id=job_id).first()
+    job.status = 'finished'
+    job.save()
+    return jsonify({ 'message' : 'ok' })

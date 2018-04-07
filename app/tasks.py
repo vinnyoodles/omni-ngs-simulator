@@ -66,7 +66,7 @@ def start_job(job_id):
     output_path = os.path.join(remote_path, 'output')
 
     qsub_path = os.path.join(QSUB_DIR, '{}.qsub'.format(sim_id))
-    arguments = []
+    arguments = [ str(job.id) ]
 
     for arg in sim['arguments']:
         if arg == 'input':

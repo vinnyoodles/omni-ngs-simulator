@@ -13,7 +13,6 @@
 # $5 type of simulation (1=single end, 2=paired end)
 # $6 fold coverage
 
-
 if [ $5 -eq 1 ]; then
     interpolated_command="\"art_454 -c $4 -r $5 input output $6\""
     ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
@@ -34,4 +33,5 @@ else
     exit
 fi
 
+tar -czf $3.tar.gz -C $3.fq $3.sam
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

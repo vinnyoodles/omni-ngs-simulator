@@ -43,7 +43,7 @@ dwgsim $2 $3 \
     -z $14 \
     2> /dev/null
 
-tar -czf $3.tar \
+tar -czf $3.tar.gz -C \
     $3.bfast.fastq.gz \
     $3.bwa.read1.fastq.gz \
     $3.bwa.read2.fastq.gz \

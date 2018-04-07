@@ -34,5 +34,5 @@ java -jar $AFG_PATH/ArtificialFastqGenerator.jar \
     -TLSD $11 \
     2> /dev/null
 
-tar -czf $3.tar.gz $3.1.fastq $4.2.fastq $3.log $4.readStartIndexes.txt
+tar -czf $3.tar.gz -C $3.1.fastq $4.2.fastq $3.log $4.readStartIndexes.txt
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

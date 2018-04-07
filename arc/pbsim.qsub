@@ -38,5 +38,5 @@ pbsim \
     $2
 
 
-tar -czf $3.tar.gz $3_0001.fastq $3_0001.maf $3_0001.ref
+tar -czf $3.tar.gz -C $3_0001.fastq $3_0001.maf $3_0001.ref
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

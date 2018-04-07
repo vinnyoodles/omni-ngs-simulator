@@ -69,6 +69,11 @@ def help():
     methods = [ 'IonTorrent', 'SOLiD', 'PacBio', '454', 'Illumina', 'Sanger', 'Nanopore' ]
     return render_template('help.html', title='Help', methods=methods)
 
+@instance.route('/simulators/help/tree', methods=['GET'], strict_slashes=False)
+@login_required
+def help_tree():
+    return render_template('tree.html', title='Help')
+
 @instance.route('/simulators', methods=['GET'], strict_slashes=False)
 @login_required
 def simulators():

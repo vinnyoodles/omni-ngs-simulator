@@ -1,4 +1,5 @@
-from flask import render_template, flash, redirect, jsonify, url_for, request
+import os
+from flask import render_template, flash, redirect, jsonify, url_for, request, send_file
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 
@@ -7,6 +8,7 @@ from app.forms import *
 from app.tasks import create_and_start_job
 from app.models import User, Job
 from app import instance
+import arc
 
 """
 Unauthenticated Routes
@@ -72,6 +74,16 @@ def help():
 @login_required
 def simulators():
     return render_template('cards.html', title='Cards', simulators=SIMULATORS)
+
+@instance.route('/download/<job_id>', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def download(job_id):
+    client = arc.Client('newriver2.arc.vt.edu', arc.ARC_USER)
+    local_path = os.path.join('/tmp', 'output.tar.gz')
+    remote_path = os.path.join(arc.ARC_DIR, job_id, 'output.tar.gz')
+    client.get_file(local_path, remote_path)
+    client.close()
+    return send_file(local_path)
 
 """
 Simulator Routes

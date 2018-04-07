@@ -21,7 +21,13 @@
                 <tr class="row100 body">
                     <td class="column1">{{ job.name }}</td>
                     <td class="column2 data-column">{{ job.command }}</td>
-                    <td class="column3 data-column">{{ job.status }}</td>
+                    {% if job.status == 'completed' %}
+                        <td class="column3 data-column">
+                            <a href="{{ url_for('download', job_id=job.id) }}">Download</a> 
+                        </td>
+                    {% else %}
+                        <td class="column3 data-column">{{ job.status }}</td>
+                    {% endif %}
                 </tr>
                 {% endfor %}
             </tbody>

@@ -5,9 +5,6 @@ from flask_login import current_user
 from app.models import Job
 import arc
 
-ARC_USER = 'vincentl'
-ARC_DIR = '/work/newriver/{}/omningssimulator'.format(ARC_USER)
-QSUB_DIR = '/home/{}/omni-ngs-simulator/arc'.format(ARC_USER)
 JOB_THRESHOLD = 6
 
 @celery.task
@@ -52,20 +49,23 @@ def start_job(job_id):
             job.save()
             return False
 
-    client = arc.Client('newriver1.arc.vt.edu', ARC_USER)
+    client = arc.Client('newriver1.arc.vt.edu', arc.ARC_USER)
     try:
-        current_job_count = int(client.run('qstat | grep {} | wc -l'.format(ARC_USER)))
+        current_job_count = int(client.run('qstat | grep {} | wc -l'.format(arc.ARC_USER)))
         if current_job_count > JOB_THRESHOLD:
             submit_retry(job)
+            client.close()
+            return False
     except ValueError:
         submit_retry(job)
+        client.close()
         return False
 
-    remote_path = arc.get_remote_path(ARC_USER, job.id)
+    remote_path = arc.get_remote_path(arc.ARC_USER, job.id)
     input_path = os.path.join(remote_path, 'input.fasta')
     output_path = os.path.join(remote_path, 'output')
 
-    qsub_path = os.path.join(QSUB_DIR, '{}.qsub'.format(sim_id))
+    qsub_path = os.path.join(arc.QSUB_DIR, '{}.qsub'.format(sim_id))
     arguments = [ str(job.id) ]
 
     for arg in sim['arguments']:
@@ -100,13 +100,13 @@ def create_and_start_job(sim_id, form):
         job.save()
 
     # # The path where all output files are written to is the project's directory.
-    project_dir = os.path.join(ARC_DIR, str(job.id))
+    project_dir = os.path.join(arc.ARC_DIR, str(job.id))
     filename = form.file.data.filename
     tmp_path = os.path.join('/tmp', filename)
     form.file.data.save(tmp_path)
 
-    remote_path = arc.get_remote_path(ARC_USER, job.id)
-    client = arc.Client('newriver1.arc.vt.edu', ARC_USER)
+    remote_path = arc.get_remote_path(arc.ARC_USER, job.id)
+    client = arc.Client('newriver1.arc.vt.edu', arc.ARC_USER)
     client.run('mkdir {}'.format(remote_path))
     client.put_file(tmp_path, os.path.join(remote_path, 'input.fasta'))
     client.close()

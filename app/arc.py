@@ -1,6 +1,10 @@
 import paramiko
 from scp import SCPClient
 
+ARC_USER = 'vincentl'
+ARC_DIR = '/work/newriver/{}/omningssimulator'.format(ARC_USER)
+QSUB_DIR = '/home/{}/omni-ngs-simulator/arc'.format(ARC_USER)
+
 paramiko.util.log_to_file('paramiko.log')
 
 class Client:
@@ -14,9 +18,9 @@ class Client:
         scp = self._scp_client()
         scp.put(local_path, remote_path)
 
-    def get_file(self, remote_path):
+    def get_file(self, local_path, remote_path):
         scp = self._scp_client()
-        scp.get(remote_path)
+        scp.get(remote_path, local_path=local_path)
 
     def run(self, command):
         stdin, stdout, stderr = self.client.exec_command(command)

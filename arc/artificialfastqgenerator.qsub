@@ -6,28 +6,29 @@
 #PBS -W group_list=newriver
 
 # Arguments
-# $1 input
-# $2 output directory
-# $3 The sequence identifier in the reference after which read generation should begin
-# $4 The spread of coverage mean given GC content (default = 0.22).
-# $5 The peak coverage mean for a region (default = 37.7).
-# $6 The GC content for regions with peak coverage mean (default = 0.45).
-# $7 The coverage standard deviation divided by the mean (default = 0.2).
-# $8 The length of each read, (default = 76).
-# $9 The mean DNA template length, (default = 210).
-# $10 The standard deviation of the DNA template length, (default = 60).
+# $1 job id
+# $2 input
+# $3 output directory
+# $4 The sequence identifier in the reference after which read generation should begin
+# $5 The spread of coverage mean given GC content (default = 0.22).
+# $6 The peak coverage mean for a region (default = 37.7).
+# $7 The GC content for regions with peak coverage mean (default = 0.45).
+# $8 The coverage standard deviation divided by the mean (default = 0.2).
+# $9 The length of each read, (default = 76).
+# $10 The mean DNA template length, (default = 210).
+# $11 The standard deviation of the DNA template length, (default = 60).
 
 java -jar $AFG_PATH/ArtificialFastqGenerator.jar \
-    -R $1 \
-    -O $2 \
-    -S $3 \
-    -CMGCS $4 \
-    -CMP $5 \
-    -CMPGC $6 \
-    -CSD $7 \
-    -RL $8 \
-    -TLM $9 \
-    -TLSD $10 \
+    -R $2 \
+    -O $3 \
+    -S $4 \
+    -CMGCS $5 \
+    -CMP $6 \
+    -CMPGC $7 \
+    -CSD $8 \
+    -RL $9 \
+    -TLM $10 \
+    -TLSD $11 \
     2> /dev/null
 
-tar -czf $2.tar.gz $2.1.fastq $2.2.fastq $2.log $2.readStartIndexes.txt
+tar -czf $3.tar.gz $3.1.fastq $4.2.fastq $3.log $4.readStartIndexes.txt

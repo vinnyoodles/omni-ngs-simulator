@@ -6,34 +6,35 @@
 #PBS -W group_list=newriver
 
 # Arguments
-# $1 input reference
-# $2 output
+# $1 job id
+# $2 input reference
+# $3 output
 
-# $3 --length-min         minimum length (100).
-# $4 --length-max         maximum length (CLR: 25000, CCS: 2500).
-# $5 --accuracy-min       minimum accuracy.
+# $4 --length-min         minimum length (100).
+# $5 --length-max         maximum length (CLR: 25000, CCS: 2500).
+# $6 --accuracy-min       minimum accuracy.
                    # (CLR: 0.75, CCS: fixed as 0.75).
                    # this option can be used only in case of CLR.
-# $6 --accuracy-max       maximum accuracy.
+# $7 --accuracy-max       maximum accuracy.
                    # (CLR: 1.00, CCS: fixed as 1.00).
                    # this option can be used only in case of CLR.
-# $7:$8:$9 --difference-ratio   ratio of differences. substitution:insertion:deletion.
+# $8:$9:$10 --difference-ratio   ratio of differences. substitution:insertion:deletion.
                    # each value up to 1000 (CLR: 10:60:30, CCS:6:21:73).
-# $10 --seed               for a pseudorandom number generator (Unix time).
-# $11 fastq file to sample
+# $11 --seed               for a pseudorandom number generator (Unix time).
+# $12 fastq file to sample
 
 
 
 pbsim \
-    --length-min $3 \
-    --length-max $4 \
-    --accuracy-min $5 \
-    --accuracy-max $6 \
-    --difference-ratio $7:$8:$9 \
-    --seed $10 \
-    --prefix $2 \
-    --sample-fastq $11 \
-    $1
+    --length-min $4 \
+    --length-max $5 \
+    --accuracy-min $6 \
+    --accuracy-max $7 \
+    --difference-ratio $8:$9:$10 \
+    --seed $11 \
+    --prefix $3 \
+    --sample-fastq $12 \
+    $2
 
 
-tar -czf $2.tar.gz $2_0001.fastq $2_0001.maf $2_0001.ref
+tar -czf $3.tar.gz $3_0001.fastq $3_0001.maf $3_0001.ref

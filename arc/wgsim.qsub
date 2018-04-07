@@ -6,32 +6,33 @@
 #PBS -W group_list=newriver
 
 # Arguments
-# $1 input reference
-# $2 output
+# $1 job id
+# $2 input reference
+# $3 output
 
-# $3  -e FLOAT      base error rate [0.020]
-# $4  -d INT        outer distance between the two ends [500]
-# $5  -s INT        standard deviation [50]
-# $6  -N INT        number of read pairs [1000000]
-# $7  -1 INT        length of the first read [70]
-# $8  -2 INT        length of the second read [70]
-# $9  -r FLOAT      rate of mutations [0.0010]
-# $10 -R FLOAT      fraction of indels [0.15]
-# $11 -X FLOAT      probability an indel is extended [0.30]
-# $12 -S INT        seed for random generator [-1]
+# $4  -e FLOAT      base error rate [0.020]
+# $5  -d INT        outer distance between the two ends [500]
+# $6  -s INT        standard deviation [50]
+# $7  -N INT        number of read pairs [1000000]
+# $8  -1 INT        length of the first read [70]
+# $9  -2 INT        length of the second read [70]
+# $10  -r FLOAT      rate of mutations [0.0010]
+# $11 -R FLOAT      fraction of indels [0.15]
+# $12 -X FLOAT      probability an indel is extended [0.30]
+# $13 -S INT        seed for random generator [-1]
 
 
 wgsim \
-    -e $3 \
-    -d $4 \
-    -s $5 \
-    -N $6 \
-    -1 $7 \
-    -2 $8 \
-    -r $9 \
-    -R $10 \
-    -X $11 \
-    -S $12 \
-    $1 $2_1.fq $2_2.fq
+    -e $4 \
+    -d $5 \
+    -s $6 \
+    -N $7 \
+    -1 $8 \
+    -2 $9 \
+    -r $10 \
+    -R $11 \
+    -X $12 \
+    -S $13 \
+    $2 $3_1.fq $3_2.fq
 
-tar -czf $2.tar.gz $2_1.fq $2_2.fq
+tar -czf $3.tar.gz $3_1.fq $3_2.fq

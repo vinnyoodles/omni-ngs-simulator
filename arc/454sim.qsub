@@ -6,13 +6,17 @@
 #PBS -W group_list=newriver
 
 # Arguments
-# $1 input path
-# $2 output path
-# $3 fragment count
-# $4 fragment length
-# $5 flow simulation count (default=800)
-# $6 generation (available=GS,FLX,Ti, default=Ti)
+# $1 job id
+# $2 input path
+# $3 output path
+# $4 fragment count
+# $5 fragment length
+# $6 flow simulation count (default=800)
+# $7 generation (available=GS,FLX,Ti, default=Ti)
 
-fragsim -c $3 -l $4 $1 | 454sim -n $5 -o $2 -d $SIM454_GEN_PATH -g $6
+interpolated_command="fragsim -c $4 -l $5 $2 | 454sim -n $6 -o $3 -d $SIM454_GEN_PATH -g $7"
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 $1 $interpolated_command"
 
-tar -czf $2.tar.gz $2
+# fragsim -c $4 -l $5 $2 | 454sim -n $6 -o $3 -d $SIM454_GEN_PATH -g $7
+
+# tar -czf $3.tar.gz $3

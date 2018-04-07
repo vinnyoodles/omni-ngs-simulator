@@ -6,25 +6,26 @@
 #PBS -W group_list=newriver
 
 # Arguments
-# $1 input reference
-# $2 output
+# $1 job id
+# $2 input reference
+# $3 output
 
-# $3 -l LEN, --read-len=LEN
+# $4 -l LEN, --read-len=LEN
 #               Generate reads having a length of LEN.  Default: 100
 
-# $4 -x VAL, --coverage=VAL
+# $5 -x VAL, --coverage=VAL
 #                Set the average sequencing coverage (sometimes called depth).
 #                It may be either a floating-point number or an integer.
 
-# $5 -m LEN, --insert-len-mean=LEN
+# $6 -m LEN, --insert-len-mean=LEN
 #                Generate inserts (fragments) having an average length of LEN.
 #                Default: 180
 
-# $6 -v LEN, --insert-len-sd=LEN
+# $7 -v LEN, --insert-len-sd=LEN
 #                Set the standard deviation of the insert (fragment) length.
 #                Default: 10% of insert length mean.
 
-# $7 -S SEED, --random-seed=SEED
+# $8 -S SEED, --random-seed=SEED
 #                Use SEED as the random seed. Default:
 #                time(NULL) * getpid().  Note: If pIRS was not compiled with
 #                --disable-threads, each thread actually uses its own random
@@ -39,12 +40,12 @@
      -B Profiles/Base-Calling_Profiles/humNew.PE100.matrix.gz \
      -I Profiles/InDel_Profiles/phixv2.InDel.matrix \
      -G Profiles/GC-depth_Profiles/humNew.gcdep_100.dat \
-     -l $3 \
-     -x $4 \
-     -m $5 \
-     -v $6 \
-     -S $7 \
-     -o $2 \
-     $1
+     -l $4 \
+     -x $5 \
+     -m $6 \
+     -v $7 \
+     -S $8 \
+     -o $3 \
+     $2
 
-tar -czf $2.tar.gz $2_100_180_1.fq $2_100_180_2.fq
+tar -czf $3.tar.gz $3_100_180_1.fq $3_100_180_2.fq

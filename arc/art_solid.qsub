@@ -6,24 +6,25 @@
 #PBS -W group_list=newriver
 
 # Arguments
-# $1 input path
-# $2 output path
-# $3 read length
-# $4 type of simulation (1=single end, 2=paired end)
-# $5 random seed
-# $6 fold coverage
+# $1 job id
+# $2 input path
+# $3 output path
+# $4 read length
+# $5 type of simulation (1=single end, 2=paired end)
+# $6 random seed
+# $7 fold coverage
 
-if [ $4 -eq 1 ]; then
+if [ $5 -eq 1 ]; then
     # SINGLE-END (F3 READ) SIMULATION
     # art_SOLiD [ options ] <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <LEN_READ> <FOLD_COVERAGE>
-    art_SOLiD -r $4 $1 $2 $3 $6
+    art_SOLiD -r $5 $2 $3 $4 $7
 
-elif [ $4 -eq 2 ]; then
+elif [ $5 -eq 2 ]; then
     # MATE-PAIR READS (F3-R3 PAIR) SIMULATION
     # art_SOLiD [ options ] <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <LEN_READ> <FOLD_COVERAGE> <MEAN_FRAG_LEN> <STD_DEV>
-    # $7 mean fragment length
-    # $8 standard deviation
-    art_SOLiD -r $4 $1 $2 $3 $6 $7 $8
+    # $8 mean fragment length
+    # $9 standard deviation
+    art_SOLiD -r $5 $2 $3 $4 $7 $8 $9
 
 else
     # TODO: curl job failure

@@ -6,26 +6,27 @@
 #PBS -W group_list=newriver
 
 # Arguments
-# $1 input
-# $2 output
-# $3 -n int       number of reads to generate [50000]
-# $4 -m int       read mean size [200]
-# $5 -sd double   standard deviation for read size [20.0]
-# $6 -r int       number of random reads [0]
-# $7 -d double    deletion rate [0.01]
-# $8 -i double    insertion rate [0.005]
-# $9 -s double    substitution rate [0.005]
+# $1 job id
+# $2 input
+# $3 output
+# $4 -n int       number of reads to generate [50000]
+# $5 -m int       read mean size [200]
+# $6 -sd double   standard deviation for read size [20.0]
+# $7 -r int       number of random reads [0]
+# $8 -d double    deletion rate [0.01]
+# $9 -i double    insertion rate [0.005]
+# $10 -s double    substitution rate [0.005]
 
 java -jar $CURESIM_PATH/CuReSim.jar \
-    -f $1 \
-    -o $2 \
-    -n $3 \
-    -m $4 \
-    -sd $5 \
-    -r $6 \
-    -d $7 \
-    -i $8 \
-    -s $9 \
+    -f $2 \
+    -o $3 \
+    -n $4 \
+    -m $5 \
+    -sd $6 \
+    -r $7 \
+    -d $8 \
+    -i $9 \
+    -s $10 \
     2> /dev/null
 
-tar -czf $2.tar.gz $2
+tar -czf $3.tar.gz $3

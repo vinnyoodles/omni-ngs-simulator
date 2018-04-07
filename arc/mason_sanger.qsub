@@ -38,7 +38,7 @@
 # $15  -pde, --probability-delete-end NUM
 #         Probability for a delete at end of read. Default: 0.005.
 
-interpolated_command="\"mason sanger --seed $4 --num-reads $5 --source-length $6 --source-probability-A $7 --source-probability-C $8 --source-probability-G $9 --pmb $10 --pme $11 --pib $12 --pie $13 --pdb $14 --pde $15 input -o output\""
+interpolated_command="\"mason sanger --seed $4 --num-reads $5 --source-length $6 --source-probability-A $7 --source-probability-C $8 --source-probability-G $9 --pmb ${10} --pme ${11} --pib ${12} --pie ${13} --pdb ${14} --pde ${15} input -o output\""
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 mason sanger \
@@ -48,12 +48,12 @@ mason sanger \
     --source-probability-A $7 \
     --source-probability-C $8 \
     --source-probability-G $9 \
-    --pmb $10 \
-    --pme $11 \
-    --pib $12 \
-    --pie $13 \
-    --pdb $14 \
-    --pde $15 \
+    --pmb ${10} \
+    --pme ${11} \
+    --pib ${12} \
+    --pie ${13} \
+    --pdb ${14} \
+    --pde ${15} \
     $2 -o $3.fasta
     
 cd /work/newriver/vincentl/omningssimulator/${1}

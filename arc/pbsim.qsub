@@ -23,7 +23,7 @@
 # $11 --seed               for a pseudorandom number generator (Unix time).
 # $12 fastq file to sample
 
-interpolated_command="\"pbsim --length-min $4 --length-max $5 --accuracy-min $6 --accuracy-max $7 --difference-ratio $8:$9:$10 --seed $11 --prefix output --sample-fastq $12 input\""
+interpolated_command="\"pbsim --length-min $4 --length-max $5 --accuracy-min $6 --accuracy-max $7 --difference-ratio $8:$9:${10} --seed ${11} --prefix output --sample-fastq ${12} input\""
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 pbsim \
@@ -31,10 +31,10 @@ pbsim \
     --length-max $5 \
     --accuracy-min $6 \
     --accuracy-max $7 \
-    --difference-ratio $8:$9:$10 \
-    --seed $11 \
+    --difference-ratio $8:$9:${10} \
+    --seed ${11} \
     --prefix $3 \
-    --sample-fastq $12 \
+    --sample-fastq ${12} \
     $2
 
 cd /work/newriver/vincentl/omningssimulator/${1}

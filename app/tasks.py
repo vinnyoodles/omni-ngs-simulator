@@ -5,8 +5,9 @@ from flask_login import current_user
 from app.models import Job
 import arc
 
-ARC_DIR = '$WORK/omningssimulator'
 ARC_USER = 'vincentl'
+ARC_DIR = '/work/newriver/{}/omningssimulator'.format(ARC_USER)
+QSUB_DIR = '/home/{}/omni-ngs-simulator/arc'.format(ARC_USER)
 JOB_THRESHOLD = 6
 
 @celery.task
@@ -51,10 +52,6 @@ def start_job(job_id):
             job.save()
             return False
 
-    remote_path = arc.get_remote_path(ARC_USER, job.id)
-    input_path = os.path.join(remote_path, 'input.fasta')
-    output_path = os.path.join(remote_path, 'output')
-
     client = arc.Client('newriver1.arc.vt.edu', ARC_USER)
     try:
         current_job_count = int(client.run('qstat | grep {} | wc -l'.format(ARC_USER)))
@@ -64,12 +61,25 @@ def start_job(job_id):
         submit_retry(job)
         return False
 
-    # TODO: submit job to arc
-    print(job.attrs)
-    # client.run()
+    remote_path = arc.get_remote_path(ARC_USER, job.id)
+    input_path = os.path.join(remote_path, 'input.fasta')
+    output_path = os.path.join(remote_path, 'output')
+
+    qsub_path = os.path.join(QSUB_DIR, '{}.qsub'.format(sim_id))
+    arguments = []
+
+    for arg in sim['arguments']:
+        if arg == 'input':
+            arguments.append(input_path)
+        elif arg == 'output':
+            arguments.append(output_path)
+        else:
+            arguments.append(str(job.attrs[arg]))
+
+    client.run('qsub {} -F "{}"'.format(qsub_path, ' '.join(arguments)))
     client.close()
 
-    job.status = 'completed'
+    job.status = 'submitted'
     job.save()
     return True
 

@@ -15,11 +15,15 @@
 # $7 fold coverage
 
 if [ $5 -eq 1 ]; then
+    interpolated_command="\"art_SOLiD -r $5 input output $4 $7\""
+    ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
     # SINGLE-END (F3 READ) SIMULATION
     # art_SOLiD [ options ] <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <LEN_READ> <FOLD_COVERAGE>
     art_SOLiD -r $5 $2 $3 $4 $7
 
 elif [ $5 -eq 2 ]; then
+    interpolated_command="\"art_SOLiD -r $5 input output $4 $7 $8 $9\""
+    ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
     # MATE-PAIR READS (F3-R3 PAIR) SIMULATION
     # art_SOLiD [ options ] <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <LEN_READ> <FOLD_COVERAGE> <MEAN_FRAG_LEN> <STD_DEV>
     # $8 mean fragment length
@@ -27,6 +31,7 @@ elif [ $5 -eq 2 ]; then
     art_SOLiD -r $5 $2 $3 $4 $7 $8 $9
 
 else
-    # TODO: curl job failure
     exit
 fi
+
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

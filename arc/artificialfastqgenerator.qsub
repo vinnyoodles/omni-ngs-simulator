@@ -18,6 +18,9 @@
 # $10 The mean DNA template length, (default = 210).
 # $11 The standard deviation of the DNA template length, (default = 60).
 
+interpolated_command="\"java -jar ArtificialFastqGenerator.jar -R $2 -O $3 -S $4 -CMGCS $5 -CMP $6 -CMPGC $7 -CSD $8 -RL $9 -TLM $10 -TLSD $11\""
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+
 java -jar $AFG_PATH/ArtificialFastqGenerator.jar \
     -R $2 \
     -O $3 \
@@ -32,3 +35,4 @@ java -jar $AFG_PATH/ArtificialFastqGenerator.jar \
     2> /dev/null
 
 tar -czf $3.tar.gz $3.1.fastq $4.2.fastq $3.log $4.readStartIndexes.txt
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

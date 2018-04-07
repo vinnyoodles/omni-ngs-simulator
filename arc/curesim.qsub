@@ -17,6 +17,9 @@
 # $9 -i double    insertion rate [0.005]
 # $10 -s double    substitution rate [0.005]
 
+interpolated_command="\"java -jar CuReSim.jar -f input -o output -n $4 -m $5 -sd $6 -r $7 -d $8 -i $9 -s $10\""
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+
 java -jar $CURESIM_PATH/CuReSim.jar \
     -f $2 \
     -o $3 \
@@ -30,3 +33,5 @@ java -jar $CURESIM_PATH/CuReSim.jar \
     2> /dev/null
 
 tar -czf $3.tar.gz $3
+
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

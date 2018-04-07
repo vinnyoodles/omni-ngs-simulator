@@ -38,6 +38,9 @@
 # $14 -pmme, --prob-mismatch-end NUM
 #       Probability of a mismatch at the last base. Default: 0.012.
 
+interpolated_command="\"mason illumina --seed $4 --num-reads $5 --source-length $6 --source-probability-A $7 --source-probability-C $8 --source-probability-G $9 --prob-insert $10 --prob-delete $11 --prob-mismatch $12 --prob-mismatch-begin $13 --prob-mismatch-end $14 input -o output\""
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+
 mason illumina \
     --seed $4 \
     --num-reads $5 \
@@ -53,3 +56,4 @@ mason illumina \
     $2 -o $3.fasta
 
 tar -czf $2.tar.gz $2.fasta
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

@@ -36,6 +36,9 @@
 #                with --disable-threads, or run on system with 4 or fewer
 #                processors).
 
+interpolated_command="\"pirs simulate -B humNew.PE100.matrix.gz -I phixv2.InDel.matrix -G humNew.gcdep_100.dat -l $4 -x $5 -m $6 -v $7 -S $8 -o output input\""
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+
  pirs simulate \
      -B Profiles/Base-Calling_Profiles/humNew.PE100.matrix.gz \
      -I Profiles/InDel_Profiles/phixv2.InDel.matrix \
@@ -49,3 +52,5 @@
      $2
 
 tar -czf $3.tar.gz $3_100_180_1.fq $3_100_180_2.fq
+
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

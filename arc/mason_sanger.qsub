@@ -6,50 +6,55 @@
 #PBS -W group_list=newriver
 
 # Arguments
-# $1 input
-# $2 output
-# $3 -s, --seed INT
+# $1 job id
+# $2 input
+# $3 output
+# $4 -s, --seed INT
 #       The seed for Rng. Default: 0.
-# $4 -N, --num-reads NUM
+# $5 -N, --num-reads NUM
 #       Number of reads (or mate pairs) to simulate. Default: 1000.
 
-# $5 -sn, --source-length NUM
+# $6 -sn, --source-length NUM
 #       Length of random source sequence. Default: 1000000.
 
-# $6 -spA, --source-probability-A NUM
+# $7 -spA, --source-probability-A NUM
 #       Propabilibty for A in randomly generated sequence. Default: 0.25.
-# $7 -spC, --source-probability-C NUM
+# $8 -spC, --source-probability-C NUM
 #       Propabilibty for C in randomly generated sequence. Default: 0.25.
-# $8 -spG, --source-probability-G NUM
+# $9 -spG, --source-probability-G NUM
 #       Propabilibty for G in randomly generated sequence. Default: 0.25.
 
 # Sanger Error Model Parameters:
-# $9   -pmb, --probability-mismatch-begin NUM
+# $10   -pmb, --probability-mismatch-begin NUM
 #         Probability for a mismatch at begin of read. Default: 0.005.
-# $10  -pme, --probability-mismatch-end NUM
+# $11  -pme, --probability-mismatch-end NUM
 #         Probability for a mismatch at end of read. Default: 0.01.
-# $11  -pib, --probability-insert-begin NUM
+# $12  -pib, --probability-insert-begin NUM
 #         Probability for a insert at begin of read. Default: 0.0025.
-# $12  -pie, --probability-insert-end NUM
+# $13  -pie, --probability-insert-end NUM
 #         Probability for a insert at end of read. Default: 0.005.
-# $13  -pdb, --probability-delete-begin NUM
+# $14  -pdb, --probability-delete-begin NUM
 #         Probability for a delete at begin of read. Default: 0.0025.
-# $14  -pde, --probability-delete-end NUM
+# $15  -pde, --probability-delete-end NUM
 #         Probability for a delete at end of read. Default: 0.005.
 
+interpolated_command="\"mason sanger --seed $4 --num-reads $5 --source-length $6 --source-probability-A $7 --source-probability-C $8 --source-probability-G $9 --pmb $10 --pme $11 --pib $12 --pie $13 --pdb $14 --pde $15 input -o output\""
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+
 mason sanger \
-    --seed $3 \
-    --num-reads $4 \
-    --source-length $5 \
-    --source-probability-A $6 \
-    --source-probability-C $7 \
-    --source-probability-G $8 \
-    --pmb $9 \
-    --pme $10 \
-    --pib $11 \
-    --pie $12 \
-    --pdb $13 \
-    --pde $14 \
-    $1 -o $2.fasta
+    --seed $4 \
+    --num-reads $5 \
+    --source-length $6 \
+    --source-probability-A $7 \
+    --source-probability-C $8 \
+    --source-probability-G $9 \
+    --pmb $10 \
+    --pme $11 \
+    --pib $12 \
+    --pie $13 \
+    --pdb $14 \
+    --pde $15 \
+    $2 -o $3.fasta
     
-tar -czf $2.tar.gz $2.fasta
+tar -czf $3.tar.gz $3.fasta
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

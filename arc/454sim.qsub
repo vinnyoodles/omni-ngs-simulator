@@ -14,9 +14,11 @@
 # $6 flow simulation count (default=800)
 # $7 generation (available=GS,FLX,Ti, default=Ti)
 
-interpolated_command="fragsim -c $4 -l $5 $2 | 454sim -n $6 -o $3 -d $SIM454_GEN_PATH -g $7"
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 $1 $interpolated_command"
+interpolated_command="\"fragsim -c $4 -l $5 input | 454sim -n $6 -o output -g $7\""
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
-# fragsim -c $4 -l $5 $2 | 454sim -n $6 -o $3 -d $SIM454_GEN_PATH -g $7
+fragsim -c $4 -l $5 $2 | 454sim -n $6 -o $3 -d $SIM454_GEN_PATH -g $7
 
-# tar -czf $3.tar.gz $3
+tar -czf $3.tar.gz $3
+
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

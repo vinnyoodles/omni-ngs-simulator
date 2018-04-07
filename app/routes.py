@@ -1,4 +1,4 @@
-import os
+import os, arc, mailer
 from flask import render_template, flash, redirect, jsonify, url_for, request, send_file
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
@@ -8,7 +8,6 @@ from app.forms import *
 from app.tasks import create_and_start_job
 from app.models import User, Job
 from app import instance
-import arc
 
 """
 Unauthenticated Routes
@@ -246,4 +245,8 @@ def finished_job(job_id):
     job = Job.objects(id=job_id).first()
     job.status = 'finished'
     job.save()
+
+    user = User.objects(id=job.user_id).first()
+    mailer.notify(job, user)
+
     return jsonify({ 'message' : 'ok' })

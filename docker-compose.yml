@@ -22,6 +22,8 @@ services:
       - FLASK_APP=/app/server.py
       - FLASK_DEBUG=1
       - REDIS_URL=redis://sim_redis:6379/0
+      - OMNINGSSIMULATOR_EMAIL=${OMNINGSSIMULATOR_EMAIL}
+      - OMNINGSSIMULATOR_EMAIL_PW=${OMNINGSSIMULATOR_EMAIL_PW}
 
     # Mount the project directory to the container's directory for hot reloading.
     volumes:
@@ -52,7 +54,6 @@ services:
     environment:
       - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
       - REDIS_URL=redis://sim_redis:6379/0
-      - PATH=$PATH:/art_bin_MountRainier:/454sim.1.04
     links:
       - sim_redis
       - sim_mongo

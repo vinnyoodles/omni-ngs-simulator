@@ -91,6 +91,8 @@ def create_and_start_job(sim_id, form, extra_file=None):
     for name, value in form.data.items():
         if name == 'name':
             data['name'] = value
+        elif name == 'sequence_identifier':
+            job_attrs[name] = str(value)[1:]
         elif name != 'csrf_token' and name != 'file' and name != 'submit':
             job_attrs[name] = str(value)
 

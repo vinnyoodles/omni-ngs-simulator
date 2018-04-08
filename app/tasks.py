@@ -73,6 +73,8 @@ def start_job(job_id):
             arguments.append(input_path)
         elif arg == 'output':
             arguments.append(output_path)
+        elif arg == 'extra_file':
+            arguments.append(os.path.join(remote_path, 'extra_file'))
         else:
             arguments.append(str(job.attrs[arg]))
 
@@ -83,7 +85,7 @@ def start_job(job_id):
     job.save()
     return True
 
-def create_and_start_job(sim_id, form):
+def create_and_start_job(sim_id, form, extra_file=None):
     job_attrs = dict()
     data = { 'simulator' : sim_id, 'status' : 'created', 'user_id' : current_user.id, 'attrs' : job_attrs }
     for name, value in form.data.items():
@@ -91,6 +93,9 @@ def create_and_start_job(sim_id, form):
             data['name'] = value
         elif name != 'csrf_token' and name != 'file' and name != 'submit':
             job_attrs[name] = str(value)
+
+    if extra_file is not None:
+        job_attrs['extra_file'] = 'extra_file'
     job = Job(**data)
     job.save()
 
@@ -113,8 +118,12 @@ def create_and_start_job(sim_id, form):
 
         client.put_file(tmp_path, os.path.join(remote_path, 'input.fasta'))
 
-    client.close()
+    if extra_file is not None:
+        tmp_path = os.path.join('/tmp', 'extra_file')
+        extra_file.data.save(tmp_path)
+        client.put_file(tmp_path, os.path.join(remote_path, 'extra_file'))
 
+    client.close()
     start_job.apply_async(args=[str(job.id)])
 
 

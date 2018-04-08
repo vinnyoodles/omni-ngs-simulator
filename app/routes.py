@@ -178,7 +178,11 @@ def nessm():
 @instance.route('/simulators/pbsim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def pbsim():
-    return base_simulator_route('pbsim', 'Pbsim', PbsimForm)
+    form = PbsimForm()
+    if form.validate_on_submit():
+        create_and_start_job('pbsim', form, form.fastq_file)
+        return redirect(url_for('dashboard'))
+    return render_template('simulators/{}.html'.format('pbsim'), title='Pbsim', form=form)
 
 @instance.route('/simulators/readsim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required

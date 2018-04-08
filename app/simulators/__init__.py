@@ -67,7 +67,7 @@ SIMULATORS = {
         'title': 'Pbsim',
         'caption': 'PacBio reads simulater (called PBSIM) in which sampling-based and model-based simulations are implemented.',
         'route': 'pbsim',
-        'arguments': [ 'input', 'output', 'min_length', 'max_length', 'min_accuracy', 'max_accuracy', 'substition_percentage', 'insertion_percentage', 'deletion_percentage', 'random_seed' ],
+        'arguments': [ 'input', 'output', 'min_length', 'max_length', 'min_accuracy', 'max_accuracy', 'substition_percentage', 'insertion_percentage', 'deletion_percentage', 'random_seed', 'extra_file' ],
         'ready': True
     },
     'pirs': {

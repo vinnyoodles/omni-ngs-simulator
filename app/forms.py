@@ -168,6 +168,7 @@ class PbsimForm(BaseSimulatorForm):
     insertion_percentage = DecimalField('Insertion percentage', default=0.6, validators=[DataRequired(), NumberRange(min=0, max=1)])
     deletion_percentage = DecimalField('Deletion percentage', default=0.3, validators=[DataRequired(), NumberRange(min=0, max=1)])
     random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=RAND_SEED_MAX)])
+    fastq_file = FileField('Sample Fastq File', validators=[FileRequired()])
 
     def __init__(self, *args, **kwargs):
         super(PbsimForm, self).__init__(*args, **kwargs)
@@ -189,7 +190,7 @@ class PirsForm(BaseSimulatorForm):
     read_len = IntegerField('Length of generated reads', default=100, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
     coverage = IntegerField('Average sequencing coverage (depth)', default=200, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
     insertion_len = IntegerField('Average length of generated insertion', default=100, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
-    std_dev_insertion_len = IntegerField('Standard deviation of insertion legnth', default=0.1, validators=[DataRequired()])
+    std_dev_insertion_len = DecimalField('Standard deviation of insertion length', default=0.1, validators=[DataRequired()])
     random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=RAND_SEED_MAX)])
 
     def __init__(self, *args, **kwargs):

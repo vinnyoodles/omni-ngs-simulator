@@ -1,0 +1,60 @@
+#!/bin/bash
+
+#PBS -l walltime=100:00:00
+#PBS -q normal_q
+#PBS -A cs4884s18
+#PBS -W group_list=newriver
+
+# Arguments
+# $1 job id
+# $2 input
+# $3 output
+# $4 -c coverage
+# $5 -n number of reads
+# $6 -f Generate 454 style data (this will ignore option -r, paired end, and error profiles.)
+
+# Non 454 style arguments
+# $7 read length -r
+
+# ---Error Options---
+# $8 -e  Turn on error function (default: 0, enable with 1)
+# $9 -x  Starting error rate (default: .001)
+# $10 -i  Incremental error rate per position (default: .0004)
+
+# ---Paired End Options---
+# $11 -p      Do a paired-end run (default: 0, enable with 1)
+# $12 -l      Distance between first position of each sequence (default: 250)
+# $13 -s      Standard deviation of distances (default: 25)
+
+# The next few lines are for installing bioperl
+module load perl/5.20.2
+cd perl5/lib/perl5/
+perl -MCPAN -Mlocal::lib -e 'CPAN::install(LWP)'
+perl -Mlocal::lib
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+perl -MCPAN -Mlocal::lib -e 'CPAN::install(C/CJ/CJFIELDS/BioPerl-1.6.924.tar.gz)' 2>/dev/null
+
+if [ $6 -eq 1 ]; then
+    interpolated_command="\"perl simhtsd.pl -o output -c $4 -n $5 -f input\""
+    ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+    perl /home/vincentl/omni-ngs-simulator/bin/Simhtsd/simhtsd/simhtsd.pl \
+        -o $3 -c $4 -n $5 -f $2
+else
+    interpolated_command="\"perl simhtsd.pl -o output -c $4 -n $5 -r $7 -e $8 -x $9 -i ${10} -p ${11} -l ${12} -s ${13} input\""
+    ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+    perl /home/vincentl/omni-ngs-simulator/bin/Simhtsd/simhtsd/simhtsd.pl \
+        -o $3 \
+        -c $4 \
+        -n $5 \
+        -r $7 \
+        -e $8 \
+        -x $9 \
+        -i ${10} \
+        -p ${11} \
+        -l ${12} \
+        -s ${13} \
+        $2
+fi
+
+tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
+ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"

@@ -1,4 +1,94 @@
 {% extends "form_base.html" %}
 
 {% block form_content %}
+    <div class="form-group row">
+        {{ form.coverage.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.coverage(class_='form-control', value='36', required='') }}
+        </div>
+        {% for error in form.coverage.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.num_reads.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.num_reads(class_='form-control', value='100', required='') }}
+        </div>
+        {% for error in form.num_reads.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.generate_454.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.generate_454(class_='form-control') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.read_len.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.read_len(class_='form-control', value='36', required='') }}
+        </div>
+        {% for error in form.read_len.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.error_func.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.error_func(class_='form-control') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.error_rate.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.error_rate(class_='form-control', value='0.001', required='') }}
+        </div>
+        {% for error in form.error_rate.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.incremental_error_rate.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.incremental_error_rate(class_='form-control', value='0.0004', required='') }}
+        </div>
+        {% for error in form.incremental_error_rate.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.paired_end.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.paired_end(class_='form-control') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.distance_between_first_pos.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.distance_between_first_pos(class_='form-control', value='250', required='') }}
+        </div>
+        {% for error in form.distance_between_first_pos.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.std_dev.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.std_dev(class_='form-control', value='25', required='') }}
+        </div>
+        {% for error in form.std_dev.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
 {% endblock %}

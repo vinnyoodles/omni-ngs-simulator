@@ -81,8 +81,16 @@
 # Track read information (reference sequence, position, errors, ...)
 # by writing it in the read description. Default: 1
 
-interpolated_command="\"grinder -rf $2 -od $3 -tr $4 -rd $5 -id $6 -mo $7 -un $8 -lb $9 -cb ${10} -rs ${11} -dt ${12}\""
+interpolated_command="\"grinder -rf input -od output -tr $4 -rd $5 -id $6 -mo $7 -un $8 -lb $9 -cb ${10} -rs ${11} -dt ${12}\""
 ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+
+# Load perl local lib and bioperl
+module load perl/5.20.2
+cd perl5/lib/perl5/
+perl -MCPAN -Mlocal::lib -e 'CPAN::install(LWP)'
+perl -Mlocal::lib
+eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
+perl -MCPAN -Mlocal::lib -e 'CPAN::install(C/CJ/CJFIELDS/BioPerl-1.6.924.tar.gz)'
 
 grinder -rf $2 -od $3 \
     -tr $4 \

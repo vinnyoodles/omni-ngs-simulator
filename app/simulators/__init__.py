@@ -126,7 +126,7 @@ SIMULATORS = {
         'title': 'Grinder',
         'caption': 'A bioinformatics tool to create simulated omic shotgun and amplicon sequence libraries for all main sequencing platforms.',
         'route':'grinder',
-        'arguments': [ 'input', 'output', 'total_reads', 'cov_fold', 'read_dist', 'insert_dist', 'mate_orientation', 'direction', 'length_bias', 'copy_bias', 'random_seed', 'desc_track' ],
+        'arguments': [ 'input', 'output', 'total_reads', 'read_dist', 'insert_dist', 'mate_orientation', 'direction', 'length_bias', 'copy_bias', 'random_seed', 'desc_track' ],
         'ready': True
     },
 

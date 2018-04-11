@@ -113,7 +113,19 @@ class GemsimForm(BaseSimulatorForm):
     pass
 
 class GrinderForm(BaseSimulatorForm):
-    pass
+    total_reads = IntegerField('Number of reads to generate')
+    read_dist = IntegerField('Read length distribution')
+    insert_dist = IntegerField('Reads spanning the given insert length')
+    mate_orientation = SelectField('Orientation of paired-end or mate-pair reads', choices=[('FR', 'Forward Reverse'), ('FF', 'Forward Forward'), ('RF', 'Reverse Forward'), ('RR', 'Reverse Reverse')])
+    direction = SelectField('Read direction', choices=[('0', 'Bidirectional'), ('1', 'Unidirectional'), ('-1', 'Reverse')])
+    length_bias = BooleanField('Sample sequences proportionally to their length')
+    copy_bias = BooleanField('Sample sequences proportionally to the number of copies of the target gene')
+    random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=RAND_SEED_MAX)])
+    desc_track = BooleanField('Track read information as description')
+
+    def __init__(self, *args, **kwargs):
+        super(GrinderForm, self).__init__(*args, **kwargs)
+        self.random_seed.data = rand_seed()
 
 class MasonSangerForm(BaseSimulatorForm):
     read_count = IntegerField('Number of reads to simulate', default=1000, validators=[DataRequired(), NumberRange(min=1, max=2000000)])

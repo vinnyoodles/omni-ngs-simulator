@@ -1,4 +1,78 @@
 {% extends "form_base.html" %}
 
 {% block form_content %}
+    <div class="form-group row">
+        {{ form.total_reads.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.total_reads(class_='form-control', value='100', required='') }}
+        </div>
+        {% for error in form.total_reads.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.read_dist.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.read_dist(class_='form-control', value='100', required='') }}
+        </div>
+        {% for error in form.read_dist.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.insert_dist.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.insert_dist(class_='form-control', value='0', required='') }}
+        </div>
+        {% for error in form.insert_dist.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.mate_orientation.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.mate_orientation(class_='form-control') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.direction.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.direction(class_='form-control') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.length_bias.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.length_bias(class_='form-control') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.copy_bias.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.copy_bias(class_='form-control') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.random_seed.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.random_seed(class_='form-control', value=form.random_seed.data, required='') }}
+        </div>
+        {% for error in form.random_seed.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.desc_track.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.desc_track(class_='form-control') }}
+        </div>
+    </div>
 {% endblock %}

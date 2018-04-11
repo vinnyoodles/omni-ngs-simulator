@@ -24,7 +24,7 @@ def start_job(job_id):
 
     job = Job.objects(id=job_id).first()
     if job == None:
-        return False
+        return 'no job found'
 
     job.status = 'queued'
     job.save()
@@ -35,7 +35,7 @@ def start_job(job_id):
         job.status = 'failed'
         job.err = 'Invalid simulator or simulator does not exist'
         job.save()
-        return False
+        return 'invalid simulator'
 
     sim = SIMULATORS[sim_id]
 
@@ -47,7 +47,7 @@ def start_job(job_id):
             job.status = 'failed'
             job.err = 'Missing argument: {}'.format(arg)
             job.save()
-            return False
+            return 'missing argument: {}'.format(arg)
 
     client = arc.Client('newriver1.arc.vt.edu', arc.ARC_USER)
     try:
@@ -55,11 +55,11 @@ def start_job(job_id):
         if current_job_count > JOB_THRESHOLD:
             submit_retry(job)
             client.close()
-            return False
+            return 'arc is full'
     except ValueError:
         submit_retry(job)
         client.close()
-        return False
+        return 'failed to check arc status'
 
     remote_path = arc.get_remote_path(arc.ARC_USER, job.id)
     input_path = os.path.join(remote_path, 'input.fasta')

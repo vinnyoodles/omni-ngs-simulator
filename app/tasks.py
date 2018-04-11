@@ -92,7 +92,12 @@ def create_and_start_job(sim_id, form, extra_file=None):
         if name == 'name':
             data['name'] = value
         elif name == 'sequence_identifier':
+            # NOTE: sequence identifier is for artificialfastqgenerator where
+            # this field must be the header to a sequence and it must start with >
             job_attrs[name] = str(value)[1:]
+        elif isinstance(value, bool):
+            # NOTE: let 1 equal true and 0 false
+            job_attrs[name] = '1' if value else '0'
         elif name != 'csrf_token' and name != 'file' and name != 'submit':
             job_attrs[name] = str(value)
 

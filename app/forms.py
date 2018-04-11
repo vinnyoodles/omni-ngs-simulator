@@ -184,7 +184,17 @@ class SimseqForm(BaseSimulatorForm):
     pass
 
 class SimhtsdForm(BaseSimulatorForm):
-    pass
+    coverage = IntegerField('Desired coverage')
+    num_reads = IntegerField('Number of reads to output')
+    generate_454 = BooleanField('Generate 454 style data')
+    read_len = IntegerField('Read length')
+    error_func = BooleanField('Turn on error function')
+    error_rate = DecimalField('Starting error rate')
+    incremental_error_rate = DecimalField('Incremental error rate per position')
+    paired_end = BooleanField('Paired end run')
+    distance_between_first_pos = IntegerField('Distance between first position of each sequence')
+    std_dev = IntegerField('Standard deviation of distances')
+
 
 class PirsForm(BaseSimulatorForm):
     read_len = IntegerField('Length of generated reads', default=100, validators=[DataRequired(), NumberRange(min=1, max=2000000)])

@@ -168,7 +168,8 @@ SIMULATORS = {
         'title': 'simhtsd',
         'caption': 'Given a reference sequence, simhtsd will create a large set of short nucleotide reads, simulating the output from today\'s high-throughput DNA sequencers, such as the Illumina Genome Analyzer II.',
         'route': 'simhtsd',
-        'ready': False
+        'arguments': [ 'input', 'output', 'coverage', 'num_reads', 'generate_454', 'read_len', 'error_func', 'error_rate', 'incremental_error_rate', 'paired_end', 'distance_between_first_pos', 'std_dev' ],
+        'ready': True
     },
 
     'simngs': {

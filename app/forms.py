@@ -33,6 +33,7 @@ class BaseSimulatorForm(FlaskForm):
     name = StringField('Name')
     file = FileField('Input File', validators=[FileRequired()])
     submit = SubmitField('Submit')
+    privacy = SelectField('Privacy', choices=[('public', 'Public'), ('private', 'Private')], validators=[DataRequired()])
 
 class Sim454Form(BaseSimulatorForm):
     generation = SelectField('Generation', choices=[('Ti', 'Ti'), ('GS', 'GS'), ('FLX', 'FLX')], validators=[DataRequired()])

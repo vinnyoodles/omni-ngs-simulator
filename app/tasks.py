@@ -91,6 +91,8 @@ def create_and_start_job(sim_id, form, extra_file=None):
     for name, value in form.data.items():
         if name == 'name':
             data['name'] = value
+        elif name == 'privacy':
+            data['privacy'] = value
         elif name == 'sequence_identifier':
             # NOTE: sequence identifier is for artificialfastqgenerator where
             # this field must be the header to a sequence and it must start with >

@@ -4,3 +4,5 @@ data
 *.out
 *.fasta
 *.fastq
+*.fa
+*.log

@@ -18,125 +18,33 @@ docker-compose up
 
 ## Adding new simulators
 
-### 1. Add the simulator specific dictionary values into `SIMULATORS` in `app/simulators/__init__.py`.
+### 1. Add an entry in the [simulator dictionary](https://github.com/vinnyoodles/omni-ngs-simulator/blob/2b1b9f480e03d412f0478a653a6ebb2684f5c36f/app/simulators/__init__.py#L1)
 
-The documentation for the dictionary can be found in [app/tasks.py](https://github.com/vinnyoodles/omni-ngs-simulator/blob/a310525bcc8197711ac0d8925e0dbf4dd7503e38/app/tasks.py#L9-L48)
-
-An example of the dictionary format for the command `echo` would be:
-
-```python
-'echo': {
-    'command': 'echo',
-    'arguments': ['string_to_echo']
-    'defaults': { },
-    'format': '{string_to_echo}'
-    'stdout': True,
-    'title': 'echo',
-    'caption': 'Write arguments to the standard output'
-    'route': 'echo_route'
-}
-
-...
-
-@instance.route('/simulators/echo')
-def echo_route():
-    return render_template(...)
-```
-
-### 2. Add flask specific route for the simulator in `app/routes.py`.
-
-This route has to match the `route` key in the dictionary specified in step 1.
-The python function requires two decorators. The first decorator specifies the route's url, REST methods and other parameters.
-The second decorator requires users to be logged in to visit the page.
-
-```python
-@instance.route('/simulators/example_simulator', methods=['GET', 'POST'], strict_slashes=False)
-@login_required
-```
-
-The route function handles both _GET_ and _POST_ requests. The POST request occurs on form submission. Therefore, there is conditional logic
-to check if the function is called on a form submission.
+It should have the following format:
 
 ```
-...
-form = ExampleForm()
-if form.validate_on_submit():
-    create_and_start_job('example_job_key', form.name.data, { ... }, form.file.data)
-    return redirect(url_for('dashboard'))
-```
-If the form is invalid (invalid or missing arguments), then the user is redirected back to the simulator's form page with the error message showing.
-If the form is valid, then `create_and_start_job` would be called with 4 parameters. The parameters are the following:
-
-- Key value of the simulator in the dictionary specified in step 1.
-- User inputted name field from the form (if it was left blank, then this would be empty and the database ID would be used instead).
-- Dictionary of simulator specific arguments
-- Input file
-
-### 3. Add form class in `app/forms.py`.
-
-The form class is for validation and helps with creating the HTML file.
-The class can inherit from `BaseSimulatorForm` because of some shared fields.
-There shouldn't be anything new or different from the existing forms in `app/forms.py`, but the libraries used are [Flask-WTF](https://flask-wtf.readthedocs.io/en/stable/) and [WTForms](https://wtforms.readthedocs.io/en/stable/index.html).
-
-### 4. Create HTML file for the simulator and its form.
-
-The file should be created in `app/templates/simulators`. Also, make sure to include the boilerplate code for rendering the headers and other parts.
-
-```HTML
-{% extends "container.html" %}
-
-{% block content %}
-    <div class="text-center" style="padding-top:20px">
-        <h3 style="padding-bottom:10px">NAME OF SIMULATOR</h3>
-        <div class="row">
-            <div class="col-lg-6 offset-lg-3 text-center">
-                <form action="" class="form job-form" method="POST" enctype="multipart/form-data" role="form">
-                    {{ form.hidden_tag() }}
-
-                    <div class="form-group row">
-                        {{ form.name.label(class_='col-4 col-form-label')}}
-                        <div class="col-8">
-                            {{ form.name(class_='form-control', placeholder='Default - Job ID')}}
-                        </div>
-                    </div>
-
-                    <div class="form-group row">
-                        <div class="custom-file">
-                            {{ form.file(class_='custom-file-input', accept='.fasta', required='') }}
-                            {{ form.file.label(class_='custom-file-label') }}
-                        </div>
-                    </div>
-
-                    <!-- Enter simulator specific forms here -->
-
-                    {{ form.submit(class_='btn btn-outline-primary btn-block') }}
-                </form>
-            </div>
-        </div>
-    </div>
-{% endblock %}
+title: title that will be rendered in html
+caption: description of the simulator that will be rendered in html
+route: url path name (follows /simulators)
+arguments: list of argument names in the order that they must appear in the qsub script
+ready: True
 ```
 
-Use [the 454Sim.html](https://github.com/vinnyoodles/omni-ngs-simulator/blob/32e5313248f15decc849fee595cc8c9437796b38/app/templates/simulators/454sim.html#L25-L60) as an example and a reference for adding specific fields. The form library handles a majority of the work. We just have to pass in the styling classes. Basically, the form just has to be wrapped in a few `div`s and given the correct class names.
+### 2. Create flask form class
 
-The style classes (and any other HTML parameters) are passed in the following manner: https://stackoverflow.com/a/34748860/5334575.
+Use the [base class](https://github.com/vinnyoodles/omni-ngs-simulator/blob/2b1b9f480e03d412f0478a653a6ebb2684f5c36f/app/forms.py#L32) as the parent class.
 
-The HTML file requires a few parameters to be passed in, they are passed in from the route function.
-The parameters that are expected are, in the following order:
+Any additional parameters/form fields that are not included in the base class must be added in the simulator specific class.
+The documentation for the form fields can be [found here](https://flask-wtf.readthedocs.io/en/stable/index.html)
 
-- path to the HTML file (relative to `routes.py`)
-- title (keyword argument) used in other html files
-- form (keyword argument) used to populate form fields
+### 3. Create form html file
 
-```python
-@instance.route('/simulators/echo')
-def echo_route():
-    form = ExampleSimulatorForm()
-    return render_template('simulators/example.html', title='Example', form=form)
-```
+The simulator requires an html file that is specific to it and all of its parameters/fields.
+It should be placed under the `app/templates/simulators` directory and should be named the same as the route entry in the dictionary.
 
-### 5. Install simulator and its dependencies on machine
+### Examples
 
-In order to run the simulator, it has to be configured to run. Ideally, the simulator should be placed in $PATH so it does not require an absolute path. The simulator would be run using the `command` key in the dictionary specified in the first step.
+- [grinder](https://github.com/vinnyoodles/omni-ngs-simulator/pull/30/files)
+- [simhtsd](https://github.com/vinnyoodles/omni-ngs-simulator/pull/29/files)
 
 

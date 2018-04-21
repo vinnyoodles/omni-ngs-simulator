@@ -23,11 +23,12 @@ docker-compose up
 It should have the following format:
 
 ```
-title: title that will be rendered in html
-caption: description of the simulator that will be rendered in html
-route: url path name (follows /simulators)
-arguments: list of argument names in the order that they must appear in the qsub script
-ready: True
+title:       title that will be rendered in html
+caption:     description of the simulator that will be rendered in html
+route:       url path name (follows /simulators)
+arguments:   list of argument names in the order that they must appear in the qsub script
+tags:        list of keywords used for searching
+ready:       boolean dictating whether or not the simulator is production ready
 ```
 
 ### 2. Create flask form class

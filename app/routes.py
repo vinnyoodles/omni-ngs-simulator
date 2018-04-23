@@ -89,6 +89,13 @@ def download(job_id):
     client.close()
     return send_file(local_path)
 
+@instance.route('/search', methods=['GET'], strict_slashes=False)
+@login_required
+def search():
+    form = SearchForm()
+    return render_template('search.html', title='Search', form=form)
+
+
 """
 Simulator Routes
 """

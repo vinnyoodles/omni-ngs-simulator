@@ -29,6 +29,47 @@ class RegistrationForm(FlaskForm):
         if user is not None:
             raise ValidationError('Please use a different email address.')
 
+class SearchForm(FlaskForm):
+    reference = BooleanField('Reference')
+    noreference = BooleanField('No reference')
+    genomics = BooleanField('Genomics')
+    metagenomics = BooleanField('Metagenomics')
+    tech_454 = BooleanField('454')
+    tech_illumina = BooleanField('Illumina')
+    tech_solid = BooleanField('SOLiD')
+    tech_iontorrent = BooleanField('IonTorrent')
+    tech_sanger = BooleanField('Sanger')
+    tech_pacbio = BooleanField('PacBio')
+    variants = BooleanField('Variants')
+    novariants = BooleanField('No variants')
+    submit = SubmitField('Search')
+
+    def __init__(self, *args, **kwargs):
+        super(SearchForm, self).__init__(*args, **kwargs)
+        self.ref_tags = [
+            self.reference,
+            self.noreference,
+        ]
+
+        self.gen_tags = [
+            self.genomics,
+            self.metagenomics,
+        ]
+
+        self.tech_tags = [
+            self.tech_454,
+            self.tech_illumina,
+            self.tech_solid,
+            self.tech_iontorrent,
+            self.tech_sanger,
+            self.tech_pacbio,
+        ]
+
+        self.var_tags = [
+            self.variants,
+            self.novariants
+        ]
+
 class BaseSimulatorForm(FlaskForm):
     name = StringField('Name')
     file = FileField('Input File', validators=[FileRequired()])

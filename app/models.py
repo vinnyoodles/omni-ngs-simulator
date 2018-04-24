@@ -23,6 +23,7 @@ class Job(Document):
     attrs              = DictField(required=True)
     command            = StringField()
     err                = StringField()
+    tags               = ListField(required=True)
 
 @login.user_loader
 def load_user(user_id):

@@ -105,6 +105,10 @@ def create_and_start_job(sim_id, form, extra_file=None):
 
     if extra_file is not None:
         job_attrs['extra_file'] = 'extra_file'
+
+    # Apply the job's tags to the dictionary to be stored in the database.
+    data['tags'] = SIMULATORS[sim_id]['tags']
+
     job = Job(**data)
     job.save()
 

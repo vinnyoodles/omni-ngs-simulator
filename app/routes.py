@@ -89,12 +89,18 @@ def download(job_id):
     client.close()
     return send_file(local_path)
 
-@instance.route('/search', methods=['GET'], strict_slashes=False)
+@instance.route('/search', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def search():
     form = SearchForm()
+    if form.validate_on_submit():
+        requested_tags = []
+        for key in form.mapped_tags:
+            if form.mapped_tags[key].data:
+                requested_tags.append(key)
+        return Job.objects(privacy='public', status='finished', tags__in=requested_tags).to_json()
+        # return redirect(url_for('index'))
     return render_template('search.html', title='Search', form=form)
-
 
 """
 Simulator Routes

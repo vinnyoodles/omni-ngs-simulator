@@ -70,6 +70,21 @@ class SearchForm(FlaskForm):
             self.novariants
         ]
 
+        self.mapped_tags = {
+            'reference': self.reference,
+            'noreference': self.noreference,
+            'genomics': self.genomics,
+            'metagenomics': self.metagenomics,
+            '454': self.tech_454,
+            'illumina': self.tech_illumina,
+            'solid': self.tech_solid,
+            'iontorrent': self.tech_iontorrent,
+            'sanger': self.tech_sanger,
+            'pacbio': self.tech_pacbio,
+            'variants': self.variants,
+            'novariants': self.novariants,
+        }
+
 class BaseSimulatorForm(FlaskForm):
     name = StringField('Name')
     file = FileField('Input File', validators=[FileRequired()])
@@ -294,6 +309,7 @@ class XsForm(FlaskForm):
     repeat_max = IntegerField('Maximum repeat size', default=0, validators=[DataRequired()])
     mutation_frequency = DecimalField('Mutation rate', default=0.001, validators=[DataRequired(), NumberRange(min=0, max=1)])
     random_seed = IntegerField('Random Seed', validators=[DataRequired(), NumberRange(min=1, max=RAND_SEED_MAX)])
+    privacy = SelectField('Privacy', choices=[('public', 'Public'), ('private', 'Private')], validators=[DataRequired()])
 
     name = StringField('Name')
     submit = SubmitField('Submit')

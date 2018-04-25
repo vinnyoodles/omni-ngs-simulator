@@ -43,6 +43,19 @@ The documentation for the form fields can be [found here](https://flask-wtf.read
 The simulator requires an html file that is specific to it and all of its parameters/fields.
 It should be placed under the `app/templates/simulators` directory and should be named the same as the route entry in the dictionary.
 
+### 4. Create qsub script
+
+The service expects there to exist a qsub script for every simulator and calls it [here](https://github.com/vinnyoodles/omni-ngs-simulator/blob/b64a885476b31adf424aec8b7941f1a0796355a7/app/tasks.py#L81). The qsub script should contain the following:
+
+- qsub parameters
+    - walltime, queue, allocation, etc...
+- initial update request
+    - this is important for two reasons: first it updates the job status as `running` and second it populates the job command information
+    - the job argument interpolation is done individually in each qsub script, look at [interpolated_command](https://github.com/vinnyoodles/omni-ngs-simulator/blob/b64a885476b31adf424aec8b7941f1a0796355a7/arc/dwgsim.qsub#L29) variable in any of the existing qsub scripts
+- job command
+- final update request
+    - this updates the job status to be `finished` and sends the email notification
+
 ### Examples
 
 - [grinder](https://github.com/vinnyoodles/omni-ngs-simulator/pull/30/files)

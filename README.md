@@ -52,6 +52,7 @@ The service expects there to exist a qsub script for every simulator and calls i
 - initial update request
     - this is important for two reasons: first it updates the job status as `running` and second it populates the job command information
     - the job argument interpolation is done individually in each qsub script, look at [interpolated_command](https://github.com/vinnyoodles/omni-ngs-simulator/blob/b64a885476b31adf424aec8b7941f1a0796355a7/arc/dwgsim.qsub#L29) variable in any of the existing qsub scripts
+    - make sure the `input` and `output` variables are hidden in `interpolated_command`
 - job command
 - final update request
     - this updates the job status to be `finished` and sends the email notification

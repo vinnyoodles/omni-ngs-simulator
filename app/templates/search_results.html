@@ -1,0 +1,35 @@
+{% extends "container.html" %}
+
+{% block content %}
+<div class="table100 ver2">
+    <div class="table100-head">
+        <table class="table100-width">
+            <thead>
+                <tr>
+                    <th class="column1">Job name</th>
+                    <th class="column2">Tags</th>
+                    <th class="column3">User</th>
+                    <th class="column3">Output</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+
+    <div class="table100-body">
+        <table class="table100-width">
+            <tbody>
+                {% for job in jobs %}
+                <tr class="row100 body">
+                    <td class="column1">{{ job.name }}</td>
+                    <td class="column2 data-column">{{ ", ".join(job.tags) }}</td>
+                    <td class="column3 data-column">{{ job.user[0].email }}</td>
+                    <td class="column3 data-column">
+                        <a href="{{ url_for('download', job_id=job._id) }}">Download</a> 
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

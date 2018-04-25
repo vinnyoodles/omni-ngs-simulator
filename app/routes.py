@@ -98,8 +98,19 @@ def search():
         for key in form.mapped_tags:
             if form.mapped_tags[key].data:
                 requested_tags.append(key)
-        return Job.objects(privacy='public', status='finished', tags__in=requested_tags).to_json()
-        # return redirect(url_for('index'))
+
+        pipeline = [
+            { '$lookup': { 'from': 'user', 'localField': 'user_id', 'foreignField': '_id', 'as': 'user' }},
+            { '$project': {
+                '_id': 1,
+                'user.email': 1,
+                'name': 1,
+                'command': 1,
+                'tags': 1
+            }}
+        ]
+        results = Job.objects(privacy='public', status='finished', tags__in=requested_tags).aggregate(*pipeline)
+        return render_template('search_results.html', title='Search Results', jobs=list(results))
     return render_template('search.html', title='Search', form=form)
 
 """

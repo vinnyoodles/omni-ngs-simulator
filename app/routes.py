@@ -2,6 +2,8 @@ import os, arc, mailer
 from flask import render_template, flash, redirect, jsonify, url_for, request, send_file
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
+from mongoengine.queryset.visitor import Q
+from functools import reduce
 
 from app.simulators import SIMULATORS, sim_json
 from app.forms import *
@@ -94,22 +96,43 @@ def download(job_id):
 def search():
     form = SearchForm()
     if form.validate_on_submit():
-        requested_tags = []
-        for key in form.mapped_tags:
-            if form.mapped_tags[key].data:
-                requested_tags.append(key)
+        requested_tags = {}
+        keys = [ 'ref_db', 'genomics', 'tech', 'variants' ]
+        for k in keys:
+            requested_tags[k] = []
+            for t in form.mapped_tags[k]:
+                field_tuple = form.mapped_tags[k][t]
+                field = field_tuple[0]
+                if len(field_tuple) == 1 and field.data:
+                    # list field
+                    requested_tags[k].append(t)
+                elif field.data:
+                    # boolean field
+                    kwargs = { k: field_tuple[1] }
+                    requested_tags[k].append(Q(**kwargs))
 
-        pipeline = [
-            { '$lookup': { 'from': 'user', 'localField': 'user_id', 'foreignField': '_id', 'as': 'user' }},
-            { '$project': {
-                '_id': 1,
-                'user.email': 1,
-                'name': 1,
-                'command': 1,
-                'tags': 1
-            }}
-        ]
-        results = Job.objects(privacy='public', status='finished', tags__in=requested_tags).aggregate(*pipeline)
+        # http://docs.mongoengine.org/guide/querying.html#advanced-queries
+        # Create the query object
+        # Technology is a list query.
+        if len(requested_tags['tech']) > 0:
+            query = Q(tech__in=requested_tags['tech'])
+        else:
+            query = None
+
+        # The other three keys are boolean queries.
+        for key in [ 'ref_db', 'genomics', 'variants' ]:
+            if len(requested_tags[key]) == 0:
+                continue
+            key_query = reduce((lambda q1, q2: q1 | q2), requested_tags[key])
+            if query is None:
+                query = key_query
+            else:
+                query = query & key_query
+
+        if query is None:
+            results = Job.objects()
+        else:
+            results = Job.objects(query)
         return render_template('search_results.html', title='Search Results', jobs=list(results))
     return render_template('search.html', title='Search', form=form)
 

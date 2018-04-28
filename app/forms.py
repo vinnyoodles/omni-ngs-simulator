@@ -71,18 +71,26 @@ class SearchForm(FlaskForm):
         ]
 
         self.mapped_tags = {
-            'reference': self.reference,
-            'noreference': self.noreference,
-            'genomics': self.genomics,
-            'metagenomics': self.metagenomics,
-            '454': self.tech_454,
-            'illumina': self.tech_illumina,
-            'solid': self.tech_solid,
-            'iontorrent': self.tech_iontorrent,
-            'sanger': self.tech_sanger,
-            'pacbio': self.tech_pacbio,
-            'variants': self.variants,
-            'novariants': self.novariants,
+            'ref_db': {
+                'ref': (self.reference, True),
+                'noref': (self.noreference, False)
+            },
+            'genomics': {
+                'genomics': (self.genomics, True),
+                'metagenomics': (self.metagenomics, False)
+            },
+            'tech': {
+                '454': (self.tech_454,),
+                'illumina': (self.tech_illumina,),
+                'solid': (self.tech_solid,),
+                'iontorrent': (self.tech_iontorrent,),
+                'sanger': (self.tech_sanger,),
+                'pacbio': (self.tech_pacbio,)
+            },
+            'variants': {
+                'variants': (self.variants, True),
+                'novariants': (self.novariants, False)
+            }
         }
 
 class BaseSimulatorForm(FlaskForm):

@@ -7,41 +7,42 @@
 
 # Arguments
 # $1 job id
-# $2 input
-# $3 output directory
-# $4       -d INT        outer distance between the two ends for pairs                          [500]
-# $5       -s INT        standard deviation of the distance for pairs                           [50.000]
-# $6       -C FLOAT      mean coverage across available positions (-1 to disable)               [100.00]
-# $7       -r FLOAT      rate of mutations                                                      [0.0010]
-# $8       -F FLOAT      frequency of given mutation to simulate low fequency somatic mutations [0.5000]
+# $2 arc user
+# $3 input
+# $4 output directory
+# $5       -d INT        outer distance between the two ends for pairs                          [500]
+# $6       -s INT        standard deviation of the distance for pairs                           [50.000]
+# $7       -C FLOAT      mean coverage across available positions (-1 to disable)               [100.00]
+# $8       -r FLOAT      rate of mutations                                                      [0.0010]
+# $9       -F FLOAT      frequency of given mutation to simulate low fequency somatic mutations [0.5000]
 #                            NB: freqeuncy F refers to the first strand of mutation, therefore mutations 
 #                            on the second strand occour with a frequency of 1-F 
-# $9       -R FLOAT      fraction of mutations that are indels                                  [0.10]
-# $10       -X FLOAT      probability an indel is extended                                       [0.30]
-# $11      -I INT        the minimum length indel                                               [1]
-# $12      -y FLOAT      probability of a random DNA read                                       [0.05]
-# $13      -c INT        generate reads for                                                     [0]
+# $10       -R FLOAT      fraction of mutations that are indels                                  [0.10]
+# $11       -X FLOAT      probability an indel is extended                                       [0.30]
+# $12      -I INT        the minimum length indel                                               [1]
+# $13      -y FLOAT      probability of a random DNA read                                       [0.05]
+# $14      -c INT        generate reads for                                                     [0]
 #                            0: Illumina
 #                            1: SOLiD
 #                            2: Ion Torrent
-# $14      -z INT        random seed (-1 uses the current time)                                 [-1]
+# $l5      -z INT        random seed (-1 uses the current time)                                 [-1]
 
-interpolated_command="\"dwgsim input output -d $4 -s $5 -C $6 -r $7 -F $8 -R $9 -X ${10} -I ${11} -y ${12} -c ${13} -z ${14}\""
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+interpolated_command="\"dwgsim input output -d $5 -s $6 -C $7 -r $8 -F $9 -R ${10} -X ${11} -I ${12} -y ${13} -c ${14} -z ${15}\""
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
-dwgsim $2 $3 \
-    -d $4 \
-    -s $5 \
-    -C $6 \
-    -r $7 \
-    -F $8 \
-    -R $9 \
-    -X ${10} \
-    -I ${11} \
-    -y ${12} \
-    -c ${13} \
-    -z ${14} \
+dwgsim $3 $4 \
+    -d $5 \
+    -s $6 \
+    -C $7 \
+    -r $8 \
+    -F $9 \
+    -R ${10} \
+    -X ${11} \
+    -I ${12} \
+    -y ${13} \
+    -c ${14} \
+    -z ${15} \
     2> /dev/null
 
-tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"

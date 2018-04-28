@@ -7,35 +7,36 @@
 
 # Arguments
 # $1 job id
-# $2 input reference
-# $3 output
+# $2 arc user
+# $3 input reference
+# $4 output
 
-# $4  -e FLOAT      base error rate [0.020]
-# $5  -d INT        outer distance between the two ends [500]
-# $6  -s INT        standard deviation [50]
-# $7  -N INT        number of read pairs [1000000]
-# $8  -1 INT        length of the first read [70]
-# $9  -2 INT        length of the second read [70]
-# $10  -r FLOAT      rate of mutations [0.0010]
-# $11 -R FLOAT      fraction of indels [0.15]
-# $12 -X FLOAT      probability an indel is extended [0.30]
-# $13 -S INT        seed for random generator [-1]
+# $5  -e FLOAT      base error rate [0.020]
+# $6  -d INT        outer distance between the two ends [500]
+# $7  -s INT        standard deviation [50]
+# $8  -N INT        number of read pairs [1000000]
+# $9  -1 INT        length of the first read [70]
+# $10  -2 INT        length of the second read [70]
+# $11  -r FLOAT      rate of mutations [0.0010]
+# $12 -R FLOAT      fraction of indels [0.15]
+# $13 -X FLOAT      probability an indel is extended [0.30]
+# $14 -S INT        seed for random generator [-1]
 
-interpolated_command="\"wgsim -e $4 -d $5 -s $6 -N $7 -1 $8 -2 $9 -r ${10} -R ${11} -X ${12} -S ${13} input output_1 output_2\""
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+interpolated_command="\"wgsim -e $5 -d $6 -s $7 -N $8 -1 $9 -2 ${10} -r ${11} -R ${12} -X ${13} -S ${14} input output_1 output_2\""
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 wgsim \
-    -e $4 \
-    -d $5 \
-    -s $6 \
-    -N $7 \
-    -1 $8 \
-    -2 $9 \
-    -r ${10} \
-    -R ${11} \
-    -X ${12} \
-    -S ${13} \
-    $2 $3_1.fq $3_2.fq
+    -e $5 \
+    -d $6 \
+    -s $7 \
+    -N $8 \
+    -1 $9 \
+    -2 ${10} \
+    -r ${11} \
+    -R ${12} \
+    -X ${13} \
+    -S ${14} \
+    $3 $4_1.fq $4_2.fq
  
-tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"

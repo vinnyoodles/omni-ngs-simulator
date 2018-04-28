@@ -7,15 +7,16 @@
 
 # Arguments
 # $1 job id
-# $2 input reference
-# $3 output
+# $2 arc user
+# $3 input reference
+# $4 output
 # -od <output_dir> | -output_dir <output_dir>
 
-# $4 -tr <total_reads> | -total_reads <total_reads>
+# $5 -tr <total_reads> | -total_reads <total_reads>
 # Number of shotgun or amplicon reads to generate for each library. Do
 # not specify this if you specify the fold coverage. Default: 100
 
-# $5 -rd <read_dist>... | -read_dist <read_dist>...
+# $6 -rd <read_dist>... | -read_dist <read_dist>...
 # Desired shotgun or amplicon read length distribution specified as:
 # average length, distribution ('uniform' or 'normal') and standard
 # deviation.
@@ -32,7 +33,7 @@
 # Reference sequences smaller than the specified read length are not
 # used. Default: 100
 
-# $6 -id <insert_dist>... | -insert_dist <insert_dist>...
+# $7 -id <insert_dist>... | -insert_dist <insert_dist>...
 # Create paired-end or mate-pair reads spanning the given insert
 # length. Important: the insert is defined in the biological sense,
 # i.e. its length includes the length of both reads and of the stretch
@@ -41,7 +42,7 @@
 # 2,500 bp for mate pairs) Two distinct reads are generated whether or
 # not the mate pair overlaps. Default: 0
 
-# $7 -mo <mate_orientation> | -mate_orientation <mate_orientation>
+# $8 -mo <mate_orientation> | -mate_orientation <mate_orientation>
 # When generating paired-end or mate-pair reads (see <insert_dist>),
 # specify the orientation of the reads (F: forward, R: reverse):
 
@@ -52,7 +53,7 @@
 
 # Default: FR
 
-# $8 -un <unidirectional> | -unidirectional <unidirectional>
+# $9 -un <unidirectional> | -unidirectional <unidirectional>
 # Instead of producing reads bidirectionally, from the reference
 # strand and its reverse complement, proceed unidirectionally, from
 # one strand only (forward or reverse). Values: 0 (off, i.e.
@@ -60,29 +61,29 @@
 # for amplicon and strand-specific transcriptomic or proteomic
 # datasets. Default: 0
 
-# $9 -lb <length_bias> | -length_bias <length_bias>
+# $10 -lb <length_bias> | -length_bias <length_bias>
 # In shotgun libraries, sample reference sequences proportionally to
 # their length. For example, in simulated microbial datasets, this
 # means that at the same relative abundance, larger genomes contribute
 # more reads than smaller genomes (and all genomes have the same fold
 # coverage). 0 = no, 1 = yes. Default: 1
 
-# $10 -cb <copy_bias> | -copy_bias <copy_bias>
+# $11 -cb <copy_bias> | -copy_bias <copy_bias>
 # In amplicon libraries where full genomes are used as input, sample
 # species proportionally to the number of copies of the target gene:
 # at equal relative abundance, genomes that have multiple copies of
 # the target gene contribute more amplicon reads than genomes that
 # have a single copy. 0 = no, 1 = yes. Default: 1
 
-# $11 -rs <random_seed> | -random_seed <random_seed>
+# $12 -rs <random_seed> | -random_seed <random_seed>
 # Seed number to use for the pseudo-random number generator.
 
-# $12 -dt <desc_track> | -desc_track <desc_track>
+# $13 -dt <desc_track> | -desc_track <desc_track>
 # Track read information (reference sequence, position, errors, ...)
 # by writing it in the read description. Default: 1
 
-interpolated_command="\"grinder -rf input -od output -tr $4 -rd $5 -id $6 -mo $7 -un $8 -lb $9 -cb ${10} -rs ${11} -dt ${12}\""
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+interpolated_command="\"grinder -rf input -od output -tr $5 -rd $6 -id $7 -mo $8 -un $9 -lb ${10} -cb ${11} -rs ${12} -dt ${13}\""
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 # Load perl local lib and bioperl
 module load perl/5.20.2
@@ -92,17 +93,17 @@ perl -Mlocal::lib
 eval "$(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)"
 perl -MCPAN -Mlocal::lib -e 'CPAN::install(C/CJ/CJFIELDS/BioPerl-1.6.924.tar.gz)'
 
-grinder -rf $2 -od $3 \
-    -tr $4 \
-    -rd $5 \
-    -id $6 \
-    -mo $7 \
-    -un $8 \
-    -lb $9 \
-    -cb ${10} \
-    -rs ${11} \
-    -dt ${12}
+grinder -rf $3 -od $4 \
+    -tr $5 \
+    -rd $6 \
+    -id $7 \
+    -mo $8 \
+    -un $9 \
+    -lb ${10} \
+    -cb ${11} \
+    -rs ${12} \
+    -dt ${13}
 
 
-tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"

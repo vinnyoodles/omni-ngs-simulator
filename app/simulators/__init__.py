@@ -180,7 +180,7 @@ SIMULATORS = {
         'genomics': True,
         'tech': ['illumina', '454', 'sanger'],
         'variants': False,
-        'ready': True
+        'ready': False
     },
 
     'metasim': {
@@ -227,7 +227,7 @@ SIMULATORS = {
         'genomics': True,
         'tech': ['454'],
         'variants': True,
-        'ready': True
+        'ready': False
     },
 
     'simngs': {

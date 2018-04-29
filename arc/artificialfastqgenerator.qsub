@@ -20,7 +20,7 @@
 # $12 The standard deviation of the DNA template length, (default = 60).
 
 interpolated_command="\"java -jar ArtificialFastqGenerator.jar -R input -O output -S \"\>${5}\" -CMGCS $6 -CMP $7 -CMPGC $8 -CSD $9 -RL ${10} -TLM ${11} -TLSD ${12}\""
-ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 module load jdk/1.8.0
 
@@ -37,5 +37,5 @@ java -jar $AFG_PATH/ArtificialFastqGenerator.jar \
     -TLSD ${12} \
     2> /dev/null
 
-tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
-ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /groups/ngsproj/generated_data/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 2 ${1}"

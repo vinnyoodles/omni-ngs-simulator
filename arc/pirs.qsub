@@ -38,7 +38,7 @@
 #                processors).
 
 interpolated_command="\"pirs simulate -B humNew.PE100.matrix.gz -I phixv2.InDel.matrix -G humNew.gcdep_100.dat -l $5 -x $6 -m $7 -v $8 -S $9 -o output input\""
-ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
  pirs simulate \
      -B Profiles/Base-Calling_Profiles/humNew.PE100.matrix.gz \
@@ -52,5 +52,5 @@ ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1
      -o $4 \
      $3
 
-tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
-ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /groups/ngsproj/generated_data/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 2 ${1}"

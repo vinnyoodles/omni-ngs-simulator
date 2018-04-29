@@ -16,14 +16,14 @@
 
 if [ $6 -eq 1 ]; then
     interpolated_command="\"art_454 -r $5 input output $7\""
-    ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+    ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
     # SINGLE-END SIMULATION
     # art_454 <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <FOLD_COVERAGE>
     art_454 -r $5 $3 $4 $7
 
 elif [ $6 -eq 2 ]; then
     interpolated_command="\"art_454 -r $5 input output $7 $8 $9\""
-    ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+    ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
     # PAIRED-END SIMULATION
     # art_454 <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <FOLD_COVERAGE> <MEAN_FRAG_LEN> <STD_DEV>
     # $8 mean fragment length
@@ -33,5 +33,5 @@ else
     exit
 fi
 
-tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
-ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /groups/ngsproj/generated_data/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 2 ${1}"

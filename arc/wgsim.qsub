@@ -23,7 +23,7 @@
 # $14 -S INT        seed for random generator [-1]
 
 interpolated_command="\"wgsim -e $5 -d $6 -s $7 -N $8 -1 $9 -2 ${10} -r ${11} -R ${12} -X ${13} -S ${14} input output_1 output_2\""
-ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 wgsim \
     -e $5 \
@@ -38,5 +38,5 @@ wgsim \
     -S ${14} \
     $3 $4_1.fq $4_2.fq
  
-tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
-ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /groups/ngsproj/generated_data/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 2 ${1}"

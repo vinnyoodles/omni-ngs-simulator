@@ -2,8 +2,8 @@ import paramiko
 from scp import SCPClient
 
 ARC_USER = 'vincentl'
-ARC_DIR = '/work/newriver/{}/omningssimulator'.format(ARC_USER)
-QSUB_DIR = '/home/{}/omni-ngs-simulator/arc'.format(ARC_USER)
+ARC_DIR = '/groups/ngsproj/generated_data'
+QSUB_DIR = '/groups/ngsproj/omni-ngs-simulator/arc'
 
 paramiko.util.log_to_file('paramiko.log')
 
@@ -33,5 +33,5 @@ class Client:
         return SCPClient(self.client.get_transport())
 
 
-def get_remote_path(user, job_id):
-    return '/work/newriver/{}/omningssimulator/{}'.format(user, job_id)
+def get_remote_path(job_id):
+    return '{}/{}'.format(ARC_DIR, job_id)

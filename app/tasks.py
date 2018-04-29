@@ -62,7 +62,7 @@ def start_job(job_id):
         client.close()
         return 'failed to check arc status'
 
-    remote_path = arc.get_remote_path(arc.ARC_USER, job.id)
+    remote_path = arc.get_remote_path(job.id)
     input_path = os.path.join(remote_path, 'input.fasta')
     output_path = os.path.join(remote_path, 'output')
 
@@ -120,7 +120,7 @@ def create_and_start_job(sim_id, form, extra_file=None):
         job.save()
 
     client = arc.Client('newriver1.arc.vt.edu', arc.ARC_USER)
-    remote_path = arc.get_remote_path(arc.ARC_USER, job.id)
+    remote_path = arc.get_remote_path(job.id)
     client.run('mkdir {}'.format(remote_path))
 
     # The path where all output files are written to is the project's directory.

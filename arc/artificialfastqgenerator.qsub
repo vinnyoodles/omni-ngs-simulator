@@ -7,34 +7,35 @@
 
 # Arguments
 # $1 job id
-# $2 input
-# $3 output directory
-# $4 The sequence identifier in the reference after which read generation should begin
-# $5 The spread of coverage mean given GC content (default = 0.22).
-# $6 The peak coverage mean for a region (default = 37.7).
-# $7 The GC content for regions with peak coverage mean (default = 0.45).
-# $8 The coverage standard deviation divided by the mean (default = 0.2).
-# $9 The length of each read, (default = 76).
-# $10 The mean DNA template length, (default = 210).
-# $11 The standard deviation of the DNA template length, (default = 60).
+# $2 arc user
+# $3 input
+# $4 output directory
+# $5 The sequence identifier in the reference after which read generation should begin
+# $6 The spread of coverage mean given GC content (default = 0.22).
+# $7 The peak coverage mean for a region (default = 37.7).
+# $8 The GC content for regions with peak coverage mean (default = 0.45).
+# $9 The coverage standard deviation divided by the mean (default = 0.2).
+# $10 The length of each read, (default = 76).
+# $11 The mean DNA template length, (default = 210).
+# $12 The standard deviation of the DNA template length, (default = 60).
 
-interpolated_command="\"java -jar ArtificialFastqGenerator.jar -R input -O output -S \"\>${4}\" -CMGCS $5 -CMP $6 -CMPGC $7 -CSD $8 -RL $9 -TLM ${10} -TLSD ${11}\""
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+interpolated_command="\"java -jar ArtificialFastqGenerator.jar -R input -O output -S \"\>${5}\" -CMGCS $6 -CMP $7 -CMPGC $8 -CSD $9 -RL ${10} -TLM ${11} -TLSD ${12}\""
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 module load jdk/1.8.0
 
 java -jar $AFG_PATH/ArtificialFastqGenerator.jar \
-    -R $2 \
-    -O $3 \
-    -S ">${4}" \
-    -CMGCS $5 \
-    -CMP $6 \
-    -CMPGC $7 \
-    -CSD $8 \
-    -RL $9 \
-    -TLM ${10} \
-    -TLSD ${11} \
+    -R $3 \
+    -O $4 \
+    -S ">${5}" \
+    -CMGCS $6 \
+    -CMP $7 \
+    -CMPGC $8 \
+    -CSD $9 \
+    -RL ${10} \
+    -TLM ${11} \
+    -TLSD ${12} \
     2> /dev/null
 
-tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"

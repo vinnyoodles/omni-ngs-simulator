@@ -7,32 +7,33 @@
 
 # Arguments
 # $1 job id
-# $2 input path
-# $3 output path
-# $4 read length
-# $5 type of simulation (1=single end, 2=paired end)
-# $6 random seed
-# $7 fold coverage
+# $2 arc user
+# $3 input path
+# $4 output path
+# $5 read length
+# $6 type of simulation (1=single end, 2=paired end)
+# $7 random seed
+# $8 fold coverage
 
-if [ $5 -eq 1 ]; then
-    interpolated_command="\"art_SOLiD -r $6 input output $4 $7\""
-    ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+if [ $6 -eq 1 ]; then
+    interpolated_command="\"art_SOLiD -r $7 input output $5 $8\""
+    ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
     # SINGLE-END (F3 READ) SIMULATION
     # art_SOLiD [ options ] <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <LEN_READ> <FOLD_COVERAGE>
-    art_SOLiD -r $6 $2 $3 $4 $7
+    art_SOLiD -r $7 $3 $4 $5 $8
 
-elif [ $5 -eq 2 ]; then
-    interpolated_command="\"art_SOLiD -r $6 input output $4 $7 $8 $9\""
-    ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+elif [ $6 -eq 2 ]; then
+    interpolated_command="\"art_SOLiD -r $7 input output $5 $8 $9 ${10}\""
+    ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
     # MATE-PAIR READS (F3-R3 PAIR) SIMULATION
     # art_SOLiD [ options ] <INPUT_SEQ_FILE> <OUTPUT_FILE_PREFIX> <LEN_READ> <FOLD_COVERAGE> <MEAN_FRAG_LEN> <STD_DEV>
-    # $8 mean fragment length
-    # $9 standard deviation
-    art_SOLiD -r $6 $2 $3 $4 $7 $8 $9
+    # $9 mean fragment length
+    # $10 standard deviation
+    art_SOLiD -r $7 $3 $4 $5 $8 $9 ${10}
 
 else
     exit
 fi
 
-tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"

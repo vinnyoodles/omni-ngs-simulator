@@ -7,32 +7,33 @@
 
 # Arguments
 # $1 job id
-# $2 input
-# $3 output
-# $4 -n int       number of reads to generate [50000]
-# $5 -m int       read mean size [200]
-# $6 -sd double   standard deviation for read size [20.0]
-# $7 -r int       number of random reads [0]
-# $8 -d double    deletion rate [0.01]
-# $9 -i double    insertion rate [0.005]
-# $10 -s double    substitution rate [0.005]
+# $2 arc user
+# $3 input
+# $4 output
+# $5 -n int       number of reads to generate [50000]
+# $6 -m int       read mean size [200]
+# $7 -sd double   standard deviation for read size [20.0]
+# $8 -r int       number of random reads [0]
+# $9 -d double    deletion rate [0.01]
+# $10 -i double    insertion rate [0.005]
+# $11 -s double    substitution rate [0.005]
 
-interpolated_command="\"java -jar CuReSim.jar -f input -o output -n $4 -m $5 -sd $6 -r $7 -d $8 -i $9 -s ${10}\""
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+interpolated_command="\"java -jar CuReSim.jar -f input -o output -n $5 -m $6 -sd $7 -r $8 -d $9 -i ${10} -s ${11}\""
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 module load jdk/1.8.0
 
 java -jar $CURESIM_PATH/CuReSim.jar \
-    -f $2 \
-    -o $3 \
-    -n $4 \
-    -m $5 \
-    -sd $6 \
-    -r $7 \
-    -d $8 \
-    -i $9 \
-    -s ${10} \
+    -f $3 \
+    -o $4 \
+    -n $5 \
+    -m $6 \
+    -sd $7 \
+    -r $8 \
+    -d $9 \
+    -i ${10} \
+    -s ${11} \
     2> /dev/null
 
-tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"

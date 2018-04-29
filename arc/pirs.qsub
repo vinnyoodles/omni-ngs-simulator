@@ -7,25 +7,26 @@
 
 # Arguments
 # $1 job id
-# $2 input reference
-# $3 output
+# $2 arc user
+# $3 input reference
+# $4 output
 
-# $4 -l LEN, --read-len=LEN
+# $5 -l LEN, --read-len=LEN
 #               Generate reads having a length of LEN.  Default: 100
 
-# $5 -x VAL, --coverage=VAL
+# $6 -x VAL, --coverage=VAL
 #                Set the average sequencing coverage (sometimes called depth).
 #                It may be either a floating-point number or an integer.
 
-# $6 -m LEN, --insert-len-mean=LEN
+# $7 -m LEN, --insert-len-mean=LEN
 #                Generate inserts (fragments) having an average length of LEN.
 #                Default: 180
 
-# $7 -v LEN, --insert-len-sd=LEN
+# $8 -v LEN, --insert-len-sd=LEN
 #                Set the standard deviation of the insert (fragment) length.
 #                Default: 10% of insert length mean.
 
-# $8 -S SEED, --random-seed=SEED
+# $9 -S SEED, --random-seed=SEED
 #                Use SEED as the random seed. Default:
 #                time(NULL) * getpid().  Note: If pIRS was not compiled with
 #                --disable-threads, each thread actually uses its own random
@@ -36,20 +37,20 @@
 #                with --disable-threads, or run on system with 4 or fewer
 #                processors).
 
-interpolated_command="\"pirs simulate -B humNew.PE100.matrix.gz -I phixv2.InDel.matrix -G humNew.gcdep_100.dat -l $4 -x $5 -m $6 -v $7 -S $8 -o output input\""
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+interpolated_command="\"pirs simulate -B humNew.PE100.matrix.gz -I phixv2.InDel.matrix -G humNew.gcdep_100.dat -l $5 -x $6 -m $7 -v $8 -S $9 -o output input\""
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
  pirs simulate \
      -B Profiles/Base-Calling_Profiles/humNew.PE100.matrix.gz \
      -I Profiles/InDel_Profiles/phixv2.InDel.matrix \
      -G Profiles/GC-depth_Profiles/humNew.gcdep_100.dat \
-     -l $4 \
-     -x $5 \
-     -m $6 \
-     -v $7 \
-     -S $8 \
-     -o $3 \
-     $2
+     -l $5 \
+     -x $6 \
+     -m $7 \
+     -v $8 \
+     -S $9 \
+     -o $4 \
+     $3
 
-tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"

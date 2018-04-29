@@ -9,51 +9,52 @@
 
 # Arguments
 # $1 job id
-# $2 input
-# $3 output
-# $4 -s, --seed INT
+# $2 arc user
+# $3 input
+# $4 output
+# $5 -s, --seed INT
 #       The seed for Rng. Default: 0.
-# $5 -N, --num-reads NUM
+# $6 -N, --num-reads NUM
 #       Number of reads (or mate pairs) to simulate. Default: 1000.
 
-# $6 -sn, --source-length NUM
+# $7 -sn, --source-length NUM
 #       Length of random source sequence. Default: 1000000.
 
-# $7 -spA, --source-probability-A NUM
+# $8 -spA, --source-probability-A NUM
 #       Propabilibty for A in randomly generated sequence. Default: 0.25.
-# $8 -spC, --source-probability-C NUM
+# $9 -spC, --source-probability-C NUM
 #       Propabilibty for C in randomly generated sequence. Default: 0.25.
-# $9 -spG, --source-probability-G NUM
+# $10 -spG, --source-probability-G NUM
 #       Propabilibty for G in randomly generated sequence. Default: 0.25.
 
 # Illumina Error Model:
-# $10 -pi, --prob-insert NUM
+# $11 -pi, --prob-insert NUM
 #       Probability of an insertion. Default: 0.001.
-# $11 -pd, --prob-delete NUM
+# $12 -pd, --prob-delete NUM
 #       Probability of a deletion. Default: 0.001.
-# $12 -pmm, --prob-mismatch NUM
+# $13 -pmm, --prob-mismatch NUM
 #       Average mismatch probability. Default: 0.004.
-# $13 -pmmb, --prob-mismatch-begin NUM
+# $14 -pmmb, --prob-mismatch-begin NUM
 #       Probability of a mismatch at the first base. Default: 0.002.
-# $14 -pmme, --prob-mismatch-end NUM
+# $15 -pmme, --prob-mismatch-end NUM
 #       Probability of a mismatch at the last base. Default: 0.012.
 
-interpolated_command="\"mason illumina --seed $4 --num-reads $5 --source-length $6 --source-probability-A $7 --source-probability-C $8 --source-probability-G $9 --prob-insert ${10} --prob-delete ${11} --prob-mismatch ${12} --prob-mismatch-begin ${13} --prob-mismatch-end ${14} input -o output\""
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
+interpolated_command="\"mason illumina --seed $5 --num-reads $6 --source-length $7 --source-probability-A $8 --source-probability-C $9 --source-probability-G ${10} --prob-insert ${11} --prob-delete ${12} --prob-mismatch ${13} --prob-mismatch-begin ${14} --prob-mismatch-end ${15} input -o output\""
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 mason illumina \
-    --seed $4 \
-    --num-reads $5 \
-    --source-length $6 \
-    --source-probability-A $7 \
-    --source-probability-C $8 \
-    --source-probability-G $9 \
-    --prob-insert ${10} \
-    --prob-delete ${11} \
-    --prob-mismatch ${12} \
-    --prob-mismatch-begin ${13} \
-    --prob-mismatch-end ${14} \
-    $2 -o $3.fasta
+    --seed $5 \
+    --num-reads $6 \
+    --source-length $7 \
+    --source-probability-A $8 \
+    --source-probability-C $9 \
+    --source-probability-G ${10} \
+    --prob-insert ${11} \
+    --prob-delete ${12} \
+    --prob-mismatch ${13} \
+    --prob-mismatch-begin ${14} \
+    --prob-mismatch-end ${15} \
+    $3 -o $4.fasta
 
-tar -czf $3.tar.gz -C /work/newriver/vincentl/omningssimulator/${1} .
-ssh vincentl@newriver1.arc.vt.edu "/home/vincentl/omni-ngs-simulator/arc/update.sh 2 ${1}"
+tar -czf $4.tar.gz -C /work/newriver/${2}/omningssimulator/${1} .
+ssh ${2}@newriver1.arc.vt.edu "/home/${2}/omni-ngs-simulator/arc/update.sh 2 ${1}"

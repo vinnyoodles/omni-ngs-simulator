@@ -108,7 +108,8 @@ def create_and_start_job(sim_id, form, extra_file=None):
         job_attrs['extra_file'] = 'extra_file'
 
     # Apply the job's tags to the dictionary to be stored in the database.
-    data['tags'] = SIMULATORS[sim_id]['tags']
+    for key in [ 'ref_db', 'genomics', 'tech', 'variants' ]:
+        data[key] = SIMULATORS[sim_id][key]
 
     job = Job(**data)
     job.save()

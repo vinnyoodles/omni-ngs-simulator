@@ -23,7 +23,10 @@ class Job(Document):
     attrs              = DictField(required=True)
     command            = StringField()
     err                = StringField()
-    tags               = ListField(required=True)
+    ref_db             = BooleanField(required=True)
+    variants           = BooleanField(required=True)
+    genomics           = BooleanField(required=True)
+    tech               = ListField(required=True)
 
 @login.user_loader
 def load_user(user_id):

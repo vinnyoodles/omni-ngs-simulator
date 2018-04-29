@@ -6,6 +6,7 @@ from app.models import Job
 import arc
 
 JOB_THRESHOLD = 6
+ARC_USER = 'vincentl'
 
 @celery.task
 def start_job(job_id):
@@ -66,7 +67,7 @@ def start_job(job_id):
     output_path = os.path.join(remote_path, 'output')
 
     qsub_path = os.path.join(arc.QSUB_DIR, '{}.qsub'.format(sim_id))
-    arguments = [ str(job.id) ]
+    arguments = [ str(job.id), ARC_USER ]
 
     for arg in sim['arguments']:
         if arg == 'input':

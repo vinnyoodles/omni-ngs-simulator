@@ -8,7 +8,7 @@ var sims = {
         "link":"ART",
         "parent_dep":true
     },
-    "ArtificialFastqGenerator":{
+    "AFG":{
         "name":"ArtificialFastqGenerator",
         "link":"artificial_fastq_generator"
     },

@@ -9,7 +9,7 @@ var sims = {
         "parent_dep":true
     },
     "AFG":{
-        "name":"ArtificialFastqGenerator",
+        "name":"AFG",
         "link":"artificial_fastq_generator"
     },
     "BEAR":{
@@ -263,7 +263,7 @@ function click(d) {
         if (d.parent) {
             link += '_' + d.parent.name;
         }
-        window.location.href = "/simulators/" + link.toLowerCase();
+        window.location.href = "/omningssimulator/simulators/" + link.toLowerCase();
     }
     if (d.children) {
         d._children = d.children;

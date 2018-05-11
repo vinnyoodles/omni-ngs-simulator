@@ -23,7 +23,7 @@
                     <td class="column2 data-column">{{ job.command }}</td>
                     {% if job.status == 'finished' %}
                         <td class="column3 data-column">
-                            <a href="{{ url_for('download', job_id=job.id) }}">Download</a> 
+                            <a href="{{ prefix_url_for('download', job_id=job.id) }}">Download</a> 
                         </td>
                     {% else %}
                         <td class="column3 data-column">{{ job.status }}</td>

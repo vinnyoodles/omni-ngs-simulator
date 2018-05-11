@@ -263,7 +263,7 @@ function click(d) {
         if (d.parent) {
             link += '_' + d.parent.name;
         }
-        window.location.href = "/simulators/" + link.toLowerCase();
+        window.location.href = "/omningssimulator/simulators/" + link.toLowerCase();
     }
     if (d.children) {
         d._children = d.children;

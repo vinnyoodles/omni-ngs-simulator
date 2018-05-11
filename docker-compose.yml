@@ -10,7 +10,7 @@ services:
 
     # Expose ports
     ports:
-      - "5000:5000"
+      - "8284:8284"
 
     # Link with mongo service
     links:
@@ -18,12 +18,13 @@ services:
       - sim_redis
 
     environment:
-      - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
+      - MONGO_URL=mongodb://sim_mongo:27018/simulator-db
       - FLASK_APP=/app/server.py
       - FLASK_DEBUG=1
       - REDIS_URL=redis://sim_redis:6379/0
       - OMNINGSSIMULATOR_EMAIL=${OMNINGSSIMULATOR_EMAIL}
       - OMNINGSSIMULATOR_EMAIL_PW=${OMNINGSSIMULATOR_EMAIL_PW}
+      - PROD_ENV=0
 
     # Mount the project directory to the container's directory for hot reloading.
     volumes:
@@ -35,10 +36,11 @@ services:
 
     # Use the official mongo image
     image: mongo
+    command: mongod --port 27018
     volumes:
       - ./data:/data/db
     ports:
-      - "27017:27017"
+      - "27018:27018"
 
   sim_redis:
     container_name: sim_redis
@@ -52,7 +54,7 @@ services:
     volumes:
       - .:/app
     environment:
-      - MONGO_URL=mongodb://sim_mongo:27017/simulator-db
+      - MONGO_URL=mongodb://sim_mongo:27018/simulator-db
       - REDIS_URL=redis://sim_redis:6379/0
     links:
       - sim_redis

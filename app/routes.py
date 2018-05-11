@@ -11,50 +11,59 @@ from app.tasks import create_and_start_job
 from app.models import User, Job
 from app import instance
 
+PROD_ENV = os.environ.get('PROD_ENV') == '1'
+
+def prefix_url_for(route, **kwargs):
+    url = url_for(route, **kwargs)
+    prefix = ''
+    if PROD_ENV:
+        prefix = '/omningssimulator'
+    return prefix + url
+
 """
 Unauthenticated Routes
 """
 
-@instance.route('/')
+@instance.route('/', strict_slashes=False)
 def index():
-    return render_template('index.html', title='Home', transparent_nav=True)
+    return render_template('index.html', title='Home', transparent_nav=True, prefix_url_for=prefix_url_for)
 
 @instance.route('/login', methods=['GET', 'POST'], strict_slashes=False)
 def login():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(prefix_url_for('index'))
     form = LoginForm()
 
     if form.validate_on_submit():
         user = User.objects(email=form.email.data).first()
         if user is None or not user.check_password(form.password.data):
             flash('Invalid email or password', 'alert-danger')
-            return redirect(url_for('login'))
+            return redirect(prefix_url_for('login'))
         login_user(user, remember=form.remember_me.data)
 
         next_page = request.args.get('next')
         if not next_page or url_parse(next_page).netloc != '':
-            next_page = url_for('index')
+            next_page = prefix_url_for('index')
         return redirect(next_page)
-    return render_template('auth/login.html', title='Login', form=form)
+    return render_template('auth/login.html', title='Login', form=form, prefix_url_for=prefix_url_for)
 
 @instance.route('/register', methods=['GET', 'POST'], strict_slashes=False)
 def register():
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(prefix_url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(email=form.email.data, institution=form.institution.data)
         user.set_password(form.password.data)
         user.save()
         flash('Congratulations, you are now a registered user!', 'alert-info')
-        return redirect(url_for('login'))
-    return render_template('auth/register.html', title='Register', form=form) 
+        return redirect(prefix_url_for('login'))
+    return render_template('auth/register.html', title='Register', form=form, prefix_url_for=prefix_url_for) 
 
-@instance.route('/logout')
+@instance.route('/logout', strict_slashes=False)
 def logout():
     logout_user()
-    return redirect(url_for('index'))
+    return redirect(prefix_url_for('index'))
 
 """
 Authenticated Routes
@@ -63,23 +72,23 @@ Authenticated Routes
 @login_required
 def dashboard():
     jobs = Job.objects(user_id=current_user.id).order_by('-$natural').all()
-    return render_template('dashboard.html', title='Dashboard', jobs=jobs)
+    return render_template('dashboard.html', title='Dashboard', jobs=jobs, prefix_url_for=prefix_url_for)
 
 @instance.route('/simulators/help', methods=['GET'], strict_slashes=False)
 @login_required
 def help():
     methods = [ 'IonTorrent', 'SOLiD', 'PacBio', '454', 'Illumina', 'Sanger', 'Nanopore' ]
-    return render_template('help.html', title='Help', methods=methods)
+    return render_template('help.html', title='Help', methods=methods, prefix_url_for=prefix_url_for)
 
 @instance.route('/simulators/help/tree', methods=['GET'], strict_slashes=False)
 @login_required
 def help_tree():
-    return render_template('tree.html', title='Help')
+    return render_template('tree.html', title='Help', prefix_url_for=prefix_url_for)
 
 @instance.route('/simulators', methods=['GET'], strict_slashes=False)
 @login_required
 def simulators():
-    return render_template('cards.html', title='Cards', simulators=SIMULATORS)
+    return render_template('cards.html', title='Cards', simulators=SIMULATORS, prefix_url_for=prefix_url_for)
 
 @instance.route('/download/<job_id>', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
@@ -133,8 +142,8 @@ def search():
             results = Job.objects()
         else:
             results = Job.objects(query)
-        return render_template('search_results.html', title='Search Results', jobs=list(results))
-    return render_template('search.html', title='Search', form=form)
+        return render_template('search_results.html', title='Search Results', jobs=list(results), prefix_url_for=prefix_url_for)
+    return render_template('search.html', title='Search', form=form, prefix_url_for=prefix_url_for)
 
 """
 Simulator Routes
@@ -144,8 +153,8 @@ def base_simulator_route(simulator, title, FormClass):
     form = FormClass()
     if form.validate_on_submit():
         create_and_start_job(simulator, form)
-        return redirect(url_for('dashboard'))
-    return render_template('simulators/{}.html'.format(simulator), title=title, form=form)
+        return redirect(prefix_url_for('dashboard'))
+    return render_template('simulators/{}.html'.format(simulator), title=title, form=form, prefix_url_for=prefix_url_for)
 
 @instance.route('/simulators/454sim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
@@ -228,8 +237,8 @@ def pbsim():
     form = PbsimForm()
     if form.validate_on_submit():
         create_and_start_job('pbsim', form, form.fastq_file)
-        return redirect(url_for('dashboard'))
-    return render_template('simulators/{}.html'.format('pbsim'), title='Pbsim', form=form)
+        return redirect(prefix_url_for('dashboard'))
+    return render_template('simulators/{}.html'.format('pbsim'), title='Pbsim', form=form, prefix_url_for=prefix_url_for)
 
 @instance.route('/simulators/readsim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required

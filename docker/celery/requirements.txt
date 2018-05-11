@@ -6,3 +6,4 @@ mongoengine==0.15.0
 paramiko==2.4.1
 redis==2.10.6
 scp==0.10.2
+werkzeug

@@ -4,7 +4,7 @@
     <div class="container" style="padding-top:50px; padding-bottom:50px">
         <div class="row">
             <div class="col-sm-6  sim-card">
-                <a style="text-decoration:none; color:inherit;" href="{{ url_for('help_tree') }}">
+                <a style="text-decoration:none; color:inherit;" href="{{ prefix_url_for('help_tree') }}">
                     <div class="card hover-highlight" style="height:100%">
                         <div class="card-body">
                             <h5 class="card-title">Find your simulator</h5>
@@ -16,7 +16,7 @@
             {% for sim in simulators %}
                 {% if simulators[sim]['ready'] %}
                     <div class="col-sm-6  sim-card">
-                        <a style="text-decoration:none; color:inherit;" href="{{ url_for(simulators[sim]['route']) }}">
+                        <a style="text-decoration:none; color:inherit;" href="{{ prefix_url_for(simulators[sim]['route']) }}">
                             <div class="card hover-highlight" style="height:100%">
                                 <div class="card-body">
                                     <h5 class="card-title">{{ simulators[sim]['title'] }}</h5>

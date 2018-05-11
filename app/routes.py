@@ -11,9 +11,14 @@ from app.tasks import create_and_start_job
 from app.models import User, Job
 from app import instance
 
-def prefix_url_for(route):
-    url = url_for(route)
-    return '/omningssimulator' + url
+PROD_ENV = os.environ.get('PROD_ENV') == '1'
+
+def prefix_url_for(route, **kwargs):
+    url = url_for(route, **kwargs)
+    prefix = ''
+    if PROD_ENV:
+        prefix = '/omningssimulator'
+    return prefix + url
 
 """
 Unauthenticated Routes

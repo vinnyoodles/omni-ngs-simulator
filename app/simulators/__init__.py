@@ -47,6 +47,31 @@ SIMULATORS = {
         'ready': True
     },
 
+    # 'bear_454': {
+    #     'title': 'BEAR - 454',
+    #     'caption': 'BEAR is intended to be an easy-to-use collection of scripts for generating simulated WGS metagenomic reads with read lengths, quality scores, error profiles, and species abundances derived from real user-supplied WGS data.',
+    #     'route': 'bear_454',
+    #     'arguments': [],
+    #     'ref_db': True,
+    #     'genomics': True,
+    #     'tech': ['454'],
+    #     'variants': False,
+    #     'ready': True
+    # },
+
+    # 'bear_454': {
+    # 'title': 'BEAR - 454',
+    # 'caption': 'BEAR is intended to be an easy-to-use collection of scripts for generating simulated WGS metagenomic reads with read lengths, quality scores, error profiles, and species abundances derived from real user-supplied WGS data.',
+    # 'route': 'bear_454',
+    # 'arguments': [],
+    # 'ref_db': True,
+    # 'genomics': True,
+    # 'tech': ['454'],
+    # 'variants': False,
+    # 'ready': True
+    # },
+
+
     'curesim': {
         'title': 'CuReSim',
         'caption': 'Customized read simulator generates synthetic NGS reads, supporting read simulation for major letter-base sequencing platforms.',
@@ -208,6 +233,11 @@ SIMULATORS = {
         'title': 'SInC',
         'caption': 'An accurate and fast error-model based simulator for SNPs, Indels and CNVs coupled with a read generator for short-read sequence data.',
         'route': 'sinc',
+        'arguements':[],
+        'ref_db': True,
+        'genomics': True,
+        'tech': ['illumina'],
+        'variants': False,
         'ready': False
     },
 

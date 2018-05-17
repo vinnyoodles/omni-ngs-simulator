@@ -138,6 +138,9 @@ class ArtificialFastqGeneratorForm(BaseSimulatorForm):
     mean_length = IntegerField('Mean DNA Template Length', default=210)
     std_dev = IntegerField('Standard Deviation of the DNA Template Length', default=60)
 
+# class Bear454Form(BaseSimulatorForm):
+    
+
 class CuresimForm(BaseSimulatorForm):
     read_count = IntegerField('Number of Reads to Generate', default=50000, validators=[DataRequired()])
     read_mean = IntegerField('Read Mean Size', default=200, validators=[DataRequired()])

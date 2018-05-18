@@ -138,8 +138,15 @@ class ArtificialFastqGeneratorForm(BaseSimulatorForm):
     mean_length = IntegerField('Mean DNA Template Length', default=210)
     std_dev = IntegerField('Standard Deviation of the DNA Template Length', default=60)
 
-# class Bear454Form(BaseSimulatorForm):
-    
+class BEARForm(BaseSimulatorForm):
+    total_reads = IntegerField('The total number of reads to sample from all genomes.', validators=[DataRequired()])
+    longest_read = IntegerField('The length, in bp, of the longest possible read to simulate', validators=[DataRequired()])
+    insert_mean_length = IntegerField('Average length of insert for pair-end reads.', default=0)
+    insert_stddev = IntegerField('Standard deviation of insert length for paired-end reads.', default=0)
+
+    def __init__(self, *args, **kwargs):
+        super(BEARForm, self).__init__(*args, **kwargs)
+        self.random_seed.data = rand_seed()
 
 class CuresimForm(BaseSimulatorForm):
     read_count = IntegerField('Number of Reads to Generate', default=50000, validators=[DataRequired()])

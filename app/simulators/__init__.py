@@ -47,30 +47,41 @@ SIMULATORS = {
         'ready': True
     },
 
-    # 'bear_454': {
-    #     'title': 'BEAR - 454',
-    #     'caption': 'BEAR is intended to be an easy-to-use collection of scripts for generating simulated WGS metagenomic reads with read lengths, quality scores, error profiles, and species abundances derived from real user-supplied WGS data.',
-    #     'route': 'bear_454',
-    #     'arguments': [],
-    #     'ref_db': True,
-    #     'genomics': True,
-    #     'tech': ['454'],
-    #     'variants': False,
-    #     'ready': True
-    # },
+    'art_illumina': {
+        'title': 'ART - Illumina',
+        'caption': 'ART generates sequence read data according to the empirical read quality profile summarized from large real read data. ART has been used for benchmarking methods and tools for next-generation sequencing data analysis, including read alignment, de novo assembly, detection of SNP, CNV, or other structure variation.',
+        'route': 'art_illumina',
+        'arguments': [ 'input', 'output', 'random_seed', 'simulation_type', 'fold_coverage', 'mean_frag_len', 'std_dev' ],
+        'ref_db': True,
+        'genomics': True,
+        'tech': ['illumina'],
+        'variants': True,
+        'ready': False
+    },
 
-    # 'bear_454': {
-    # 'title': 'BEAR - 454',
-    # 'caption': 'BEAR is intended to be an easy-to-use collection of scripts for generating simulated WGS metagenomic reads with read lengths, quality scores, error profiles, and species abundances derived from real user-supplied WGS data.',
-    # 'route': 'bear_454',
-    # 'arguments': [],
-    # 'ref_db': True,
-    # 'genomics': True,
-    # 'tech': ['454'],
-    # 'variants': False,
-    # 'ready': True
-    # },
+    'bear_genomics': {
+        'title': 'BEAR - Genomics',
+        'caption': 'BEAR is intended to be an easy-to-use collection of scripts for generating simulated WGS metagenomic reads with read lengths, quality scores, error profiles, and species abundances derived from real user-supplied WGS data.',
+        'route': 'bear_genomics',
+        'arguments': ['genomes_file','abundance_file','output_file','total_reads','longest_read','insert_mean_length','insert_stddev'],
+        'ref_db': True,
+        'genomics': True,
+        'tech': ['454','illumina','iontorrent'],
+        'variants': False,
+        'ready': False
+     },
 
+    'bear_metagenomics': {
+        'title': 'BEAR - Metagenomics',
+        'caption': 'BEAR is intended to be an easy-to-use collection of scripts for generating simulated WGS metagenomic reads with read lengths, quality scores, error profiles, and species abundances derived from real user-supplied WGS data.',
+        'route': 'bear_metagenomics',
+        'arguments': ['metagenomics_file','abundance_file','output_file','total_reads','longest_read','insert_mean_length','insert_stddev'],
+        'ref_db': True,
+        'genomics': False,
+        'tech': ['454','illumina','iontorrent'],
+        'variants': False,
+        'ready': False
+     },    
 
     'curesim': {
         'title': 'CuReSim',
@@ -91,7 +102,7 @@ SIMULATORS = {
         'arguments': [ 'input', 'output', 'pair_outer_distance', 'distance_std_dev', 'mean_coverage', 'mutation_rate', 'mutation_frequency', 'mutation_indel_percentage', 'indel_extension_rate', 'min_indel_length', 'random_read_probability', 'technology', 'random_seed' ],
         'ref_db': True,
         'genomics': True,
-        'tech': ['illumina', 'solid', 'illumina'],
+        'tech': ['illumina', 'solid', 'iontorrent'],
         'variants': False,
         'ready': True
     },
@@ -120,28 +131,65 @@ SIMULATORS = {
         'ready': True
     },
 
+    'mason_metagenomics': {
+        'title': 'Mason - Metagenomics',
+        'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
+        'route': 'mason_metagenomics',
+        'arguments': [ 'input', 'output', 'random_seed', 'read_count', 'random_source_sequence_length', 'a_probability', 'c_probability', 'g_probability', 'insertion_probability', 'deletion_probability', 'avg_mismatch_probability', 'first_base_mismatch_probability', 'last_base_mismatch_probability' ],
+        'ref_db': True,
+        'genomics': False,
+        'tech': ['illumina','454'],
+        'variants': False,
+        'ready': False
+    },
+
+    'mason_454': {
+        'title': 'Mason - 454',
+        'caption': 'Simulate NGS reads given a genome with variants for a given donor to use as the source.',
+        'route': 'mason_454',
+        'arguments': [ 'input', 'output', 'random_seed', 'read_count', 'random_source_sequence_length', 'a_probability', 'c_probability', 'g_probability', 'insertion_probability', 'deletion_probability', 'avg_mismatch_probability', 'first_base_mismatch_probability', 'last_base_mismatch_probability' ],
+        'ref_db': True,
+        'genomics': True,
+        'tech': ['illumina'],
+        'variants': False,
+        'ready': False
+    },
+
+
     'pbsim': {
         'title': 'Pbsim',
         'caption': 'PacBio reads simulater (called PBSIM) in which sampling-based and model-based simulations are implemented.',
         'route': 'pbsim',
         'arguments': [ 'input', 'output', 'min_length', 'max_length', 'min_accuracy', 'max_accuracy', 'substition_percentage', 'insertion_percentage', 'deletion_percentage', 'random_seed', 'extra_file' ],
-        'tags': [ 'reference', 'genomics', 'variants', 'pacbio' ],
+        ##'tags': [ 'reference', 'genomics', 'variants', 'pacbio' ],
         'ref_db': True,
         'genomics': True,
-        'tech': ['illumina'],
+        'tech': ['pacbio'], ##Ask
         'variants': True,
         'ready': True
     },
-    'pirs': {
-        'title': 'pIRS',
+    'pirs_genomics': {
+        'title': 'pIRS - Genomics',
         'caption': 'A tool for simulating paired-end reads from a reference genome. It is optimized for simulating reads similar to those generated from the Illumina platform.',
-        'route': 'pirs',
+        'route': 'pirs_genomics',
         'arguments': [ 'input', 'output', 'read_len', 'coverage', 'insertion_len', 'std_dev_insertion_len', 'random_seed' ],
         'ref_db': True,
         'genomics': True,
         'tech': ['illumina'],
         'variants': False,
         'ready': True
+    },
+
+    'pirs_metagenomics': {
+        'title': 'pIRS - Metagenomics',
+        'caption': 'A tool for simulating paired-end reads from a reference genome. It is optimized for simulating reads similar to those generated from the Illumina platform.',
+        'route': 'pirs_metagenomics',
+        'arguments': [ 'input', 'output', 'read_len', 'coverage', 'insertion_len', 'std_dev_insertion_len', 'random_seed' ],
+        'ref_db': True,
+        'genomics': False,
+        'tech': ['illumina'],
+        'variants': False,
+        'ready': False
     },
 
     'wgsim': {
@@ -172,13 +220,35 @@ SIMULATORS = {
         'title' : 'EAGLE',
         'caption': 'Enhanced Artificial Genome Engine, next generation sequencing reads simulator, is designed to simulate the behaviour of Illumina\'s Next Generation Sequencing instruments, in order to facilitate the development and testing of downstream applications.',
         'route': 'eagle',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': False,
+        'tech': ['454','illumina','pacbio','iontorrent'],
+        'variants': False,
         'ready': False
     },
 
-    'fastqsim': {
-        'title': 'FASTQSim',
+    'fastqsim_genomics': {
+        'title': 'FASTQSim - Genomics',
         'caption': 'FASTQSim: Platform-Independent Data Characterizationa and In Silico Read Generation for NGS Datasets',
-        'route': 'fastqsim',
+        'route': 'fastqsim_genomics',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': True,
+        'tech':['illumina','solid','pacbio','iontorrent'],
+        'variants': False,
+        'ready': False
+    },
+
+    'fastqsim_metagenomics': {
+        'title': 'FASTQSim - Metagenomics',
+        'caption': 'FASTQSim: Platform-Independent Data Characterizationa and In Silico Read Generation for NGS Datasets',
+        'route': 'fastqsim_metagenomics',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': False,
+        'tech':['illumina','solid','pacbio','iontorrent'],
+        'variants': False,
         'ready': False
     },
 
@@ -186,20 +256,42 @@ SIMULATORS = {
         'title': 'Flowsim',
         'caption': 'Generates simulated reads from them mimicing Roche\'s 454 pyrosequencing technology, writing output in 454\'s native SFF format. The flowgram generation is based on empirical distributions derived from real data',
         'route': 'flowsim',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': True,
+        'tech':['454'],
+        'variants': True,
         'ready': False
     }, 
 
-    'gemsim': {
-        'title': 'GemSim',
+    'gemsim_genomics': {
+        'title': 'GemSim - Genomics',
         'caption': 'A NGS simulator capable of generating single or paired-end reads for any sequencing technology compatible with the generic formats SAM and FASTQ. GemSIM creates and uses empirically derived, sequence-context based error models to realistically emulate individual sequencing runs and/or technologies.',
-        'route': 'gemsim',
+        'route': 'gemsim_genomics',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': True,
+        'tech':['illumina','454'],
+        'variants': False,
+        'ready': False
+    },
+    
+    'gemsim_metagenomics': {
+        'title': 'GemSim - Metagenomics',
+        'caption': 'A NGS simulator capable of generating single or paired-end reads for any sequencing technology compatible with the generic formats SAM and FASTQ. GemSIM creates and uses empirically derived, sequence-context based error models to realistically emulate individual sequencing runs and/or technologies.',
+        'route': 'gemsim_metagenomics',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': False,
+        'tech':['illumina','454'],
+        'variants': False,
         'ready': False
     },
 
-    'grinder': {
-        'title': 'Grinder',
+    'grinder_genomics': {
+        'title': 'Grinder - Genomics',
         'caption': 'A bioinformatics tool to create simulated omic shotgun and amplicon sequence libraries for all main sequencing platforms.',
-        'route':'grinder',
+        'route':'grinder_genomics',
         'arguments': [ 'input', 'output', 'total_reads', 'read_dist', 'insert_dist', 'mate_orientation', 'direction', 'length_bias', 'copy_bias', 'random_seed', 'desc_track' ],
         'ref_db': True,
         'genomics': True,
@@ -208,10 +300,39 @@ SIMULATORS = {
         'ready': False
     },
 
-    'metasim': {
-        'title': 'MetaSim',
+    'grinder_metagenomics': {
+        'title': 'Grinder - Metagenomics',
+        'caption': 'A bioinformatics tool to create simulated omic shotgun and amplicon sequence libraries for all main sequencing platforms.',
+        'route':'grinder_metagenomics',
+        'arguments': [ 'input', 'output', 'total_reads', 'read_dist', 'insert_dist', 'mate_orientation', 'direction', 'length_bias', 'copy_bias', 'random_seed', 'desc_track' ],
+        'ref_db': True,
+        'genomics': False,
+        'tech': ['illumina', '454', 'sanger'],
+        'variants': False,
+        'ready': False
+    },
+
+    'metasim_genomics': {
+        'title': 'MetaSim - Genomics',
         'caption': 'Generates synthetic reads that reflect the diverse taxonomical composition of typical metagenome data sets, allows the user to design a metagenome by specifying the number of genomes present at different levels of the NCBI taxonomy, and then to collect reads from the metagenome using a simulation of a number of different sequencing technologies.',
         'route': 'metasim',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': True,
+        'tech':['illumina','454','sanger'],
+        'variants': True,
+        'ready': False
+    },
+
+    'metasim_metagenomics': {
+        'title': 'MetaSim - Metagenomics',
+        'caption': 'Generates synthetic reads that reflect the diverse taxonomical composition of typical metagenome data sets, allows the user to design a metagenome by specifying the number of genomes present at different levels of the NCBI taxonomy, and then to collect reads from the metagenome using a simulation of a number of different sequencing technologies.',
+        'route': 'metasim_metagenomics',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': False,
+        'tech':['illumina','454','sanger'],
+        'variants': True,
         'ready': False
     },
 
@@ -219,6 +340,11 @@ SIMULATORS = {
         'title': 'NeSSM',
         'caption': 'Next-generation Sequencing Simulator for Metagenomics, combining complete genomes currently available, a community composition table, and sequencing parameters, it can simulate metagenome sequencing better than existing systems.',
         'route': 'nessm',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': False,
+        'tech':['illumina','454'],
+        'variants': False,
         'ready': False
     },
 
@@ -226,6 +352,11 @@ SIMULATORS = {
         'title': 'ReadSim',
         'caption': 'ReadSim is a fast and simple reads simulator to target long reads such as PacBio or Nanopore.',
         'route': 'readsim',
+        'arguments':[''],
+        'ref_db': True,
+        'genomics': True,
+        'tech':['nanopore','pacbio'],
+        'variants': False,
         'ready': False
     },
 
@@ -245,6 +376,11 @@ SIMULATORS = {
         'title': 'SimSeq',
         'caption': 'An illumina paired-end and mate-pair short read simulator, attempts to model as many of the quirks that exist in Illumina data as possible. Some of these quirks include the potential for chimeric reads, and non-biotinylated fragment pull down in mate-pair libraries.',
         'route': 'simseq',
+        'arguements':[],
+        'ref_db': True,
+        'genomics': True,
+        'tech': ['illumina'],
+        'variants': False,
         'ready': False
     },
 
@@ -255,7 +391,7 @@ SIMULATORS = {
         'arguments': [ 'input', 'output', 'coverage', 'num_reads', 'generate_454', 'read_len', 'error_func', 'error_rate', 'incremental_error_rate', 'paired_end', 'distance_between_first_pos', 'std_dev' ],
         'ref_db': True,
         'genomics': True,
-        'tech': ['454'],
+        'tech': ['454','illumina'],
         'variants': True,
         'ready': False
     },
@@ -264,6 +400,11 @@ SIMULATORS = {
         'title': 'simNGS',
         'caption': 'Simulating observations from Illumina sequencing machines using the statistical models behind the AYB base-calling software.',
         'route': 'simngs',
+        'arguements':[],
+        'ref_db': True,
+        'genomics': True,
+        'tech': ['illumina'],
+        'variants': True,
         'ready': False
     }
 }

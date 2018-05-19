@@ -1,0 +1,110 @@
+{% extends "form_base.html" %}
+
+{% block form_content %}
+    <div class="form-group row">
+        {{ form.pair_outer_distance.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.pair_outer_distance(class_='form-control', value='500', required='') }}
+        </div>
+        {% for error in form.pair_outer_distance.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.distance_std_dev.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.distance_std_dev(class_='form-control', value='50', required='') }}
+        </div>
+        {% for error in form.distance_std_dev.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.mean_coverage.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.mean_coverage(class_='form-control', value='100', required='') }}
+        </div>
+        {% for error in form.mean_coverage.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.mutation_rate.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.mutation_rate(class_='form-control', value='0.001', required='') }}
+        </div>
+        {% for error in form.mutation_rate.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.mutation_frequency.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.mutation_frequency(class_='form-control', value='0.5', required='') }}
+        </div>
+        {% for error in form.mutation_frequency.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.mutation_indel_percentage.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.mutation_indel_percentage(class_='form-control', value='0.1', required='') }}
+        </div>
+        {% for error in form.mutation_indel_percentage.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.indel_extension_rate.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.indel_extension_rate(class_='form-control', value='0.3', required='') }}
+        </div>
+        {% for error in form.indel_extension_rate.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.min_indel_length.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.min_indel_length(class_='form-control', value='1', required='') }}
+        </div>
+        {% for error in form.min_indel_length.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.random_read_probability.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.random_read_probability(class_='form-control', value='0.05', required='') }}
+        </div>
+        {% for error in form.random_read_probability.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group row">
+        {{ form.technology.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.technology(class_='form-control', required='') }}
+        </div>
+    </div>
+
+    <div class="form-group row">
+        {{ form.random_seed.label(class_='col-4 col-form-label') }}
+        <div class="col-8">
+            {{ form.random_seed(class_='form-control', value=form.random_seed.data, required='') }}
+        </div>
+        {% for error in form.random_seed.errors %}
+            <span class="alert alert-danger" role="alert">{{ error }}</span>
+        {% endfor %}
+    </div>
+{% endblock %}

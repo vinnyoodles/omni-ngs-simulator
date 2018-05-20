@@ -166,6 +166,11 @@ def sim_454():
 def art_454():
     return base_simulator_route('art_454', 'ART 454', Art454Form)
 
+@instance.route('/simulators/art_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def art_illumina():
+    return base_simulator_route('art_illumina', 'ART Illumina', ArtIlluminaForm)
+
 @instance.route('/simulators/art_solid', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def art_solid():
@@ -176,60 +181,251 @@ def art_solid():
 def artificial_fastq_generator():
     return base_simulator_route('artificialfastqgenerator', 'ArtificialFastqGenerator', ArtificialFastqGeneratorForm)
 
-@instance.route('/simulators/curesim', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/bear_genomics_454', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def curesim():
-    return base_simulator_route('curesim', 'CuReSim', CuresimForm)
+def bear_genomics_454():
+    return base_simulator_route('bear_genomics_454', 'BEAR Genomics 454', BearGenomics454Form)
 
-@instance.route('/simulators/dwgsim', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/bear_genomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def dwgsim():
-    return base_simulator_route('dwgsim', 'DWGSIM', DwgsimForm)
+def bear_genomics_illumina():
+    return base_simulator_route('bear_genomics_illumina', 'BEAR Genomics Illumina', BearGenomicsIlluminaForm)
 
-@instance.route('/simulators/eagle', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/bear_genomics_iontorrent', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def eagle():
-    return base_simulator_route('eagle', 'EAGLE', EagleForm)
+def bear_genomics_iontorrent():
+    return base_simulator_route('bear_genomics_iontorrent', 'BEAR Genomics Iontorrent', BearGenomicsIontorrentForm)
 
-@instance.route('/simulators/fastqsim', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/bear_metagenomics_454', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def fastqsim():
-    return base_simulator_route('fastqsim', 'FASTQSim', FastqsimForm)
+def bear_metagenomics_454():
+    return base_simulator_route('bear_metagenomics_454', 'BEAR Metagenomics 454', BearMetagenomics454Form)
+
+@instance.route('/simulators/bear_metagenomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def bear_metagenomics_illumina():
+    return base_simulator_route('bear_metagenomics_illumina', 'BEAR Metagenomics Illumina', BearMetagenomicsIlluminaForm)
+
+@instance.route('/simulators/bear_metagenomics_iontorrent', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def bear_metagenomics_iontorrent():
+    return base_simulator_route('bear_metagenomics_iontorrent', 'BEAR Metagenomics Iontorrent', BearMetagenomicsIontorrentForm)
+
+@instance.route('/simulators/curesim_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def curesim_illumina():
+    return base_simulator_route('curesim_illumina', 'CuReSim Illumina', CuresimForm)
+
+@instance.route('/simulators/curesim_solid', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def curesim_solid():
+    return base_simulator_route('curesim_solid', 'CuReSim Solid', CuresimForm)
+
+@instance.route('/simulators/curesim_iontorrent', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def curesim_iontorrent():
+    return base_simulator_route('curesim_iontorrent', 'CuReSim Iontorrent', CuresimForm)
+
+@instance.route('/simulators/curesim_454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def curesim_454():
+    return base_simulator_route('curesim_454', 'CuReSim 454', CuresimForm)
+
+@instance.route('/simulators/dwgsim_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def dwgsim_illumina():
+    return base_simulator_route('dwgsim_illumina', 'DWGSIM Illumina', DwgsimForm)
+
+@instance.route('/simulators/dwgsim_solid', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def dwgsim_solid():
+    return base_simulator_route('dwgsim_solid', 'DWGSIM Solid', DwgsimForm)
+
+@instance.route('/simulators/dwgsim_iontorrent', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def dwgsim_iontorrent():
+    return base_simulator_route('dwgsim_iontorrent', 'DWGSIM Iontorrent', DwgsimForm)
+
+@instance.route('/simulators/eagle_454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def eagle_454():
+    return base_simulator_route('eagle_454', 'EAGLE 454', Eagle454Form)
+
+@instance.route('/simulators/eagle_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def eagle_illumina():
+    return base_simulator_route('eagle', 'EAGLE Illumina', EagleIlluminaForm)
+
+@instance.route('/simulators/eagle_pacbio', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def eagle_pacbio():
+    return base_simulator_route('eagle_pacbio', 'EAGLE PacBio', EaglePacbioForm)
+
+@instance.route('/simulators/eagle_iontorrent', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def eagle_iontorrent():
+    return base_simulator_route('eagle_iontorrent', 'EAGLE Iontorrent', EagleIontorrentForm)
+
+@instance.route('/simulators/fastqsim_genomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def fastqsim_genomics_illumina():
+    return base_simulator_route('fastqsim_genomics_illumina', 'FASTQSim Genomics Illumina', FastqsimGenomicsIlluminaForm)
+
+@instance.route('/simulators/fastqsim_genomics_solid', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def fastqsim_genomics_solid():
+    return base_simulator_route('fastqsim_genomics_solid', 'FASTQSim Genomics Solid', FastqsimGenomicsSolidForm)
+
+@instance.route('/simulators/fastqsim_genomics_pacbio', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def fastqsim_genomics_pacbio():
+    return base_simulator_route('fastqsim_genomics_pacbio', 'FASTQSim Genomics PacBio', FastqsimGenomicsPacBioForm)
+
+@instance.route('/simulators/fastqsim_genomics_iontorrent', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def fastqsim_genomics_iontorrent():
+    return base_simulator_route('fastqsim_genomics_iontorrent', 'FASTQSim Genomics IonTorrent', FastqsimGenomicsIontorrentForm)
+
+@instance.route('/simulators/fastqsim_metagenomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def fastqsim_metagenomics_illumina():
+    return base_simulator_route('fastqsim_metagenomics_illumina', 'FASTQSim Metagenomics Illumina', FastqsimMetagenomicsIlluminaForm)
+
+@instance.route('/simulators/fastqsim_metagenomics_solid', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def fastqsim_metagenomics_solid():
+    return base_simulator_route('fastqsim_metagenomics_solid', 'FASTQSim Metagenomics Solid', FastqsimMetagenomicsSolidForm)
+
+@instance.route('/simulators/fastqsim_metagenomics_pacbio', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def fastqsim_metagenomics_pacbio():
+    return base_simulator_route('fastqsim_metagenomics_pacbio', 'FASTQSim Metagenomics PacBio', FastqsimMetagenomicsPacBioForm)
+
+@instance.route('/simulators/fastqsim_metagenomics_iontorrent', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def fastqsim_metagenomics_iontorrent():
+    return base_simulator_route('fastqsim_metagenomics_iontorrent', 'FASTQSim Metagenomics Iontorrent', FastqsimMetagenomicsIontorrentForm)
 
 @instance.route('/simulators/flowsim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def flowsim():
     return base_simulator_route('flowsim', 'FlowSim', FlowsimForm)
 
-@instance.route('/simulators/gemsim', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/gemsim_genomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def gemsim():
-    return base_simulator_route('gemsim', 'GemSim', GemsimForm)
+def gemsim_genomics_illumina():
+    return base_simulator_route('gemsim_genomics_illumina', 'GemSim Genomics Illumina', GemsimGenomicsIlluminaForm)
 
-@instance.route('/simulators/grinder', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/gemsim_genomics_454', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def grinder():
-    return base_simulator_route('grinder', 'Grinder', GrinderForm)
+def gemsim_genomics_454():
+    return base_simulator_route('gemsim_genomics_454', 'GemSim Genomics 454', GemsimGenomics454Form)
 
-@instance.route('/simulators/mason_sanger', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/gemsim_metagenomics_454', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def mason_sanger():
-    return base_simulator_route('mason_sanger', 'Mason - Sanger', MasonSangerForm)
+def gemsim_metagenomics_454():
+    return base_simulator_route('gemsim_metagenomics_454', 'GemSim Metagenomics 454', GemsimMetagenomics454Form)
+
+@instance.route('/simulators/gemsim_metagenomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def gemsim_metagenomics_illumina():
+    return base_simulator_route('gemsim_metagenomics_illumina', 'GemSim Metagenomics Illumina', GemsimMetagenomicsIlluminaForm)
+
+@instance.route('/simulators/grinder_genomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def grinder_genomics_illumina():
+    return base_simulator_route('grinder_genomics_illumina', 'Grinder Genomics Illumina', GrinderGenomicsIlluminaForm)
+
+@instance.route('/simulators/grinder_genomics_454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def grinder_genomics_454():
+    return base_simulator_route('grinder_genomics_454', 'Grinder Genomics 454', GrinderGenomics454Form)
+
+@instance.route('/simulators/grinder_genomics_sanger', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def grinder_genomics_sanger():
+    return base_simulator_route('grinder_genomics_sanger', 'Grinder Genomics Sanger', GrinderGenomicsSangerForm)
+
+@instance.route('/simulators/grinder_metagenomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def grinder_metagenomics_illumina():
+    return base_simulator_route('grinder_metagenomics_illumina', 'Grinder Metagenomics Illumina', GrinderMetagenomicsIlluminaForm)
+@instance.route('/simulators/grinder_metagenomics_454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def grinder_metagenomics_454():
+    return base_simulator_route('grinder_metagenomics_454', 'Grinder Metagenomics 454 ', GrinderMetagenomics454Form)
+@instance.route('/simulators/grinder_metagenomics_sanger', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def grinder_metagenomics_sanger():
+    return base_simulator_route('grinder_metagenomics_sanger', 'Grinder Metagenomics Sanger', GrinderMetagenomicsSangerForm)
+
+@instance.route('/simulators/mason_genomics_454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def mason_genomics_454():
+    return base_simulator_route('mason_genomics_454', 'Mason Genomics 454', MasonSangerForm)
+
+@instance.route('/simulators/mason_genomics_sanger', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def mason_genomics_sanger():
+    return base_simulator_route('mason_genomics_sanger', 'Mason Genomics Sanger', MasonSangerForm)
+
+@instance.route('/simulators/mason_genomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def mason_genomics_illumina():
+    return base_simulator_route('mason_genomics_illumina', 'Mason Genomics Illumina', MasonSangerForm)
+
+@instance.route('/simulators/mason_metagenomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def mason_metagenomics_illumina():
+    return base_simulator_route('mason_metagenomics_illumina', 'Mason Metagenomics Illumina', MasonSangerForm)
+
+@instance.route('/simulators/mason_metagenomics_454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def mason_metagenomics_454():
+    return base_simulator_route('mason_metagenomics_454', 'Mason Metagenomics 454', MasonSangerForm)
 
 @instance.route('/simulators/mason_illumina', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def mason_illumina():
     return base_simulator_route('mason_illumina', 'Mason - Illumina', MasonIlluminaForm)
 
-@instance.route('/simulators/metasim', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/metasim_genomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def metasim():
-    return base_simulator_route('metasim', 'MetaSim', MetasimForm)
+def metasim_genomics_illumina():
+    return base_simulator_route('metasim_genomics_illumina', 'MetaSim Genomics Illumina', MetasimGenomicsIlluminaForm)
 
-@instance.route('/simulators/nessm', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/metasim_genomics_454', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def nessm():
-    return base_simulator_route('nessm', 'NeSSM', NessmForm)
+def metasim_genomics_454():
+    return base_simulator_route('metasim_genomics_454', 'MetaSim Genomics 454', MetasimGenomics454Form)
+
+@instance.route('/simulators/metasim_genomics_sanger', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def metasim_genomics_sanger():
+    return base_simulator_route('metasim_genomics_sanger', 'MetaSim Genomics Sanger', MetasimGenomicsSangerForm)
+
+@instance.route('/simulators/metasim_metagenomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def metasim_metagenomics_illumina():
+    return base_simulator_route('metasim_metagenomics_illumina', 'MetaSim Metagenomics Illumina', MetasimMetagenomicsIlluminaForm)
+@instance.route('/simulators/metasim_metagenomics_454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def metasim_metagenomics_454():
+    return base_simulator_route('metasim_metagenomics_454', 'MetaSim Metagenomics 454', MetasimMetagenomics454Form)
+@instance.route('/simulators/metasim_metagenomics_sanger', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def metasim_metagenomics_sanger():
+    return base_simulator_route('metasim_metagenomics_sanger', 'MetaSim Metagenomics Sanger', MetasimMetagenomicsSangerForm)
+
+@instance.route('/simulators/nessm_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def nessm_illumina():
+    return base_simulator_route('nessm_illumina', 'NeSSM Illumina', NessmIlluminaForm)
+
+@instance.route('/simulators/nessm_454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def nessm_454():
+    return base_simulator_route('nessm_454', 'NeSSM 454', Nessm454Form)
 
 @instance.route('/simulators/pbsim', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
@@ -240,10 +436,15 @@ def pbsim():
         return redirect(prefix_url_for('dashboard'))
     return render_template('simulators/{}.html'.format('pbsim'), title='Pbsim', form=form, prefix_url_for=prefix_url_for)
 
-@instance.route('/simulators/readsim', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/readsim_nanopore', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def readsim():
-    return base_simulator_route('readsim', 'ReadSim', ReadsimForm)
+def readsim_nanopore():
+    return base_simulator_route('readsim_nanopore', 'ReadSim Nanopore', ReadsimNanoPoreForm)
+
+@instance.route('/simulators/readsim_pacbio', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def readsim_pacbio():
+    return base_simulator_route('readsim_pacbio', 'ReadSim PacBio', ReadsimPacBioForm)
 
 @instance.route('/simulators/sinc', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
@@ -255,30 +456,61 @@ def sinc():
 def simseq():
     return base_simulator_route('simseq', 'SimSeq', SimseqForm)
 
-@instance.route('/simulators/simhtsd', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/simhtsd_454', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def simhtsd():
-    return base_simulator_route('simhtsd', 'Simhtsd', SimhtsdForm)
+def simhtsd_454():
+    return base_simulator_route('simhtsd_454', 'Simhtsd 454', Simhtsd454Form)
 
-@instance.route('/simulators/pirs', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/simhtsd_illumina', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def pirs():
-    return base_simulator_route('pirs', 'pIRS', PirsForm)
+def ssimhtsd_illumina():
+    return base_simulator_route('simhtsd_illumina', 'Simhtsd Illumina', SimhtsdIlluminaForm)
+
+
+@instance.route('/simulators/pirs_genomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def pirs_genomics_illumina():
+    return base_simulator_route('pirs_genomics_illumina', 'pIRS Genomics Illumina', PirsForm)
+
+@instance.route('/simulators/pirs_metagenomics_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def pirs_metagenomics_illumina():
+    return base_simulator_route('pirs_metagenomics_illumina', 'pIRS Metagenomics Illumina', PirsForm)
 
 @instance.route('/simulators/simngs', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
 def simngs():
     return base_simulator_route('simngs', 'simNGS', SimngsForm)
 
-@instance.route('/simulators/wgsim', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/wgsim_illumina', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def wgsim():
-    return base_simulator_route('wgsim', 'wgsim', WgsimForm)
+def wgsim_illumina():
+    return base_simulator_route('wgsim_illumina', 'wgsim Illumina', WgsimForm)
 
-@instance.route('/simulators/xs', methods=['GET', 'POST'], strict_slashes=False)
+@instance.route('/simulators/wgsim_solid', methods=['GET', 'POST'], strict_slashes=False)
 @login_required
-def xs():
-    return base_simulator_route('xs', 'xs', XsForm)
+def wgsim_solid():
+    return base_simulator_route('wgsim_solid', 'wgsim Solid', WgsimForm)
+
+@instance.route('/simulators/xs_454', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def xs_454():
+    return base_simulator_route('xs_454', 'xs 454', XsForm)
+
+@instance.route('/simulators/xs_iontorrent', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def xs_iontorrent():
+    return base_simulator_route('xs_iontorrent', 'xs Iontorrent', XsForm)
+
+@instance.route('/simulators/xs_illumina', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def xs_illumina():
+    return base_simulator_route('xs_illumina', 'xs Illumina', XsForm)
+
+@instance.route('/simulators/xs_solid', methods=['GET', 'POST'], strict_slashes=False)
+@login_required
+def xs_solid():
+    return base_simulator_route('xs_solid', 'xs Solid', XsForm)
 
 """
 API Routes

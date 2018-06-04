@@ -36,7 +36,7 @@ wgsim \
     -R ${12} \
     -X ${13} \
     -S ${14} \
-    $3 $4_1.fq $4_2.fq 2> variants.txt
+    $3 $4_1.fq $4_2.fq 2> /groups/ngsproj/generated_data/${1}/variants.txt
  
 tar -czf $4.tar.gz -C /groups/ngsproj/generated_data/${1} .
 ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 2 ${1}"

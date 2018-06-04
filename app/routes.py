@@ -312,6 +312,6 @@ def finished_job(job_id):
     job.save()
 
     user = User.objects(id=job.user_id).first()
-    mailer.notify(job, user)
+    mailer.notify(job, user, job_id)
 
     return jsonify({ 'message' : 'ok' })

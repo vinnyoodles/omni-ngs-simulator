@@ -22,7 +22,7 @@
 # $13 -X FLOAT      probability an indel is extended [0.30]
 # $14 -S INT        seed for random generator [-1]
 
-interpolated_command="\"wgsim -e $5 -d $6 -s $7 -N $8 -1 $9 -2 ${10} -r ${11} -R ${12} -X ${13} -S ${14} input output_1 output_2\""
+interpolated_command="\"wgsim -e $5 -d $6 -s $7 -N $8 -1 $9 -2 ${10} -r ${11} -R ${12} -X ${13} -S ${14} input output_1 output_2 1> variants.txt\""
 ssh ${2}@newriver1.arc.vt.edu "/groups/ngsproj/omni-ngs-simulator/arc/update.sh 1 ${1} ${interpolated_command}"
 
 wgsim \

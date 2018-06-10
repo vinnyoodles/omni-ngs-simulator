@@ -88,7 +88,7 @@ def help_tree():
 @instance.route('/simulators', methods=['GET'], strict_slashes=False)
 @login_required
 def simulators():
-    return render_template('cards.html', title='Cards', simulators=SIMULATORS, prefix_url_for=prefix_url_for)
+    return render_template('cards.html', title='Simulators', simulators=SIMULATORS, prefix_url_for=prefix_url_for)
 
 @instance.route('/download/<job_id>', methods=['GET', 'POST'], strict_slashes=False)
 @login_required

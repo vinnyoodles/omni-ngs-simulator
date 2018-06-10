@@ -11,9 +11,10 @@ def notify(job, user, job_id):
     msg['To'] = user.email
     msg['Subject'] = 'Your job is done: {}'.format(job.name)
 
-    body = 'Hi, the job you have submitted has just finished and is ready for download:' \
+    body = 'Hi,\n' \
+           '\nThe job you have submitted has just finished and is ready for download:' \
            '\nhttps://bench.cs.vt.edu/omningssimulator/download/' + job_id + \
-           '\nYou can also find all your previously submitted jobs in your dashboard.'
+           '\n\nYou can also find all of your previously submitted jobs in the dashboard.'
     msg.attach(MIMEText(body, 'plain'))
 
     server = smtplib.SMTP('smtp.gmail.com', 587)

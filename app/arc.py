@@ -1,7 +1,7 @@
 import paramiko
 from scp import SCPClient
 
-ARC_USER = 'vincent1'
+ARC_USER = 'vincentl'
 ARC_DIR = '/groups/ngsproj/generated_data'
 QSUB_DIR = '/groups/ngsproj/omni-ngs-simulator/arc'
 

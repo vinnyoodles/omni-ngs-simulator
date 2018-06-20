@@ -127,9 +127,6 @@ class ArtSolidForm(BaseSimulatorForm):
     def __init__(self, *args, **kwargs):
         super(ArtSolidForm, self).__init__(*args, **kwargs)
         self.random_seed.data = rand_seed()
-class ArtIlluminaForm(BaseSimulatorForm):
-    pass
-
 
 class ArtificialFastqGeneratorForm(BaseSimulatorForm):
     sequence_identifier = StringField('Sequence Identifier in reference where read generation will begin (Must begin with a >)')
@@ -140,31 +137,6 @@ class ArtificialFastqGeneratorForm(BaseSimulatorForm):
     read_length = IntegerField('Read Length', default=76)
     mean_length = IntegerField('Mean DNA Template Length', default=210)
     std_dev = IntegerField('Standard Deviation of the DNA Template Length', default=60)
-
-# class BEARForm(BaseSimulatorForm):
-#     total_reads = IntegerField('The total number of reads to sample from all genomes.', validators=[DataRequired()])
-#     longest_read = IntegerField('The length, in bp, of the longest possible read to simulate', validators=[DataRequired()])
-#     insert_mean_length = IntegerField('Average length of insert for pair-end reads.', default=0)
-#     insert_stddev = IntegerField('Standard deviation of insert length for paired-end reads.', default=0)
-
-#     def __init__(self, *args, **kwargs):
-#         super(BEARForm, self).__init__(*args, **kwargs)
-#         self.random_seed.data = rand_seed()
-
-class BearGenomics454Form(BaseSimulatorForm):
-    pass
-class BearGenomicsIlluminaForm(BaseSimulatorForm):
-    pass
-class BearGenomicsIontorrentForm(BaseSimulatorForm):
-    pass
-class BearMetagenomics454Form(BaseSimulatorForm):
-    pass
-class BearMetagenomicsIlluminaForm(BaseSimulatorForm):
-    pass
-class BearMetagenomicsIontorrentForm(BaseSimulatorForm):
-    pass
-
-
 
 class CuresimForm(BaseSimulatorForm):
     read_count = IntegerField('Number of Reads to Generate', default=50000, validators=[DataRequired()])
@@ -193,55 +165,16 @@ class DwgsimForm(BaseSimulatorForm):
         super(DwgsimForm, self).__init__(*args, **kwargs)
         self.random_seed.data = rand_seed()
 
-class Eagle454Form(BaseSimulatorForm):
+class EagleForm(BaseSimulatorForm):
     pass
 
-class EagleIlluminaForm(BaseSimulatorForm):
-    pass
-
-class EaglePacbioForm(BaseSimulatorForm):
-    pass
-
-class EagleIontorrentForm(BaseSimulatorForm):
-    pass
-
-class FastqsimGenomicsIlluminaForm(BaseSimulatorForm):
-    pass
-
-class FastqsimGenomicsSolidForm(BaseSimulatorForm):
-    pass
-
-class FastqsimGenomicsPacBioForm(BaseSimulatorForm):
-    pass
-
-class FastqsimGenomicsIontorrentForm(BaseSimulatorForm):
-    pass
-
-class FastqsimMetagenomicsIlluminaForm(BaseSimulatorForm):
-    pass
-
-class FastqsimMetagenomicsSolidForm(BaseSimulatorForm):
-    pass
-
-class FastqsimMetagenomicsPacBioForm(BaseSimulatorForm):
-    pass
-
-class FastqsimMetagenomicsIontorrentForm(BaseSimulatorForm):
+class FastqsimForm(BaseSimulatorForm):
     pass
 
 class FlowsimForm(BaseSimulatorForm):
     pass
 
-class GemsimGenomicsIlluminaForm(BaseSimulatorForm):
-    pass
-
-class GemsimGenomics454Form(BaseSimulatorForm):
-    pass
-
-class GemsimMetagenomics454Form(BaseSimulatorForm):
-    pass
-
-class GemsimMetagenomicsIlluminaForm(BaseSimulatorForm):
+class GemsimForm(BaseSimulatorForm):
     pass
 
 class GrinderForm(BaseSimulatorForm):
@@ -258,24 +191,6 @@ class GrinderForm(BaseSimulatorForm):
     def __init__(self, *args, **kwargs):
         super(GrinderForm, self).__init__(*args, **kwargs)
         self.random_seed.data = rand_seed()
-
-class GrinderGenomicsIlluminaForm(BaseSimulatorForm):
-    pass
-
-class GrinderGenomics454Form(BaseSimulatorForm):
-    pass
-
-class GrinderGenomicsSangerForm(BaseSimulatorForm):
-    pass
-
-class GrinderMetagenomicsIlluminaForm(BaseSimulatorForm):
-    pass
-
-class GrinderMetagenomics454Form(BaseSimulatorForm):
-    pass
-
-class GrinderMetagenomicsSangerForm(BaseSimulatorForm):
-    pass
 
 class MasonSangerForm(BaseSimulatorForm):
     read_count = IntegerField('Number of reads to simulate', default=1000, validators=[DataRequired(), NumberRange(min=1, max=2000000)])
@@ -314,28 +229,11 @@ class MasonIlluminaForm(BaseSimulatorForm):
         super(MasonIlluminaForm, self).__init__(*args, **kwargs)
         self.random_seed.data = rand_seed()
 
-class MetasimGenomicsIlluminaForm(BaseSimulatorForm):
+
+class MetasimForm(BaseSimulatorForm):
     pass
 
-class MetasimGenomics454Form(BaseSimulatorForm):
-    pass
-
-class MetasimGenomicsSangerForm(BaseSimulatorForm):
-    pass
-
-class MetasimMetagenomicsIlluminaForm(BaseSimulatorForm):
-    pass
-
-class MetasimMetagenomics454Formm(BaseSimulatorForm):
-    pass
-
-class MetasimMetagenomicsSangerForm(BaseSimulatorForm):
-    pass
-
-class NessmIlluminaForm(BaseSimulatorForm):
-    pass
-
-class Nessm454Form(BaseSimulatorForm):
+class NessmForm(BaseSimulatorForm):
     pass
 
 class PbsimForm(BaseSimulatorForm):
@@ -353,10 +251,7 @@ class PbsimForm(BaseSimulatorForm):
         super(PbsimForm, self).__init__(*args, **kwargs)
         self.random_seed.data = rand_seed()
 
-class ReadsimNanoPoreForm(BaseSimulatorForm):
-    pass
-
-class ReadsimPacBioForm(BaseSimulatorForm):
+class ReadsimForm(BaseSimulatorForm):
     pass
 
 class SincForm(BaseSimulatorForm):
@@ -377,11 +272,6 @@ class SimhtsdForm(BaseSimulatorForm):
     distance_between_first_pos = IntegerField('Distance between first position of each sequence')
     std_dev = IntegerField('Standard deviation of distances')
 
-class Simhtsd454Form(BaseSimulatorForm):
-    pass
-
-class SimhtsdIlluminaForm(BaseSimulatorForm):
-    pass
 
 class PirsForm(BaseSimulatorForm):
     read_len = IntegerField('Length of generated reads', default=100, validators=[DataRequired(), NumberRange(min=1, max=2000000)])

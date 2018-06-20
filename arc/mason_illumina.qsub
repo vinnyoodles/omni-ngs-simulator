@@ -2,8 +2,8 @@
 
 #PBS -l walltime=100:00:00
 #PBS -q normal_q
-#PBS -A cs4884s18
-#PBS -W group_list=newriver
+#PBS -A xwwugroup
+#PBS -W group_list=ngsproj
 
 # Use 'random.fasta' for the SEQUENCE file name to generate it randomly.
 

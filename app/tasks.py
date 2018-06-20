@@ -6,7 +6,7 @@ from app.models import Job
 import arc
 
 JOB_THRESHOLD = 6
-ARC_USER = 'vincent1'
+ARC_USER = 'vincentl'
 
 @celery.task
 def start_job(job_id):

@@ -260,7 +260,7 @@ function update(source) {
 function click(d) {
     if (d.link) {
         var link = d.link;
-        if (d.parent) {
+        if (d.parent && (link.toLowerCase() === "art" || link.toLowerCase() === "mason")) {
             link += '_' + d.parent.name;
         }
         window.location.href = "/omningssimulator/simulators/" + link.toLowerCase();

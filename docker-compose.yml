@@ -24,7 +24,7 @@ services:
       - REDIS_URL=redis://sim_redis:6379/0
       - OMNINGSSIMULATOR_EMAIL=${OMNINGSSIMULATOR_EMAIL}
       - OMNINGSSIMULATOR_EMAIL_PW=${OMNINGSSIMULATOR_EMAIL_PW}
-      - PROD_ENV=0
+      - PROD_ENV=1
 
     # Mount the project directory to the container's directory for hot reloading.
     volumes:
